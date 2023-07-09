@@ -4,14 +4,17 @@ import { getAppProps } from "../utils/getAppProps";
 
 export default function TokenTopup() {
   const handleClick = async () => {
-    await fetch(`/api/addTokens`, {
+    const result = await fetch(`/api/addTokens`, {
       method: "POST",
     });
+
+    const json = await result.json();
+    console.log(json);
+    window.location.href = json.session.url;
   };
 
   return (
     <div>
-      Hola Token
       <h1>Token Topup</h1>
       <button
         className="bg-green-500 trackinf-wider w-full text-center text-white font-bold cursor-pointer uppercase px-4 py-2 rounded-md hover:bg-green-600 transition-colors block"
