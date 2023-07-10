@@ -13,7 +13,6 @@ export const AppLayout = ({
   ...rest
 }) => {
   const { user } = useUser();
-  console.log("REST", rest);
 
   return (
     <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
