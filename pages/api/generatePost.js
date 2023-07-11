@@ -24,6 +24,16 @@ export default withApiAuthRequired(async function handler(req, res) {
   });
   const openai = new OpenAIApi(config);
   const { topic, keywords } = req.body;
+  if (!topic || !keywords) {
+    res.status(422); //Unprocessable entity because we want a topic and keywords
+    return;
+  }
+
+  if (topic.length > 150 || keywords.length > 80) {
+    res.status(422);
+    return;
+  }
+
   const allowedHTMLTags = "p, h1, h2, h3, h4, h5, h6, strong, li, ol, ul, i";
 
   // const response = await openai.createCompletion({
@@ -134,6 +144,5 @@ export default withApiAuthRequired(async function handler(req, res) {
 
   console.log("post", post);
 
-  // res.status(200).json({ post: JSON.parse(response.data.choices[0].text) })
   res.status(200).json({ postId: post.insertedId });
 });
