@@ -51,10 +51,7 @@ export default function NewPost(props) {
           />
         </div>
 
-        <button
-          type="submit"
-          className="bg-green-500 trackinf-wider w-full text-center text-white font-bold cursor-pointer uppercase px-4 py-2 rounded-md hover:bg-green-600 transition-colors block"
-        >
+        <button type="submit" className="btn">
           Generate
         </button>
       </form>
