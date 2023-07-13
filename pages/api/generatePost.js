@@ -88,7 +88,7 @@ export default withApiAuthRequired(async function handler(req, res) {
       },
       {
         role: "user",
-        content: "Generate appropriate title tag text for the above blog post",
+        content: "Generate an appropriate title for the above blog post",
       },
     ],
   });
