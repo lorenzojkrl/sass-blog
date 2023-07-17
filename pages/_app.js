@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { DM_Sans, DM_Serif_Display } from "@next/font/google";
 import { PostsProvider } from "../context/postsContext";
+import { MantineProvider } from "@mantine/core";
+import Head from "next/head";
 // Fix fontawesome huge icon on startup
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -23,15 +25,33 @@ const dmSerifDisplay = DM_Serif_Display({
 function MyApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
   return (
-    <UserProvider>
-      <PostsProvider>
-        <main
-          className={`${dmSans.variable} ${dmSerifDisplay.variable} font-body`}
-        >
-          {getLayout(<Component {...pageProps} />, pageProps)}
-        </main>
-      </PostsProvider>
-    </UserProvider>
+    <>
+      <Head>
+        <title>AI SEO Writer</title>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
+        />
+      </Head>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: "light",
+        }}
+      >
+        <UserProvider>
+          <PostsProvider>
+            <main
+              className={`${dmSans.variable} ${dmSerifDisplay.variable} font-body`}
+            >
+              {getLayout(<Component {...pageProps} />, pageProps)}
+            </main>
+          </PostsProvider>
+        </UserProvider>
+      </MantineProvider>
+    </>
   );
 }
 
