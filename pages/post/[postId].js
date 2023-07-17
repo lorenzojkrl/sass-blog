@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 import PostsContext from "../../context/postsContext";
 
 export default function Post(props) {
-  console.log("post props", props);
   const router = useRouter();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const { deletePost } = useContext(PostsContext);
