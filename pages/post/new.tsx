@@ -4,7 +4,7 @@ import { AppLayout } from "../../components/AppLayout";
 import { useRouter } from "next/router";
 import { getAppProps } from "../../utils/getAppProps";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBrain } from "@fortawesome/free-solid-svg-icons";
+import { faFeather } from "@fortawesome/free-solid-svg-icons";
 import { NumberInput } from "@mantine/core";
 
 export default function NewPost(props) {
@@ -42,8 +42,12 @@ export default function NewPost(props) {
   return (
     <div className="h-full overflow-hidden">
       {generating && (
-        <div className="text-green-500 flex h-full animate-pulse w-full flex-col justify-center items-center">
-          <FontAwesomeIcon icon={faBrain} className="text-8xl" />
+        <div className="text-slate flex h-full animate-pulse w-full flex-col justify-center items-center">
+          <FontAwesomeIcon
+            icon={faFeather}
+            size="4x"
+            className="px-2 text-slate-900/60 h-5"
+          ></FontAwesomeIcon>
           <h6>Generating...</h6>
         </div>
       )}
@@ -84,10 +88,9 @@ export default function NewPost(props) {
                 Advanced options
               </summary>
               <div>
-                <label>Approximate number of words (200 - 2000)</label>
                 <NumberInput
                   defaultValue={500}
-                  label="Approximate number of words"
+                  label="Approximate number of words (200 - 2000)"
                   withAsterisk
                   hideControls
                   max={2000}
