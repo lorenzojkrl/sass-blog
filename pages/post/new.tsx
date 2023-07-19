@@ -127,6 +127,7 @@ export const getServerSideProps = withPageAuthRequired({
       return {
         redirect: {
           destination: "/token-topup",
+          permanent: false,
         },
       };
     }
