@@ -11,6 +11,11 @@ export default withApiAuthRequired(async function handler(req, res) {
   const userProfile = await db.collection("users").findOne({
     auth0Id: user.sub,
   });
+  const { topic, keywords, wordsNumber } = req.body;
+  const config = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+  const openai = new OpenAIApi(config);
 
   if (!userProfile?.availableTokens) {
     // user is authorized but he doesn't have the required permissions to process the request
@@ -19,11 +24,21 @@ export default withApiAuthRequired(async function handler(req, res) {
     return;
   }
 
-  const config = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
-  const openai = new OpenAIApi(config);
-  const { topic, keywords } = req.body;
+  if (
+    typeof wordsNumber !== "number" ||
+    wordsNumber < 200 ||
+    wordsNumber > 2000
+  ) {
+    console.log("Wrong");
+    res.status(422); //Unprocessable entity because we want a topic and keywords
+    return {
+      redirect: {
+        destination: "/post/new",
+        permanent: false,
+      },
+    };
+  }
+
   if (!topic || !keywords) {
     res.status(422); //Unprocessable entity because we want a topic and keywords
     return;
@@ -36,25 +51,8 @@ export default withApiAuthRequired(async function handler(req, res) {
 
   const allowedHTMLTags = "p, h1, h2, h3, h4, h5, h6, strong, li, ol, ul, i";
 
-  // const response = await openai.createCompletion({
-  //   model: 'text-davinci-003',
-  //   temperature: 0.2,
-  //   max_tokens: 1600,
-  //   prompt: `
-  //     Write a long and detailed SEO-friendly blog post about ${topic}, that target the following comma-separated keywords ${keywords}.
-  //     The content should be formatted in SEO-friendly HTML.
-  //     The response must also include appropriate HTML title and meta description content.
-  //     The return format must be stringified JSON in the following format:
-  //     {
-  //       "postContent": post content goes here,
-  //       "title": title goes here,
-  //       "metaDescription": meta description goes here
-  //     }
-  //     `
-  // })
-
   const postContentResponse = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
     temperature: 0.3,
     messages: [
       {
@@ -63,7 +61,9 @@ export default withApiAuthRequired(async function handler(req, res) {
       },
       {
         role: "user",
-        content: `Write a long and detailed SEO-friendly blog post about ${topic}, that target the following comma-separated keywords ${keywords}. 
+        content: `Write a long and detailed SEO-friendly blog post about ${topic}. 
+        The blog post should contain about ${wordsNumber} words.
+        The blog post should target the following comma-separated keywords ${keywords}. 
         The content should be formatted in SEO-friendly HTML.
         It should be limited to the following comma-separated HTML tags: ${allowedHTMLTags}
         The response must also include appropriate HTML title and meta description content.`,
@@ -117,9 +117,9 @@ export default withApiAuthRequired(async function handler(req, res) {
   const metaDescription =
     metaDescriptionResponse.data.choices[0]?.message?.content || "";
 
-  console.log(postContent);
-  console.log(title);
-  console.log(metaDescription);
+  // console.log(postContent);
+  // console.log(title);
+  // console.log(metaDescription);
 
   await db.collection("users").updateOne(
     {
@@ -142,7 +142,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     created: new Date(),
   });
 
-  console.log("post", post);
+  // console.log("post", post);
 
   res.status(200).json({ postId: post.insertedId });
 });

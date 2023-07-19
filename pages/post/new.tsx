@@ -4,17 +4,21 @@ import { AppLayout } from "../../components/AppLayout";
 import { useRouter } from "next/router";
 import { getAppProps } from "../../utils/getAppProps";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBrain } from "@fortawesome/free-solid-svg-icons";
+import { faFeather } from "@fortawesome/free-solid-svg-icons";
+import { NumberInput } from "@mantine/core";
 
 export default function NewPost(props) {
   const [topic, setTopic] = useState("");
   const [keywords, setKeywords] = useState("");
   const [generating, setGenerating] = useState(false);
+  const [wordsNumber, setWordsNumber] = useState<number | "">(500);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setGenerating(true);
+
+    console.log("wordsNumber in new.tsx", typeof wordsNumber, wordsNumber);
 
     try {
       const response = await fetch("/api/generatePost", {
@@ -22,7 +26,7 @@ export default function NewPost(props) {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ topic, keywords }),
+        body: JSON.stringify({ topic, keywords, wordsNumber }),
       });
       const json = await response.json();
       console.log("json", json);
@@ -38,8 +42,12 @@ export default function NewPost(props) {
   return (
     <div className="h-full overflow-hidden">
       {generating && (
-        <div className="text-green-500 flex h-full animate-pulse w-full flex-col justify-center items-center">
-          <FontAwesomeIcon icon={faBrain} className="text-8xl" />
+        <div className="text-slate flex h-full animate-pulse w-full flex-col justify-center items-center">
+          <FontAwesomeIcon
+            icon={faFeather}
+            size="4x"
+            className="px-2 text-slate-900/60 h-5"
+          ></FontAwesomeIcon>
           <h6>Generating...</h6>
         </div>
       )}
@@ -54,10 +62,11 @@ export default function NewPost(props) {
                 <strong>Generate a blog post on:</strong>
               </label>
               <textarea
-                className="resize-none border border-slate-500 w-full block m-2 px-4 py-2 rounded-sm"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
+                placeholder="The benefits of pet therapy"
                 maxLength={150}
+                className="resize-none border border-slate-500 w-full block m-2 px-4 py-2 rounded-sm"
               />
             </div>
 
@@ -66,13 +75,31 @@ export default function NewPost(props) {
                 <strong>Targeting the following keywords:</strong>
               </label>
               <textarea
-                className="resize-none border border-slate-500 w-full block m-2 px-4 py-2 rounded-sm"
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}
+                placeholder="Dogs, Pet therapy, Cats"
                 maxLength={80}
+                className="resize-none border border-slate-500 w-full block m-2 px-4 py-2 rounded-sm"
               />
-              <small className="block mb-2">Separate keywords with comma</small>
             </div>
+
+            <details className="my-4">
+              <summary className="hover:cursor-pointer">
+                Advanced options
+              </summary>
+              <div>
+                <NumberInput
+                  defaultValue={500}
+                  label="Approximate number of words (200 - 2000)"
+                  withAsterisk
+                  hideControls
+                  max={2000}
+                  min={200}
+                  value={wordsNumber}
+                  onChange={setWordsNumber}
+                />
+              </div>
+            </details>
 
             <button
               type="submit"
