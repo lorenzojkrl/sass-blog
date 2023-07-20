@@ -2,12 +2,12 @@ import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { AppLayout } from "../../components/AppLayout";
 import clientPromise from "../../lib/mongodb";
 import { ObjectId } from "mongodb";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 import { getAppProps } from "../../utils/getAppProps";
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import PostsContext from "../../context/postsContext";
+import { Badge } from "@mantine/core";
+import { IconHash } from "@tabler/icons";
 
 export default function Post(props) {
   const router = useRouter();
@@ -44,11 +44,17 @@ export default function Post(props) {
         <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           Keywords
         </div>
-        <div className="flex flex-wrap pt-2 gap-1">
+        <div className="flex flex-wrap pt-2 gap-1text-blue-600">
           {props.keywords.split(",").map((k, i) => (
-            <div key={i} className="p-2 rounded-full bg-slate-800 text-white">
-              <FontAwesomeIcon icon={faHashtag} /> {k}
-            </div>
+            <Badge
+              key={i}
+              variant="outline"
+              pl={3}
+              style={{ color: "#2563EB", borderColor: "#2563EB" }}
+              leftSection={<IconHash size="1rem" />}
+            >
+              {k}
+            </Badge>
           ))}
         </div>
         <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">

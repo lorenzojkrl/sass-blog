@@ -18,7 +18,7 @@ export default function NewPost(props) {
     e.preventDefault();
     setGenerating(true);
 
-    console.log("wordsNumber in new.tsx", typeof wordsNumber, wordsNumber);
+    // console.log("wordsNumber in new.tsx", typeof wordsNumber, wordsNumber);
 
     try {
       const response = await fetch("/api/generatePost", {
