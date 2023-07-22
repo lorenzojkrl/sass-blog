@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { getAppProps } from "../../utils/getAppProps";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFeather } from "@fortawesome/free-solid-svg-icons";
-import { NumberInput } from "@mantine/core";
+import { NumberInput, Textarea } from "@mantine/core";
 
 export default function NewPost(props) {
   const [topic, setTopic] = useState("");
@@ -57,48 +57,43 @@ export default function NewPost(props) {
             onSubmit={handleSubmit}
             className="m-auto w-full max-w-screen-sm bg-slate-100 p-4 rounded-md shadow-xlborder border-slate-200 shadow-slate-200"
           >
-            <div>
-              <label>
-                <strong>Generate a blog post on:</strong>
-              </label>
-              <textarea
-                value={topic}
-                onChange={(e) => setTopic(e.target.value)}
-                placeholder="The benefits of pet therapy"
-                maxLength={150}
-                className="resize-none border border-slate-500 w-full block m-2 px-4 py-2 rounded-sm"
-              />
-            </div>
+            <Textarea
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
+              placeholder="The benefits of pet therapy"
+              label="Generate a blog post on:"
+              maxLength={150}
+              minRows={3}
+              maxRows={5}
+              autosize
+            />
 
-            <div>
-              <label>
-                <strong>Targeting the following keywords:</strong>
-              </label>
-              <textarea
-                value={keywords}
-                onChange={(e) => setKeywords(e.target.value)}
-                placeholder="Dogs, Pet therapy, Cats"
-                maxLength={80}
-                className="resize-none border border-slate-500 w-full block m-2 px-4 py-2 rounded-sm"
-              />
-            </div>
+            <Textarea
+              value={keywords}
+              onChange={(e) => setKeywords(e.target.value)}
+              placeholder="Dogs, Pet therapy, Cats"
+              label="Targeting the following comma-separated keywords:"
+              maxLength={80}
+              minRows={2}
+              maxRows={2}
+              className="mt-5"
+            />
 
             <details className="my-4">
               <summary className="hover:cursor-pointer">
                 Advanced options
               </summary>
-              <div>
-                <NumberInput
-                  defaultValue={500}
-                  label="Approximate number of words (200 - 2000)"
-                  withAsterisk
-                  hideControls
-                  max={2000}
-                  min={200}
-                  value={wordsNumber}
-                  onChange={setWordsNumber}
-                />
-              </div>
+              <NumberInput
+                defaultValue={500}
+                label="Approximate number of words (200 - 2000)"
+                withAsterisk
+                hideControls
+                max={2000}
+                min={200}
+                value={wordsNumber}
+                onChange={setWordsNumber}
+                className="mt-5"
+              />
             </details>
 
             <button
