@@ -91,7 +91,7 @@ export default function Post(props) {
         </div>
         {/* Fix for no keywords */}
         <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          Keywords
+          Keywords & Occurence
         </div>
         <div className="flex flex-wrap pt-2 gap-1text-blue-600">
           {Object.keys(keywordCounts).map((key) => (
@@ -103,7 +103,9 @@ export default function Post(props) {
               style={{ color: "#2563EB", borderColor: "#2563EB" }}
               leftSection={<IconHash size="1rem" />}
             >
-              {key}: {keywordCounts[key]}
+              <span style={{ fontSize: "larger" }}>
+                {key}: {keywordCounts[key]}
+              </span>
             </Badge>
           ))}
         </div>
