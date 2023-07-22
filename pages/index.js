@@ -1,36 +1,60 @@
 // import Image from "next/image";
 // import HeroImage from "../public/hero.webp";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFeather } from "@fortawesome/free-solid-svg-icons";
-import { Logo } from "../components/logo";
+import Head from "next/head";
 import Link from "next/link";
-
+import { Navbar } from "../components/navbar";
+import Hero from "../components/hero";
+import SectionTitle from "../components/sectionTitle";
+import Benefits from "../components/benefits";
+import { benefitOne } from "../components/benefitDescription";
+import Footer from "../components/footer";
 export default function Home() {
   return (
-    <div className="max-w-screen h-screen overflow-hidden flex flex-col items-center	">
-      <section className="min-w-max flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
-        <h1 className="text-2xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-8 text-slate-900/90">
-          AI SEO Writer
-          <FontAwesomeIcon
-            icon={faFeather}
-            size="sm"
-            className="px-2 text-slate-900/90"
-          ></FontAwesomeIcon>
-        </h1>
-        <h4 className="text-center text-slate-900/90 md:text-left text-lg mt-5 md:pl-8">
-          AI Support For Your SEO Content
-        </h4>
-      </section>
-      <div className="flex flex-col align-middle justify-center items-center relative">
-        {/* <Image src={HeroImage} alt="Hero" fill className="absolute" /> */}
-        <div className="relative text-white px-20 py-5 text-center  bg-slate-900/90 rounded-md backdrop-blur-sm">
-          <Logo />
-          <p className="pb-3">AI Support For Your SEO Content.</p>
-          <Link href="/post/new" className="btn ">
-            Let&apos;s Start
-          </Link>
-        </div>
-      </div>
-    </div>
+    <>
+      <Head>
+        <title>AI SEO Writer - AI-generated draft</title>
+        <meta
+          name="description"
+          content="AI SEO Writer helps content writers to get to the first draft faster"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Navbar />
+      <Hero />
+      <SectionTitle
+        pretitle="Benefits"
+        title=" Why you should use AI SEO Writer"
+      >
+        AI SEO Writer is being designed to help you get to your first draft
+        faster. Start with an AI-generated draft, so you can focus on the work
+        that matters.
+      </SectionTitle>
+      <Benefits data={benefitOne} />
+      {/*<Benefits imgPos="right" data={benefitTwo} /> */}
+      {/*
+      <SectionTitle
+        pretitle="Testimonials"
+        title="Here's what our customers said"
+      >
+        Testimonails is a great way to increase the brand trust and awareness.
+        Use this section to highlight your popular customers.
+      </SectionTitle>
+      <Testimonials />
+      <SectionTitle pretitle="FAQ" title="Frequently Asked Questions">
+        Answer your customers possible questions here, it will increase the
+        conversion rate as well as support or chat requests.
+      </SectionTitle>
+      <Faq />
+      <Cta />*/}
+      <Footer />
+      {/* <PopupWidget /> */}
+    </>
   );
 }
+
+// 1. Review/shring header to align with body
+// 2. Review menu in header
+// 3. Review menu & Legal in footer
+// 4. Change Follow us with Contact in footer
+// 5. Add Contacts
