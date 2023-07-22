@@ -2,17 +2,66 @@ import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { AppLayout } from "../../components/AppLayout";
 import clientPromise from "../../lib/mongodb";
 import { ObjectId } from "mongodb";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 import { getAppProps } from "../../utils/getAppProps";
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import PostsContext from "../../context/postsContext";
+import { Badge } from "@mantine/core";
+import { IconHash } from "@tabler/icons";
+
+function removeHTMLTags(text) {
+  // Regular expression to match HTML tags
+  const htmlTagRegex = /<[^>]+>/g;
+
+  // Replace HTML tags with an empty string
+  return text.replace(htmlTagRegex, "");
+}
+
+function removePunctuation(text) {
+  // Regular expression to match punctuation characters
+  const punctuationRegex = /[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/g;
+
+  // Replace punctuation with an empty string
+  return text.replace(punctuationRegex, "");
+}
+
+function stringToKeywordsArray(keywordsString) {
+  // Split the string into an array using comma as the separator
+  const keywordsArray = keywordsString.split(",");
+
+  // Trim whitespace from each keyword (optional)
+  return keywordsArray.map((keyword) => keyword.trim());
+}
+
+function countMultipleWords(text, keywords) {
+  const words = text.toLowerCase().split(/\s+/); // Split text into an array of words
+  const keywordCounts = {};
+
+  for (const keyword of keywords) {
+    const keywordWords = keyword.toLowerCase().split(/\s+/);
+    keywordCounts[keyword] = -1;
+
+    for (let i = 0; i < words.length - keywordWords.length + 1; i++) {
+      const currentWords = words.slice(i, i + keywordWords.length).join(" ");
+      if (currentWords === keyword.toLowerCase()) {
+        keywordCounts[keyword]++;
+      }
+    }
+  }
+
+  return keywordCounts;
+}
 
 export default function Post(props) {
   const router = useRouter();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const { deletePost } = useContext(PostsContext);
+
+  const textWithoutTags = removeHTMLTags(props.postContent);
+  const cleanText = removePunctuation(textWithoutTags);
+  const keywordsArray = stringToKeywordsArray(props.keywords);
+  const keywordCounts = countMultipleWords(cleanText, keywordsArray);
+  // console.log("keywordCounts", keywordCounts, keywordsArray);
 
   const handleDeleteConfirm = async () => {
     try {
@@ -42,18 +91,29 @@ export default function Post(props) {
         </div>
         {/* Fix for no keywords */}
         <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          Keywords
+          Keywords & Occurence
         </div>
-        <div className="flex flex-wrap pt-2 gap-1">
-          {props.keywords.split(",").map((k, i) => (
-            <div key={i} className="p-2 rounded-full bg-slate-800 text-white">
-              <FontAwesomeIcon icon={faHashtag} /> {k}
-            </div>
+        <div className="flex flex-wrap pt-2 gap-1text-blue-600">
+          {Object.keys(keywordCounts).map((key) => (
+            <Badge
+              key={key}
+              variant="outline"
+              pl={3}
+              mr={6}
+              style={{ color: "#2563EB", borderColor: "#2563EB" }}
+              leftSection={<IconHash size="1rem" />}
+            >
+              <span style={{ fontSize: "larger" }}>
+                {key}: {keywordCounts[key]}
+              </span>
+            </Badge>
           ))}
         </div>
-        <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          Blog Post
+        <div className="flex justify-between text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
+          <div>Blog Post</div>
+          <div>{props.postContent.split(" ").length} words</div>
         </div>
+
         <div
           dangerouslySetInnerHTML={{ __html: props.postContent || "" }}
         ></div>
