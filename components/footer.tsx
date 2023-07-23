@@ -17,7 +17,7 @@ export default function Footer() {
               {" "}
               <Link
                 href="/"
-                className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100"
+                className="flex items-center space-x-2 text-2xl font-medium text-indigo-800 dark:text-gray-100"
               >
                 <span>AI SEO Writer</span>
                 <FontAwesomeIcon

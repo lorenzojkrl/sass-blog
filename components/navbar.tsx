@@ -20,6 +20,7 @@ import {
   Collapse,
   ScrollArea,
   rem,
+  Title,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -163,11 +164,14 @@ export function Navbar() {
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: "100%" }}>
           <Group>
-            AI SEO Writer
+            <Title order={2} className="text-slate-900/90">
+              AI SEO Writer
+            </Title>
+
             <FontAwesomeIcon
               icon={faFeather}
-              size="sm"
-              className="px-2 text-slate-900/90"
+              size="lg"
+              className=" text-slate-900/90"
             ></FontAwesomeIcon>
           </Group>
           <Group
@@ -240,7 +244,10 @@ export function Navbar() {
             </a>
           </Group>
           <Group className={classes.hiddenMobile}>
-            <Link href="/post/new" className="btn ">
+            <Link
+              href="/post/new"
+              className="px-8 py-2 text-lg font-medium text-center text-white bg-indigo-700 rounded-md "
+            >
               Log in
             </Link>
           </Group>
