@@ -160,152 +160,156 @@ export function Navbar() {
   ));
 
   return (
-    <Box pb={120}>
-      <Header height={60} px="md">
-        <Group position="apart" sx={{ height: "100%" }}>
-          <Group>
-            <Title order={2} className="text-slate-900/90">
-              AI SEO Writer
-            </Title>
+    <div className="w-full">
+      <nav className="container relative  flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
+        <Box className="lg:pb-20" style={{ width: "100%" }}>
+          <Header height={60} px="md ">
+            <Group position="apart" className="w-full" sx={{ height: "100%" }}>
+              <Group>
+                <Title order={2} className="text-slate-900/90">
+                  AI SEO Writer
+                </Title>
 
-            <FontAwesomeIcon
-              icon={faFeather}
-              size="lg"
-              className=" text-slate-900/90"
-            ></FontAwesomeIcon>
-          </Group>
-          <Group
-            sx={{ height: "100%" }}
-            spacing={0}
-            className={classes.hiddenMobile}
-          >
-            <a href="#" className={classes.link}>
-              Home
-            </a>
-            <HoverCard
-              width={600}
-              position="bottom"
-              radius="md"
-              shadow="md"
-              withinPortal
-            >
-              <HoverCard.Target>
+                <FontAwesomeIcon
+                  icon={faFeather}
+                  size="lg"
+                  className=" text-slate-900/90"
+                ></FontAwesomeIcon>
+              </Group>
+              <Group
+                sx={{ height: "100%" }}
+                spacing={0}
+                className={classes.hiddenMobile}
+              >
                 <a href="#" className={classes.link}>
-                  <Center inline>
-                    <Box component="span" mr={5}>
-                      Features
-                    </Box>
-                    <IconChevronDown
-                      size={16}
-                      color={theme.fn.primaryColor()}
-                    />
-                  </Center>
+                  Home
                 </a>
-              </HoverCard.Target>
+                {/* <HoverCard
+                  width={600}
+                  position="bottom"
+                  radius="md"
+                  shadow="md"
+                  withinPortal
+                >
+                  <HoverCard.Target>
+                    <a href="#" className={classes.link}>
+                      <Center inline>
+                        <Box component="span" mr={5}>
+                          Features
+                        </Box>
+                        <IconChevronDown
+                          size={16}
+                          color={theme.fn.primaryColor()}
+                        />
+                      </Center>
+                    </a>
+                  </HoverCard.Target>
 
-              <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
-                <Group position="apart" px="md">
-                  <Text fw={500}>Features</Text>
-                  <Anchor href="#" fz="xs">
-                    View all
-                  </Anchor>
-                </Group>
+                  <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
+                    <Group position="apart" px="md">
+                      <Text fw={500}>Features</Text>
+                      <Anchor href="#" fz="xs">
+                        View all
+                      </Anchor>
+                    </Group>
 
-                <Divider
-                  my="sm"
-                  mx="-md"
-                  color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-                />
+                    <Divider
+                      my="sm"
+                      mx="-md"
+                      color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+                    />
 
-                <SimpleGrid cols={2} spacing={0}>
-                  {links}
-                </SimpleGrid>
+                    <SimpleGrid cols={2} spacing={0}>
+                      {links}
+                    </SimpleGrid>
 
-                <div className={classes.dropdownFooter}>
-                  <Group position="apart">
-                    <div>
-                      <Text fw={500} fz="sm">
-                        Get started
-                      </Text>
-                      <Text size="xs" color="dimmed">
-                        Their food sources have decreased, and their numbers
-                      </Text>
+                    <div className={classes.dropdownFooter}>
+                      <Group position="apart">
+                        <div>
+                          <Text fw={500} fz="sm">
+                            Get started
+                          </Text>
+                          <Text size="xs" color="dimmed">
+                            Their food sources have decreased, and their numbers
+                          </Text>
+                        </div>
+                        <Button variant="default">Get started</Button>
+                      </Group>
                     </div>
-                    <Button variant="default">Get started</Button>
-                  </Group>
-                </div>
-              </HoverCard.Dropdown>
-            </HoverCard>
-            <a href="#" className={classes.link}>
-              Learn
-            </a>
-            <a href="#" className={classes.link}>
-              Academy
-            </a>
-          </Group>
-          <Group className={classes.hiddenMobile}>
-            <Link
-              href="/post/new"
-              className="px-8 py-2 text-lg font-medium text-center text-white bg-indigo-700 rounded-md "
-            >
-              Log in
-            </Link>
-          </Group>
-          <Burger
+                  </HoverCard.Dropdown>
+                </HoverCard> */}
+                <a href="#" className={classes.link}>
+                  Features (To Come)
+                </a>
+                <Link href="/post/new" className={classes.link}>
+                  Try 10 free drafts
+                </Link>
+              </Group>
+              <Group className={classes.hiddenMobile}>
+                <Link
+                  href="/post/new"
+                  className="px-8 py-2 text-lg font-medium text-center text-white bg-indigo-700 rounded-md "
+                >
+                  Log in
+                </Link>
+              </Group>
+              <Burger
+                opened={drawerOpened}
+                onClick={toggleDrawer}
+                className={classes.hiddenDesktop}
+              />
+            </Group>
+          </Header>
+
+          <Drawer
             opened={drawerOpened}
-            onClick={toggleDrawer}
+            onClose={closeDrawer}
+            size="100%"
+            padding="md"
+            title="Navigation"
             className={classes.hiddenDesktop}
-          />
-        </Group>
-      </Header>
+            zIndex={1000000}
+          >
+            <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
+              <Divider
+                my="sm"
+                color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+              />
 
-      <Drawer
-        opened={drawerOpened}
-        onClose={closeDrawer}
-        size="100%"
-        padding="md"
-        title="Navigation"
-        className={classes.hiddenDesktop}
-        zIndex={1000000}
-      >
-        <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Divider
-            my="sm"
-            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
+              <a href="#" className={classes.link}>
+                Home
+              </a>
+              {/* <UnstyledButton className={classes.link} onClick={toggleLinks}>
+                <Center inline>
+                  <Box component="span" mr={5}>
+                    Features (To Come)
+                  </Box>
+                  <IconChevronDown size={16} color={theme.fn.primaryColor()} />
+                </Center>
+              </UnstyledButton>
+              <Collapse in={linksOpened}>{links}</Collapse> */}
+              <a href="#" className={classes.link}>
+                Features (To Come)
+              </a>
+              <Link href="/post/new" className={classes.link}>
+                Try 10 free drafts
+              </Link>
 
-          <a href="#" className={classes.link}>
-            Home
-          </a>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
-            <Center inline>
-              <Box component="span" mr={5}>
-                Features
-              </Box>
-              <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-            </Center>
-          </UnstyledButton>
-          <Collapse in={linksOpened}>{links}</Collapse>
-          <a href="#" className={classes.link}>
-            Learn
-          </a>
-          <a href="#" className={classes.link}>
-            Academy
-          </a>
+              <Divider
+                my="sm"
+                color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+              />
 
-          <Divider
-            my="sm"
-            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-          />
-
-          <Group position="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
-            <Link href="/post/new" className="btn ">
-              Log in
-            </Link>
-          </Group>
-        </ScrollArea>
-      </Drawer>
-    </Box>
+              <Group position="center" grow pb="xl" px="md">
+                {/* <Button variant="default">Log in</Button> */}
+                <Link href="/post/new" className="testButtonStyle">
+                  Log in
+                </Link>
+              </Group>
+            </ScrollArea>
+          </Drawer>
+        </Box>
+      </nav>
+    </div>
   );
 }
