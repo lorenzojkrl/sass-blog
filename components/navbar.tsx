@@ -252,6 +252,12 @@ export function Navbar() {
                 >
                   Log in
                 </Link>
+                <Link
+                  href="/post/new"
+                  className="px-8 py-2 text-lg font-medium text-center text-white bg-indigo-700 rounded-md "
+                >
+                  Sign up
+                </Link>
               </Group>
               <Burger
                 opened={drawerOpened}
@@ -302,9 +308,8 @@ export function Navbar() {
 
               <Group position="center" grow pb="xl" px="md">
                 {/* <Button variant="default">Log in</Button> */}
-                <Link href="/post/new" className="testButtonStyle">
-                  Log in
-                </Link>
+                <Link href="/post/new">Sign up</Link>
+                <Link href="/post/new">Log in</Link>
               </Group>
             </ScrollArea>
           </Drawer>
