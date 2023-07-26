@@ -27,8 +27,12 @@ export default function Home() {
         title=" Why you should use AI SEO Writer"
       >
         AI SEO Writer is being designed to help you get to your first draft
-        faster. Start with an AI-generated draft, so you can focus on the work
-        that matters.
+        faster.
+        <br />
+        <br />
+        Write the topic and the keywords you want to use. Get an SEO draft,
+        including meta title, meta description and your keywords. Now focus on
+        the work that matters.
       </SectionTitle>
       <Benefits data={benefitOne} />
       {/*<Benefits imgPos="right" data={benefitTwo} /> */}
@@ -53,8 +57,5 @@ export default function Home() {
   );
 }
 
-// 1. Review/shring header to align with body
 // 2. Review menu in header
 // 3. Review menu & Legal in footer
-// 4. Change Follow us with Contact in footer
-// 5. Add Contacts

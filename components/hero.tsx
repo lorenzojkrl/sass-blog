@@ -28,16 +28,30 @@ const Hero = () => {
           </div>
         </div>
         <div className="flex items-center justify-center w-full lg:w-1/2">
-          <div className="">
+          {/* <h1
+            style={{
+              position: "absolute",
+              backgroundColor: "#11111111",
+              zIndex: 1,
+              width: "500px",
+              height: "500px",
+            }}
+          >
+            Text{" "}
+          </h1> */}
+          <div
+            style={{ position: "relative", width: "500px", height: "500px" }}
+          >
             <Image
               src={heroImg}
-              width="616"
-              height="617"
-              className={"object-cover"}
+              width="500"
+              height="500"
+              className={"object-cover"} // check this
               alt="Woman Working On Computer
               BY PAWEL on https://www.glazestock.com/"
               loading="eager"
               placeholder="blur"
+              style={{ zIndex: "-1", objectFit: "contain" }}
             />
           </div>
         </div>

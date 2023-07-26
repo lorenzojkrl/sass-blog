@@ -27,6 +27,7 @@ import {
   IconNotification,
   IconCode,
   IconBook,
+  IconHelp,
   IconChartPie3,
   IconFingerprint,
   IconCoin,
@@ -102,36 +103,21 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const mockdata = [
+const pricingData = [
   {
-    icon: IconCode,
-    title: "Open source",
-    description: "This Pokémon’s cry is very loud and distracting",
+    icon: IconBook,
+    title: "10 free drafts",
+    description: "Sign up and get 10 free drafts",
   },
   {
     icon: IconCoin,
-    title: "Free for everyone",
-    description: "The fluid of Smeargle’s tail secretions changes",
+    title: "10$ = 100 drafts",
+    description: `Get 100 drafts for 10$ | No expiration date | No subscription`,
   },
   {
-    icon: IconBook,
-    title: "Documentation",
-    description: "Yanma is capable of seeing 360 degrees without",
-  },
-  {
-    icon: IconFingerprint,
-    title: "Security",
-    description: "The shell’s rounded shape and the grooves on its.",
-  },
-  {
-    icon: IconChartPie3,
-    title: "Analytics",
-    description: "This Pokémon uses its flying ability to quickly chase",
-  },
-  {
-    icon: IconNotification,
-    title: "Notifications",
-    description: "Combusken battles with the intensely hot flames it spews",
+    icon: IconHelp,
+    title: "Help us = 100 drafts",
+    description: `Help us building a better tool. Email: contact@aiseowriter.co`,
   },
 ];
 
@@ -141,7 +127,7 @@ export function Navbar() {
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
 
-  const links = mockdata.map((item) => (
+  const pricingLinks = pricingData.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
       <Group noWrap align="flex-start">
         <ThemeIcon size={34} variant="default" radius="md">
@@ -244,6 +230,59 @@ export function Navbar() {
                 <Link href="/post/new" className={classes.link}>
                   Try 10 free drafts
                 </Link>
+                <HoverCard
+                  width={600}
+                  position="bottom"
+                  radius="md"
+                  shadow="md"
+                  withinPortal
+                >
+                  <HoverCard.Target>
+                    <a href="#" className={classes.link}>
+                      <Center inline>
+                        <Box component="span" mr={5}>
+                          Pricing
+                        </Box>
+                        <IconChevronDown
+                          size={16}
+                          color={theme.fn.primaryColor()}
+                        />
+                      </Center>
+                    </a>
+                  </HoverCard.Target>
+
+                  <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
+                    <Group position="apart" px="md">
+                      <Text fw={500}>Starter pricing</Text>
+                    </Group>
+
+                    <Divider
+                      my="sm"
+                      mx="-md"
+                      color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
+                    />
+
+                    <SimpleGrid cols={2} spacing={0}>
+                      {pricingLinks}
+                    </SimpleGrid>
+
+                    <div className={classes.dropdownFooter}>
+                      <Group position="apart">
+                        <div>
+                          <Text fw={500} fz="sm">
+                            Get 10 free drafts
+                          </Text>
+                          <Text size="xs" color="dimmed">
+                            Get 10 free drafts on signup
+                          </Text>
+                        </div>
+                        <Button variant="default">
+                          <Link href="/post/new">Get started</Link>
+                        </Button>
+                      </Group>
+                    </div>
+                  </HoverCard.Dropdown>
+                </HoverCard>
               </Group>
               <Group className={classes.hiddenMobile}>
                 <Link
@@ -251,6 +290,12 @@ export function Navbar() {
                   className="px-8 py-2 text-lg font-medium text-center text-white bg-indigo-700 rounded-md "
                 >
                   Log in
+                </Link>
+                <Link
+                  href="/post/new"
+                  className="px-8 py-2 text-lg font-medium text-center text-white bg-indigo-700 rounded-md "
+                >
+                  Sign up
                 </Link>
               </Group>
               <Burger
@@ -302,9 +347,8 @@ export function Navbar() {
 
               <Group position="center" grow pb="xl" px="md">
                 {/* <Button variant="default">Log in</Button> */}
-                <Link href="/post/new" className="testButtonStyle">
-                  Log in
-                </Link>
+                <Link href="/post/new">Sign up</Link>
+                <Link href="/post/new">Log in</Link>
               </Group>
             </ScrollArea>
           </Drawer>
