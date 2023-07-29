@@ -110,7 +110,7 @@ export default function Post(props) {
           ))}
         </div>
         <div className="flex justify-between text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          <div>Blog Post</div>
+          <div>Draft </div>
           <div>{props.postContent.split(" ").length} words</div>
         </div>
 

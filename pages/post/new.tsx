@@ -52,7 +52,7 @@ export default function NewPost(props) {
         </div>
       )}
       {!generating && (
-        <div className="w-full h-full flex flex-col overflow-auto">
+        <div className="w-full h-[50%] flex flex-col overflow-auto">
           <form
             onSubmit={handleSubmit}
             className="m-auto w-full max-w-screen-sm bg-slate-100 p-4 rounded-md shadow-xlborder border-slate-200 shadow-slate-200"
@@ -61,7 +61,7 @@ export default function NewPost(props) {
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
               placeholder="The benefits of pet therapy"
-              label="Generate a blog post on:"
+              label="Generate a new draft about:"
               maxLength={150}
               minRows={3}
               maxRows={5}
@@ -101,7 +101,7 @@ export default function NewPost(props) {
               className="btn"
               disabled={!topic.trim() || !keywords.trim()}
             >
-              Generate
+              Draft
             </button>
           </form>
         </div>

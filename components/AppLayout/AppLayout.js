@@ -37,14 +37,14 @@ export const AppLayout = ({
         <div className="bg-slate-800 px-2 ">
           <Logo />
           <Link href="/post/new" className="btn">
-            New post
+            New Draft
           </Link>
           <Link href="/token-topup" className="block mt-2 text-center">
             <FontAwesomeIcon
               icon={faCoins}
               className="text-yellow-500"
             ></FontAwesomeIcon>
-            <span className="pl-1">{availableTokens} tokens available </span>
+            <span className="pl-1">{availableTokens} drafts available </span>
           </Link>
         </div>
         <div className="px-4 flex-1 overflow-auto bg-gradient-to-b from-slate-800 to-cyan-800">
