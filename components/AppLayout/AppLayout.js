@@ -1,11 +1,88 @@
-import Link from "next/link";
-import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faFeather } from "@fortawesome/free-solid-svg-icons";
 import { Logo } from "../logo";
 import { useContext, useEffect } from "react";
 import PostsContext from "../../context/postsContext";
+import {
+  createStyles,
+  Header,
+  Group,
+  Divider,
+  Box,
+  Burger,
+  Drawer,
+  ScrollArea,
+  rem,
+  Title,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import SidebarFooter from "./sidebarFooter";
+import SidebarLoadMore from "./sidebarLoadMore";
+import SidebarHeader from "./sidebarHeader";
+
+const useStyles = createStyles((theme) => ({
+  link: {
+    display: "flex",
+    alignItems: "center",
+    height: "100%",
+    paddingLeft: theme.spacing.md,
+    paddingRight: theme.spacing.md,
+    textDecoration: "none",
+    color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    fontWeight: 500,
+    fontSize: theme.fontSizes.sm,
+
+    [theme.fn.smallerThan("sm")]: {
+      height: rem(42),
+      display: "flex",
+      alignItems: "center",
+      width: "100%",
+    },
+
+    ...theme.fn.hover({
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[6]
+          : theme.colors.gray[0],
+    }),
+  },
+
+  subLink: {
+    width: "100%",
+    padding: `${theme.spacing.xs} ${theme.spacing.md}`,
+    borderRadius: theme.radius.md,
+
+    ...theme.fn.hover({
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[7]
+          : theme.colors.gray[0],
+    }),
+
+    "&:active": theme.activeStyles,
+  },
+
+  dropdownFooter: {
+    backgroundColor:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[7]
+        : theme.colors.gray[0],
+    margin: `calc(${theme.spacing.md} * -1)`,
+    marginTop: theme.spacing.sm,
+    padding: `${theme.spacing.md} calc(${theme.spacing.md} * 2)`,
+    paddingBottom: theme.spacing.xl,
+    borderTop: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
+    }`,
+  },
+
+  hiddenDesktop: {
+    [theme.fn.largerThan("sm")]: {
+      display: "none",
+    },
+  },
+}));
 
 export const AppLayout = ({
   children,
@@ -18,6 +95,10 @@ export const AppLayout = ({
 
   const { setPostsFromSSR, posts, getPosts, noMorePosts } =
     useContext(PostsContext);
+
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
+    useDisclosure(false);
+  const { classes, theme } = useStyles();
 
   useEffect(() => {
     setPostsFromSSR(postsFromSSR);
@@ -32,72 +113,97 @@ export const AppLayout = ({
   // setpostsFromSSR won't ever change because memoized
 
   return (
-    <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
-      <div className="flex flex-col text-white overflow-hidden">
-        <div className="bg-slate-800 px-2 ">
-          <Logo />
-          <Link href="/post/new" className="btn">
-            New post
-          </Link>
-          <Link href="/token-topup" className="block mt-2 text-center">
-            <FontAwesomeIcon
-              icon={faCoins}
-              className="text-yellow-500"
-            ></FontAwesomeIcon>
-            <span className="pl-1">{availableTokens} tokens available </span>
-          </Link>
+    <>
+      <div className="block md:hidden">
+        <div className="w-full">
+          <nav className="container relative  flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
+            <Box className="lg:pb-20" style={{ width: "100%" }}>
+              <Header height={60} px="md ">
+                <Group
+                  position="apart"
+                  className="w-full"
+                  sx={{ height: "100%" }}
+                >
+                  <Group>
+                    <Title order={2} className="text-slate-900/90">
+                      AI SEO Writer
+                    </Title>
+
+                    <FontAwesomeIcon
+                      icon={faFeather}
+                      size="lg"
+                      className=" text-slate-900/90"
+                    ></FontAwesomeIcon>
+                  </Group>
+
+                  <Burger
+                    opened={drawerOpened}
+                    onClick={toggleDrawer}
+                    className={classes.hiddenDesktop}
+                  />
+                </Group>
+              </Header>
+
+              <Drawer
+                opened={drawerOpened}
+                onClose={closeDrawer}
+                size="100%"
+                padding="md"
+                title="AI SEO Writer"
+                className={classes.hiddenDesktop}
+                zIndex={1000000}
+              >
+                <ScrollArea style={{ overflowX: "hidden" }}>
+                  <Divider my="sm" color="gray.1" />
+                  <SidebarHeader
+                    availableTokens={availableTokens}
+                    closeDrawer={closeDrawer}
+                  ></SidebarHeader>
+                  <Divider my="sm" color="gray.1" />
+                  <SidebarLoadMore
+                    noMorePosts={noMorePosts}
+                    getPosts={getPosts}
+                    posts={posts}
+                    postId={postId}
+                    closeDrawer={closeDrawer}
+                  ></SidebarLoadMore>
+                  <Divider my="sm" color="gray.1" />
+                  <SidebarFooter user={user}></SidebarFooter>
+                </ScrollArea>
+              </Drawer>
+            </Box>
+          </nav>
         </div>
-        <div className="px-4 flex-1 overflow-auto bg-gradient-to-b from-slate-800 to-cyan-800">
-          {posts.map((post) => (
-            <Link
-              key={post._id}
-              href={`/post/${post._id}`}
-              className={`py-1 border border-transparent block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
-                postId === post._id ? "bg-white/20 border-white" : ""
-              }`}
-            >
-              {post.topic}
-            </Link>
-          ))}
-          {!noMorePosts && (
-            <div
-              onClick={() => {
-                getPosts({ lastPostDate: posts[posts.length - 1].created });
-              }}
-              className={
-                "hover:underline text-sm text-slate-400 text-center cursor-pointer mt-4 "
-              }
-            >
-              Load more posts
+        {children}
+      </div>
+      <div className="hidden md:block">
+        <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
+          <div className="flex flex-col text-white overflow-hidden">
+            <div className="bg-slate-800 px-2 ">
+              <Logo />
+              <Divider my="sm" color="rgb(30 41 59)" />
+              <SidebarHeader
+                availableTokens={availableTokens}
+                closeDrawer={closeDrawer}
+              ></SidebarHeader>
+              <Divider my="sm" color="rgb(30 41 59)" />
             </div>
-          )}
-        </div>
-        <div className="bg-cyan-800 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
-          {!!user ? (
-            <>
-              <div className="min-width-[50px]">
-                <Image
-                  src={user.picture}
-                  alt={user.name}
-                  height={50}
-                  width={50}
-                  className="rounded-full"
-                />
-              </div>
-              <div className="flex-1">
-                <div className="font-bold">{user.email}</div>
-                <Link className="text-sm" href="/api/auth/logout">
-                  Logout
-                </Link>
-              </div>
-            </>
-          ) : (
-            <Link href="/api/auth/login">Login</Link>
-          )}
+            <div className="flex-1 bg-gradient-to-b from-slate-800 to-cyan-800">
+              <SidebarLoadMore
+                noMorePosts={noMorePosts}
+                getPosts={getPosts}
+                posts={posts}
+                postId={postId}
+                closeDrawer={closeDrawer}
+              ></SidebarLoadMore>
+            </div>
+            <div className="pt-2 bg-cyan-800 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
+              <SidebarFooter user={user}></SidebarFooter>
+            </div>
+          </div>
+          {children}
         </div>
       </div>
-
-      {children}
-    </div>
+    </>
   );
 };

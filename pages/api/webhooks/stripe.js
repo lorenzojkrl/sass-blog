@@ -26,7 +26,7 @@ const handler = async (req, res) => {
         endpointSecret,
       });
     } catch (e) {
-      console.log("An error occured while verifying Stripe requests", e);
+      console.error("An error occured while verifying Stripe requests", e);
     }
 
     switch (event.type) {
@@ -55,11 +55,10 @@ const handler = async (req, res) => {
             upsert: true,
           }
         );
-        console.log("Successful event", event.type);
 
         break;
       default:
-        console.log("Unhandled event", event.type);
+        console.error("Unhandled event", event.type);
     }
     res.status(200).json({ received: true });
   }

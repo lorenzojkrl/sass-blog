@@ -9,16 +9,15 @@ export default function TokenTopup() {
     });
 
     const json = await result.json();
-    console.log(json);
     window.location.href = json.session.url;
   };
 
   return (
     <div className="h-full overflow-hidden flex justify-center">
       <div className="flex h-full w-full max-w-sm flex-col justify-center items-center">
-        <h1>Token Topup</h1>
+        <h1>Get More Drafts</h1>
         <button className="btn" onClick={handleClick}>
-          Add tokens
+          Purchase
         </button>
       </div>
     </div>

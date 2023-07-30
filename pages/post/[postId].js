@@ -61,7 +61,6 @@ export default function Post(props) {
   const cleanText = removePunctuation(textWithoutTags);
   const keywordsArray = stringToKeywordsArray(props.keywords);
   const keywordCounts = countMultipleWords(cleanText, keywordsArray);
-  // console.log("keywordCounts", keywordCounts, keywordsArray);
 
   const handleDeleteConfirm = async () => {
     try {
@@ -110,7 +109,7 @@ export default function Post(props) {
           ))}
         </div>
         <div className="flex justify-between text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          <div>Blog Post</div>
+          <div>Draft </div>
           <div>{props.postContent.split(" ").length} words</div>
         </div>
 
