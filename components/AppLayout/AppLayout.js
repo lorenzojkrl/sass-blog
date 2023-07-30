@@ -20,6 +20,7 @@ import {
   Title,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import SidebarFooter from "./sidebarFooter";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -159,7 +160,7 @@ export const AppLayout = ({
                     color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
                   />
 
-                  <Link href="/post/new" className="btn">
+                  <Link href="/post/new" className="btn w-[80%] mx-auto">
                     New Draft
                   </Link>
                   <Link href="/token-topup" className="block mt-2 text-center">
@@ -210,20 +211,7 @@ export const AppLayout = ({
                     color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
                   />
 
-                  <Group position="center" grow pb="xl" px="md">
-                    {!!user ? (
-                      <>
-                        <div className="flex-1">
-                          <div className="font-bold">{user.email}</div>
-                          <Link className="text-sm" href="/api/auth/logout">
-                            Logout
-                          </Link>
-                        </div>
-                      </>
-                    ) : (
-                      <Link href="/api/auth/login">Login</Link>
-                    )}
-                  </Group>
+                  <SidebarFooter user={user}></SidebarFooter>
                 </ScrollArea>
               </Drawer>
             </Box>
@@ -274,28 +262,8 @@ export const AppLayout = ({
                 </div>
               )}
             </div>
-            <div className="bg-cyan-800 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
-              {!!user ? (
-                <>
-                  <div className="min-width-[50px]">
-                    <Image
-                      src={user.picture}
-                      alt={user.name}
-                      height={50}
-                      width={50}
-                      className="rounded-full"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-bold">{user.email}</div>
-                    <Link className="text-sm" href="/api/auth/logout">
-                      Logout
-                    </Link>
-                  </div>
-                </>
-              ) : (
-                <Link href="/api/auth/login">Login</Link>
-              )}
+            <div className="pt-2 bg-cyan-800 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
+              <SidebarFooter user={user}></SidebarFooter>
             </div>
           </div>
 
