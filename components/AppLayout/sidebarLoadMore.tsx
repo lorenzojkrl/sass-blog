@@ -1,16 +1,33 @@
+import Link from "next/link";
 import { Post } from "../../misc/types";
 
 const SidebarLoadMore = ({
   noMorePosts,
   getPosts,
   posts,
+  postId,
+  closeDrawer,
 }: {
   noMorePosts: boolean;
   getPosts: (arg: { lastPostDate: string }) => void;
   posts: Post[];
+  postId: any;
+  closeDrawer: () => void;
 }): JSX.Element => {
   return (
-    <>
+    <div className="px-4 flex-1">
+      {posts.map((post) => (
+        <Link
+          onClick={closeDrawer}
+          key={post._id}
+          href={`/post/${post._id}`}
+          className={`py-1 border border-transparent block text-ellipsis max-w-xs overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
+            postId === post._id ? "bg-white/20 border-white" : ""
+          }`}
+        >
+          {post.topic}
+        </Link>
+      ))}
       {!noMorePosts && (
         <div
           onClick={() => {
@@ -25,7 +42,7 @@ const SidebarLoadMore = ({
           Load more drafts
         </div>
       )}
-    </>
+    </div>
   );
 };
 

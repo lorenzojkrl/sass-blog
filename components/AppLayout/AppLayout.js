@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
@@ -22,6 +21,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import SidebarFooter from "./sidebarFooter";
 import SidebarLoadMore from "./sidebarLoadMore";
+import SidebarHeader from "./sidebarHeader";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -156,62 +156,20 @@ export const AppLayout = ({
                 zIndex={1000000}
               >
                 <ScrollArea style={{ overflowX: "hidden" }}>
-                  <Divider
-                    my="sm"
-                    color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-                  />
-
-                  <Link
-                    href="/post/new"
-                    className="btn w-[80%] mx-auto"
-                    onClick={closeDrawer}
-                  >
-                    New Draft
-                  </Link>
-                  <Link
-                    href="/token-topup"
-                    className="block mt-2 text-center"
-                    onClick={closeDrawer}
-                  >
-                    <FontAwesomeIcon
-                      icon={faCoins}
-                      className="text-yellow-500"
-                    ></FontAwesomeIcon>
-                    <span className="pl-1">
-                      {availableTokens} drafts available{" "}
-                    </span>
-                  </Link>
-
-                  <Divider
-                    my="sm"
-                    color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-                  />
-
-                  <div className="px-4 flex-1 overflow-auto ">
-                    {posts.map((post) => (
-                      <Link
-                        onClick={closeDrawer}
-                        key={post._id}
-                        href={`/post/${post._id}`}
-                        className={`py-1 border border-transparent block text-ellipsis max-w-xs overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
-                          postId === post._id ? "bg-white/20 border-white" : ""
-                        }`}
-                      >
-                        {post.topic}
-                      </Link>
-                    ))}
-                    <SidebarLoadMore
-                      noMorePosts={noMorePosts}
-                      getPosts={getPosts}
-                      posts={posts}
-                    ></SidebarLoadMore>
-                  </div>
-
-                  <Divider
-                    my="sm"
-                    color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-                  />
-
+                  <Divider my="sm" color="gray.1" />
+                  <SidebarHeader
+                    availableTokens={availableTokens}
+                    closeDrawer={closeDrawer}
+                  ></SidebarHeader>
+                  <Divider my="sm" color="gray.1" />
+                  <SidebarLoadMore
+                    noMorePosts={noMorePosts}
+                    getPosts={getPosts}
+                    posts={posts}
+                    postId={postId}
+                    closeDrawer={closeDrawer}
+                  ></SidebarLoadMore>
+                  <Divider my="sm" color="gray.1" />
                   <SidebarFooter user={user}></SidebarFooter>
                 </ScrollArea>
               </Drawer>
@@ -221,46 +179,30 @@ export const AppLayout = ({
         {children}
       </div>
       <div className="hidden md:block">
-        <div className="  grid grid-cols-[300px_1fr] h-screen max-h-screen">
+        <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
           <div className="flex flex-col text-white overflow-hidden">
             <div className="bg-slate-800 px-2 ">
               <Logo />
-              <Link href="/post/new" className="btn">
-                New Draft
-              </Link>
-              <Link href="/token-topup" className="block mt-2 text-center">
-                <FontAwesomeIcon
-                  icon={faCoins}
-                  className="text-yellow-500"
-                ></FontAwesomeIcon>
-                <span className="pl-1">
-                  {availableTokens} drafts available{" "}
-                </span>
-              </Link>
+              <Divider my="sm" color="rgb(30 41 59)" />
+              <SidebarHeader
+                availableTokens={availableTokens}
+                closeDrawer={closeDrawer}
+              ></SidebarHeader>
+              <Divider my="sm" color="rgb(30 41 59)" />
             </div>
-            <div className="px-4 flex-1 overflow-auto bg-gradient-to-b from-slate-800 to-cyan-800">
-              {posts.map((post) => (
-                <Link
-                  key={post._id}
-                  href={`/post/${post._id}`}
-                  className={`py-1 border border-transparent block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
-                    postId === post._id ? "bg-white/20 border-white" : ""
-                  }`}
-                >
-                  {post.topic}
-                </Link>
-              ))}
+            <div className="flex-1 bg-gradient-to-b from-slate-800 to-cyan-800">
               <SidebarLoadMore
                 noMorePosts={noMorePosts}
                 getPosts={getPosts}
                 posts={posts}
+                postId={postId}
+                closeDrawer={closeDrawer}
               ></SidebarLoadMore>
             </div>
             <div className="pt-2 bg-cyan-800 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
               <SidebarFooter user={user}></SidebarFooter>
             </div>
           </div>
-
           {children}
         </div>
       </div>
