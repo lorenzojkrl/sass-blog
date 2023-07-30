@@ -8,3 +8,13 @@ export type User = {
   sub: string;
   sid: string;
 };
+
+export type Post = {
+  _id: string;
+  created: string;
+  topic: string;
+  keywords: string;
+  postContent: string;
+  title: string;
+  metaDescription: string;
+};

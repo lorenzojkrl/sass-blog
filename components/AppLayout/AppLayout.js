@@ -21,6 +21,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import SidebarFooter from "./sidebarFooter";
+import SidebarLoadMore from "./sidebarLoadMore";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -154,16 +155,24 @@ export const AppLayout = ({
                 className={classes.hiddenDesktop}
                 zIndex={1000000}
               >
-                <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
+                <ScrollArea style={{ overflowX: "hidden" }}>
                   <Divider
                     my="sm"
                     color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
                   />
 
-                  <Link href="/post/new" className="btn w-[80%] mx-auto">
+                  <Link
+                    href="/post/new"
+                    className="btn w-[80%] mx-auto"
+                    onClick={closeDrawer}
+                  >
                     New Draft
                   </Link>
-                  <Link href="/token-topup" className="block mt-2 text-center">
+                  <Link
+                    href="/token-topup"
+                    className="block mt-2 text-center"
+                    onClick={closeDrawer}
+                  >
                     <FontAwesomeIcon
                       icon={faCoins}
                       className="text-yellow-500"
@@ -181,29 +190,21 @@ export const AppLayout = ({
                   <div className="px-4 flex-1 overflow-auto ">
                     {posts.map((post) => (
                       <Link
+                        onClick={closeDrawer}
                         key={post._id}
                         href={`/post/${post._id}`}
-                        className={`py-1 border border-transparent block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
+                        className={`py-1 border border-transparent block text-ellipsis max-w-xs overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
                           postId === post._id ? "bg-white/20 border-white" : ""
                         }`}
                       >
                         {post.topic}
                       </Link>
                     ))}
-                    {!noMorePosts && (
-                      <div
-                        onClick={() => {
-                          getPosts({
-                            lastPostDate: posts[posts.length - 1].created,
-                          });
-                        }}
-                        className={
-                          "hover:underline text-sm text-slate-400 text-center cursor-pointer mt-4 "
-                        }
-                      >
-                        Load more posts
-                      </div>
-                    )}
+                    <SidebarLoadMore
+                      noMorePosts={noMorePosts}
+                      getPosts={getPosts}
+                      posts={posts}
+                    ></SidebarLoadMore>
                   </div>
 
                   <Divider
@@ -249,18 +250,11 @@ export const AppLayout = ({
                   {post.topic}
                 </Link>
               ))}
-              {!noMorePosts && (
-                <div
-                  onClick={() => {
-                    getPosts({ lastPostDate: posts[posts.length - 1].created });
-                  }}
-                  className={
-                    "hover:underline text-sm text-slate-400 text-center cursor-pointer mt-4 "
-                  }
-                >
-                  Load more posts
-                </div>
-              )}
+              <SidebarLoadMore
+                noMorePosts={noMorePosts}
+                getPosts={getPosts}
+                posts={posts}
+              ></SidebarLoadMore>
             </div>
             <div className="pt-2 bg-cyan-800 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
               <SidebarFooter user={user}></SidebarFooter>
