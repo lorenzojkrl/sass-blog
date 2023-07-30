@@ -1,9 +1,14 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
-import { Divider } from "@mantine/core";
 
-const SidebarHeader = ({ availableTokens, closeDrawer }): JSX.Element => {
+const SidebarHeader = ({
+  availableTokens,
+  closeDrawer,
+}: {
+  availableTokens: number;
+  closeDrawer: () => void;
+}): JSX.Element => {
   return (
     <>
       <Link
