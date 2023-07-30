@@ -29,7 +29,6 @@ export default withApiAuthRequired(async function handler(req, res) {
     wordsNumber < 200 ||
     wordsNumber > 2000
   ) {
-    console.log("Wrong");
     res.status(422); //Unprocessable entity because we want a topic and keywords
     return {
       redirect: {
@@ -117,10 +116,6 @@ export default withApiAuthRequired(async function handler(req, res) {
   const metaDescription =
     metaDescriptionResponse.data.choices[0]?.message?.content || "";
 
-  // console.log(postContent);
-  // console.log(title);
-  // console.log(metaDescription);
-
   await db.collection("users").updateOne(
     {
       auth0Id: user.sub,
@@ -141,8 +136,6 @@ export default withApiAuthRequired(async function handler(req, res) {
     userId: userProfile._id,
     created: new Date(),
   });
-
-  // console.log("post", post);
 
   res.status(200).json({ postId: post.insertedId });
 });

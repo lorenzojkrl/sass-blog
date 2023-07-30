@@ -55,7 +55,6 @@ export const PostsProvider = ({ children }) => {
 
   // useCallback to memoize the function so it doesn't reload
   const setPostsFromSSR = useCallback((postsFromSSR = []) => {
-    // console.log("Posts from SSR:", postsFromSSR);
     dispatch({
       type: "addPosts",
       posts: postsFromSSR,
@@ -95,7 +94,6 @@ export const PostsProvider = ({ children }) => {
       });
 
       // useState logic
-      // console.log(" post results", postsResult);
       // setPosts((value) => {
       //   const newPosts = [...value];
       //   postsResult.forEach((post) => {

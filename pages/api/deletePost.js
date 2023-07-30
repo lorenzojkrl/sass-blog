@@ -22,7 +22,7 @@ export default withApiAuthRequired(async function handler(req, res) {
 
     res.status(200).json({ success: true });
   } catch (error) {
-    console.log("Error trying to delete a post", error);
+    console.error("Error trying to delete a post", error);
   }
   return;
 });

@@ -61,7 +61,6 @@ export default function Post(props) {
   const cleanText = removePunctuation(textWithoutTags);
   const keywordsArray = stringToKeywordsArray(props.keywords);
   const keywordCounts = countMultipleWords(cleanText, keywordsArray);
-  // console.log("keywordCounts", keywordCounts, keywordsArray);
 
   const handleDeleteConfirm = async () => {
     try {

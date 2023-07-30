@@ -18,8 +18,6 @@ export default function NewPost(props) {
     e.preventDefault();
     setGenerating(true);
 
-    // console.log("wordsNumber in new.tsx", typeof wordsNumber, wordsNumber);
-
     try {
       const response = await fetch("/api/generatePost", {
         method: "POST",
@@ -29,7 +27,6 @@ export default function NewPost(props) {
         body: JSON.stringify({ topic, keywords, wordsNumber }),
       });
       const json = await response.json();
-      console.log("json", json);
 
       if (json?.postId) {
         router.push(`/post/${json.postId}`);
