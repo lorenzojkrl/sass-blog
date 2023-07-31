@@ -108,6 +108,11 @@ export default function Post(props) {
             </Badge>
           ))}
         </div>
+        <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
+          Recommended slug
+        </div>
+        <div>slug-here</div>
+
         <div className="flex justify-between text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           <div>Draft </div>
           <div>{props.postContent.split(" ").length} words</div>
