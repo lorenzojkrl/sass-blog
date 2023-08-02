@@ -58,6 +58,36 @@ function countMultipleWords(text, keywords) {
   return keywordCounts;
 }
 
+function calculateKeywordDensity(text, keywords) {
+  if (!text || !keywords || !Array.isArray(keywords)) {
+    throw new Error("Text and an array of keywords are required.");
+  }
+
+  const wordsArray = text.toLowerCase().split(/\s+/);
+  const keywordCounts = {};
+
+  for (const keyword of keywords) {
+    const keywordWords = keyword.toLowerCase().split(/\s+/);
+
+    // Create a regular expression to match the complete keyword phrase
+    const regexString = keywordWords
+      .map((word) => `\\b${word}\\b`)
+      .join("\\s+");
+    const regex = new RegExp(regexString, "g");
+
+    // Find all occurrences of the keyword in the text
+    const keywordOccurrences = text.toLowerCase().match(regex) || [];
+
+    // Calculate the keyword density as a percentage
+    const totalWords = wordsArray.length;
+    const keywordDensity = (keywordOccurrences.length / totalWords) * 100;
+
+    keywordCounts[keyword] = keywordDensity.toFixed(2); // Store density rounded to 2 decimal places
+  }
+
+  return keywordCounts;
+}
+
 export default function Post(props) {
   const router = useRouter();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -68,6 +98,7 @@ export default function Post(props) {
   const cleanText = removePunctuation(textWithoutTags);
   const keywordsArray = stringToKeywordsArray(props.keywords);
   const keywordCounts = countMultipleWords(cleanText, keywordsArray);
+  const keywordsDensity = calculateKeywordDensity(cleanText, keywordsArray);
 
   const handleDeleteConfirm = async () => {
     try {
@@ -106,11 +137,13 @@ export default function Post(props) {
               <span className="font-normal">{props.slug}</span>
             </div>
           )}
-          <div className="font-bold">Keywords occurence & density</div>
+          <div className="font-bold">
+            Keywords occurence & approximate density
+          </div>
           <ul>
             {Object.keys(keywordCounts).map((key) => (
               <li key={key}>
-                {key}: {keywordCounts[key]}
+                {key}: {keywordCounts[key]} - {keywordsDensity[key]}%
               </li>
             ))}
           </ul>
