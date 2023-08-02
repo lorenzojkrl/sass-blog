@@ -107,11 +107,16 @@ export default function Post(props) {
               </span>
             </Badge>
           ))}
+          <div>KW Density {}</div>
         </div>
-        <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          Recommended slug
-        </div>
-        <div>slug-here</div>
+        {!!props.slug && (
+          <>
+            <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
+              Recommended slug
+            </div>
+            <div>{props.slug}</div>
+          </>
+        )}
 
         <div className="flex justify-between text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           <div>Draft </div>
@@ -191,6 +196,7 @@ export const getServerSideProps = withPageAuthRequired({
         id: ctx.params.postId,
         postContent: post.postContent,
         title: post.title,
+        slug: post.slug,
         metaDescription: post.metaDescription,
         keywords: post.keywords,
         postCreated: post.created.toString(),
