@@ -6,8 +6,11 @@ import { getAppProps } from "../../utils/getAppProps";
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import PostsContext from "../../context/postsContext";
-import { Badge } from "@mantine/core";
-import { IconHash } from "@tabler/icons";
+
+function removeHTMLHead(text) {
+  const regex = /<head\b[^>]*>[\s\S]*?<\/head>/gi;
+  return text.replace(regex, "");
+}
 
 function removeHTMLTags(text) {
   // Regular expression to match HTML tags
@@ -34,15 +37,18 @@ function stringToKeywordsArray(keywordsString) {
 }
 
 function countMultipleWords(text, keywords) {
-  const words = text.toLowerCase().split(/\s+/); // Split text into an array of words
+  const wordsArray = text.toLowerCase().split(/\s+/);
   const keywordCounts = {};
 
   for (const keyword of keywords) {
     const keywordWords = keyword.toLowerCase().split(/\s+/);
-    keywordCounts[keyword] = -1;
+    keywordCounts[keyword] = 0;
 
-    for (let i = 0; i < words.length - keywordWords.length + 1; i++) {
-      const currentWords = words.slice(i, i + keywordWords.length).join(" ");
+    for (let i = 0; i <= wordsArray.length - keywordWords.length; i++) {
+      const currentWords = wordsArray
+        .slice(i, i + keywordWords.length)
+        .join(" ");
+
       if (currentWords === keyword.toLowerCase()) {
         keywordCounts[keyword]++;
       }
@@ -57,7 +63,8 @@ export default function Post(props) {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const { deletePost } = useContext(PostsContext);
 
-  const textWithoutTags = removeHTMLTags(props.postContent);
+  const textWithoutHead = removeHTMLHead(props.postContent);
+  const textWithoutTags = removeHTMLTags(textWithoutHead);
   const cleanText = removePunctuation(textWithoutTags);
   const keywordsArray = stringToKeywordsArray(props.keywords);
   const keywordCounts = countMultipleWords(cleanText, keywordsArray);
@@ -90,33 +97,26 @@ export default function Post(props) {
         </div>
         {/* Fix for no keywords */}
         <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          Keywords & Occurence
+          SEO Data
         </div>
-        <div className="flex flex-wrap pt-2 gap-1text-blue-600">
-          {Object.keys(keywordCounts).map((key) => (
-            <Badge
-              key={key}
-              variant="outline"
-              pl={3}
-              mr={6}
-              style={{ color: "#2563EB", borderColor: "#2563EB" }}
-              leftSection={<IconHash size="1rem" />}
-            >
-              <span style={{ fontSize: "larger" }}>
-                {key}: {keywordCounts[key]}
-              </span>
-            </Badge>
-          ))}
-          <div>KW Density {}</div>
-        </div>
-        {!!props.slug && (
-          <>
-            <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-              Recommended slug
+        <div className="p-4 my-2 border border-stone-200 rounded-md">
+          {!!props?.slug && (
+            <div className="font-bold">
+              Recommended slug: &nbsp;
+              <span className="font-normal">{props.slug}</span>
             </div>
-            <div>{props.slug}</div>
-          </>
-        )}
+          )}
+          <div className="font-bold">Keywords occurence & density</div>
+          <ul>
+            {Object.keys(keywordCounts).map((key) => (
+              <li key={key}>
+                {key}: {keywordCounts[key]}
+              </li>
+            ))}
+          </ul>
+
+          <div></div>
+        </div>
 
         <div className="flex justify-between text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           <div>Draft </div>
@@ -196,7 +196,7 @@ export const getServerSideProps = withPageAuthRequired({
         id: ctx.params.postId,
         postContent: post.postContent,
         title: post.title,
-        slug: post.slug,
+        slug: post.slug || "",
         metaDescription: post.metaDescription,
         keywords: post.keywords,
         postCreated: post.created.toString(),

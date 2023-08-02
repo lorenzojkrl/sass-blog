@@ -119,7 +119,6 @@ export default withApiAuthRequired(async function handler(req, res) {
     ],
   });
   const slug = slugResponse.data.choices[0]?.message?.content || "";
-  console.log("slug", slug);
 
   const metaDescriptionResponse = await openai.createChatCompletion({
     model: "gpt-4",
