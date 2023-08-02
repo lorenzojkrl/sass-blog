@@ -56,7 +56,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     messages: [
       {
         role: "system",
-        content: `You are a blog post generator.`,
+        content: `You are a SEO content writer.`,
       },
       {
         role: "user",
@@ -74,12 +74,12 @@ export default withApiAuthRequired(async function handler(req, res) {
     postContentResponse.data.choices[0]?.message?.content || "";
 
   const titleResponse = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
     temperature: 0.3,
     messages: [
       {
         role: "system",
-        content: `You are a blog post generator.`,
+        content: `You are a SEO content writer.`,
       },
       {
         role: "assistant",
@@ -92,13 +92,41 @@ export default withApiAuthRequired(async function handler(req, res) {
     ],
   });
 
-  const metaDescriptionResponse = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+  const title = titleResponse.data.choices[0]?.message?.content || "";
+
+  const slugResponse = await openai.createChatCompletion({
+    model: "gpt-4",
     temperature: 0.3,
     messages: [
       {
         role: "system",
-        content: `You are a blog post generator.`,
+        content: `You are a URL slug generator. 
+        A URL slug is a composed of multiple dash-separated words.
+        A URL slug must include the words from a keyword.
+        `,
+      },
+      {
+        role: "assistant",
+        content: `Title: ${title}`,
+      },
+      {
+        role: "user",
+        content: `Generate an appropriate URL slug given the above title.
+        The URL slug must include the following keyword ${keywords[0]}.
+        Keep the URL slug short. 
+        `,
+      },
+    ],
+  });
+  const slug = slugResponse.data.choices[0]?.message?.content || "";
+
+  const metaDescriptionResponse = await openai.createChatCompletion({
+    model: "gpt-4",
+    temperature: 0.3,
+    messages: [
+      {
+        role: "system",
+        content: `You are a SEO content writer.`,
       },
       {
         role: "assistant",
@@ -112,7 +140,6 @@ export default withApiAuthRequired(async function handler(req, res) {
     ],
   });
 
-  const title = titleResponse.data.choices[0]?.message?.content || "";
   const metaDescription =
     metaDescriptionResponse.data.choices[0]?.message?.content || "";
 
@@ -132,6 +159,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     keywords,
     postContent,
     title,
+    slug,
     metaDescription,
     userId: userProfile._id,
     created: new Date(),
