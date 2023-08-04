@@ -3,15 +3,15 @@ import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { AppLayout } from "../../components/AppLayout";
 import { useRouter } from "next/router";
 import { getAppProps } from "../../utils/getAppProps";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFeather } from "@fortawesome/free-solid-svg-icons";
 import { NumberInput, Textarea } from "@mantine/core";
+import Loading from "../../components/shared/loading";
 
 export default function NewPost(props) {
   const [topic, setTopic] = useState("");
   const [keywords, setKeywords] = useState("");
   const [generating, setGenerating] = useState(false);
   const [wordsNumber, setWordsNumber] = useState<number | "">(500);
+
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -38,16 +38,7 @@ export default function NewPost(props) {
 
   return (
     <div className="h-full overflow-hidden">
-      {generating && (
-        <div className="text-slate flex h-full animate-pulse w-full flex-col justify-center items-center">
-          <FontAwesomeIcon
-            icon={faFeather}
-            size="4x"
-            className="px-2 text-slate-900/60 h-5"
-          ></FontAwesomeIcon>
-          <h6>Generating...</h6>
-        </div>
-      )}
+      {generating && <Loading />}
       {!generating && (
         <div className="w-full h-[50%] flex flex-col overflow-auto">
           <form
