@@ -3,11 +3,13 @@
 const dns = require("dns");
 dns.setDefaultResultOrder("ipv4first");
 
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['s.gravatar.com']
-  }
-}
-
-module.exports = nextConfig
+    domains: ["s.gravatar.com"],
+  },
+  i18n: {
+    locales: ["en", "es", "it"],
+    defaultLocale: "en",
+  },
+};
