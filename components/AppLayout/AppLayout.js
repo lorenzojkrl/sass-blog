@@ -1,25 +1,20 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFeather } from "@fortawesome/free-solid-svg-icons";
 import { Logo } from "../logo";
 import { useContext, useEffect } from "react";
 import PostsContext from "../../context/postsContext";
 import {
   createStyles,
-  Header,
-  Group,
   Divider,
   Box,
-  Burger,
   Drawer,
   ScrollArea,
   rem,
-  Title,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import SidebarFooter from "./sidebarFooter";
 import SidebarLoadMore from "./sidebarLoadMore";
 import SidebarHeader from "./sidebarHeader";
+import MobileHeader from "../mobileHeader";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -92,10 +87,8 @@ export const AppLayout = ({
   postCreated,
 }) => {
   const { user } = useUser();
-
   const { setPostsFromSSR, posts, getPosts, noMorePosts } =
     useContext(PostsContext);
-
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const { classes, theme } = useStyles();
@@ -118,31 +111,11 @@ export const AppLayout = ({
         <div className="w-full">
           <nav className="container relative  flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
             <Box className="lg:pb-20" style={{ width: "100%" }}>
-              <Header height={60} px="md ">
-                <Group
-                  position="apart"
-                  className="w-full"
-                  sx={{ height: "100%" }}
-                >
-                  <Group>
-                    <Title order={2} className="text-slate-900/90">
-                      AI SEO Writer
-                    </Title>
-
-                    <FontAwesomeIcon
-                      icon={faFeather}
-                      size="lg"
-                      className=" text-slate-900/90"
-                    ></FontAwesomeIcon>
-                  </Group>
-
-                  <Burger
-                    opened={drawerOpened}
-                    onClick={toggleDrawer}
-                    className={classes.hiddenDesktop}
-                  />
-                </Group>
-              </Header>
+              <MobileHeader
+                drawerOpened={drawerOpened}
+                toggleDrawer={toggleDrawer}
+                style={classes.hiddenDesktop}
+              />
 
               <Drawer
                 opened={drawerOpened}
