@@ -11,28 +11,24 @@ import {
   Text,
   SimpleGrid,
   ThemeIcon,
-  Anchor,
   Divider,
   Center,
   Box,
   Burger,
   Drawer,
-  Collapse,
   ScrollArea,
   rem,
   Title,
+  Collapse,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
-  IconNotification,
-  IconCode,
   IconBook,
-  IconHelp,
-  IconChartPie3,
-  IconFingerprint,
   IconCoin,
   IconChevronDown,
+  IconLanguage,
 } from "@tabler/icons";
+import useTranslation from "next-translate/useTranslation";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -103,42 +99,57 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const pricingData = [
-  {
-    icon: IconBook,
-    title: "10 free drafts",
-    description: "Sign up and get 10 free drafts",
-  },
-  {
-    icon: IconCoin,
-    title: "10$ = 100 drafts",
-    description: `Get 100 drafts for 10$ | No expiration date | No subscription`,
-  },
-  {
-    icon: IconHelp,
-    title: "Help us = 100 drafts",
-    description: `Help us building a better tool. Email: contact@aiseowriter.co`,
-  },
+const freeCopies = 10;
+const copiesForTenUSD = 80;
+const copiesForHundredUSD = 1000;
+
+const supportedLanguages = [
+  { name: "English", locale: "en" },
+  { name: "Español", locale: "es" },
+  { name: "Italiano", locale: "it" },
 ];
 
 export function Navbar() {
+  const { t } = useTranslation("common");
+
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
 
+  const pricingData = [
+    {
+      icon: IconBook,
+      title: "pricingTitle_One",
+      description: "pricingDescription_One",
+      copies: freeCopies,
+    },
+    {
+      icon: IconCoin,
+      title: "pricingTitle_Two",
+      description: "pricingDescription_Two",
+      copies: copiesForTenUSD,
+    },
+    {
+      icon: IconCoin,
+      title: "pricingTitle_Three",
+      description: "pricingDescription_Three",
+      copies: copiesForHundredUSD,
+    },
+  ];
+
   const pricingLinks = pricingData.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
-      <Group noWrap align="flex-start">
+      <Group noWrap>
         <ThemeIcon size={34} variant="default" radius="md">
           <item.icon size={rem(22)} color={theme.fn.primaryColor()} />
         </ThemeIcon>
         <div>
           <Text size="sm" fw={500}>
-            {item.title}
+            {t(item.title, { copies: item.copies })}
           </Text>
           <Text size="xs" color="dimmed">
-            {item.description}
+            {t(item.description, { copies: item.copies })}
           </Text>
         </div>
       </Group>
@@ -153,7 +164,7 @@ export function Navbar() {
             <Group position="apart" className="w-full" sx={{ height: "100%" }}>
               <Group>
                 <Title order={2} className="text-slate-900/90">
-                  AI SEO Writer
+                  {t("aiseowriter")}
                 </Title>
 
                 <FontAwesomeIcon
@@ -168,67 +179,14 @@ export function Navbar() {
                 className={classes.hiddenMobile}
               >
                 <a href="#" className={classes.link}>
-                  Home
+                  {t("home")}
                 </a>
-                {/* <HoverCard
-                  width={600}
-                  position="bottom"
-                  radius="md"
-                  shadow="md"
-                  withinPortal
-                >
-                  <HoverCard.Target>
-                    <a href="#" className={classes.link}>
-                      <Center inline>
-                        <Box component="span" mr={5}>
-                          Features
-                        </Box>
-                        <IconChevronDown
-                          size={16}
-                          color={theme.fn.primaryColor()}
-                        />
-                      </Center>
-                    </a>
-                  </HoverCard.Target>
 
-                  <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
-                    <Group position="apart" px="md">
-                      <Text fw={500}>Features</Text>
-                      <Anchor href="#" fz="xs">
-                        View all
-                      </Anchor>
-                    </Group>
-
-                    <Divider
-                      my="sm"
-                      mx="-md"
-                      color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
-                    />
-
-                    <SimpleGrid cols={2} spacing={0}>
-                      {links}
-                    </SimpleGrid>
-
-                    <div className={classes.dropdownFooter}>
-                      <Group position="apart">
-                        <div>
-                          <Text fw={500} fz="sm">
-                            Get started
-                          </Text>
-                          <Text size="xs" color="dimmed">
-                            Their food sources have decreased, and their numbers
-                          </Text>
-                        </div>
-                        <Button variant="default">Get started</Button>
-                      </Group>
-                    </div>
-                  </HoverCard.Dropdown>
-                </HoverCard> */}
                 <a href="#" className={classes.link}>
-                  Features (To Come)
+                  {t("features")}
                 </a>
                 <Link href="/post/new" className={classes.link}>
-                  Try 10 free drafts
+                  {t("startFree")}
                 </Link>
                 <HoverCard
                   width={600}
@@ -241,7 +199,7 @@ export function Navbar() {
                     <a href="#" className={classes.link}>
                       <Center inline>
                         <Box component="span" mr={5}>
-                          Pricing
+                          {t("pricing")}
                         </Box>
                         <IconChevronDown
                           size={16}
@@ -253,7 +211,7 @@ export function Navbar() {
 
                   <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
                     <Group position="apart" px="md">
-                      <Text fw={500}>Starter pricing</Text>
+                      <Text fw={500}>{t("starterPricing")}</Text>
                     </Group>
 
                     <Divider
@@ -270,14 +228,11 @@ export function Navbar() {
                       <Group position="apart">
                         <div>
                           <Text fw={500} fz="sm">
-                            Get 10 free drafts
-                          </Text>
-                          <Text size="xs" color="dimmed">
-                            Get 10 free drafts on signup
+                            {t("startFree")}
                           </Text>
                         </div>
                         <Button variant="default">
-                          <Link href="/post/new">Get started</Link>
+                          <Link href="/post/new">{t("G_getStarted")}</Link>
                         </Button>
                       </Group>
                     </div>
@@ -289,15 +244,46 @@ export function Navbar() {
                   href="/post/new"
                   className="px-8 py-2 text-lg font-medium text-center text-white bg-indigo-700 rounded-md "
                 >
-                  Log in
+                  {t("G_logIn")}
                 </Link>
                 <Link
                   href="/post/new"
                   className="px-8 py-2 text-lg font-medium text-center text-white bg-indigo-700 rounded-md "
                 >
-                  Sign up
+                  {t("G_signUp")}
                 </Link>
+                <HoverCard
+                  width={150}
+                  position="bottom"
+                  radius="md"
+                  shadow="md"
+                  withinPortal
+                >
+                  <HoverCard.Target>
+                    <a href="#" className={classes.link}>
+                      <Center inline>
+                        <IconLanguage size={28} color="rgb(67 56 202)" />
+                      </Center>
+                    </a>
+                  </HoverCard.Target>
+
+                  <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
+                    <SimpleGrid cols={1}>
+                      {supportedLanguages.map((language) => (
+                        <Link
+                          href="/"
+                          locale={language.locale}
+                          key={language.locale}
+                          className="text-right"
+                        >
+                          {language.name}
+                        </Link>
+                      ))}
+                    </SimpleGrid>
+                  </HoverCard.Dropdown>
+                </HoverCard>
               </Group>
+
               <Burger
                 opened={drawerOpened}
                 onClick={toggleDrawer}
@@ -322,23 +308,38 @@ export function Navbar() {
               />
 
               <a href="#" className={classes.link}>
-                Home
+                {t("home")}
               </a>
-              {/* <UnstyledButton className={classes.link} onClick={toggleLinks}>
-                <Center inline>
-                  <Box component="span" mr={5}>
-                    Features (To Come)
-                  </Box>
-                  <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-                </Center>
-              </UnstyledButton>
-              <Collapse in={linksOpened}>{links}</Collapse> */}
+
               <a href="#" className={classes.link}>
-                Features (To Come)
+                {t("features")}
               </a>
               <Link href="/post/new" className={classes.link}>
-                Try 10 free drafts
+                {t("startFree")}
               </Link>
+
+              <UnstyledButton className={classes.link} onClick={toggleLinks}>
+                <Center inline>
+                  <a href="#">
+                    <IconLanguage size={22} color="#000" />
+                  </a>
+                </Center>
+              </UnstyledButton>
+              <Collapse in={linksOpened}>
+                <SimpleGrid cols={1}>
+                  {supportedLanguages.map((language) => (
+                    <Link
+                      href="/"
+                      locale={language.locale}
+                      key={language.locale}
+                      className={classes.link}
+                      onClick={toggleLinks}
+                    >
+                      {language.name}
+                    </Link>
+                  ))}
+                </SimpleGrid>
+              </Collapse>
 
               <Divider
                 my="sm"
@@ -346,9 +347,8 @@ export function Navbar() {
               />
 
               <Group position="center" grow pb="xl" px="md">
-                {/* <Button variant="default">Log in</Button> */}
-                <Link href="/post/new">Sign up</Link>
-                <Link href="/post/new">Log in</Link>
+                <Link href="/post/new">{t("G_signUp")}</Link>
+                <Link href="/post/new">{t("G_logIn")}</Link>
               </Group>
             </ScrollArea>
           </Drawer>
