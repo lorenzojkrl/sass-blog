@@ -25,5 +25,8 @@
   "pricingDescription_Two": "Create up to {{copies}} copies | No expiration date | No subscription",
   "pricingTitle_Three": "100$ = {{copies}} copies",
   "pricingDescription_Three": "Create up to {{copies}} copies | No expiration date | No subscription",
-  "startFree": "Start free"
+  "startFree": "Start free",
+  "hero_title": "Get To Your First Draft - Faster",
+  "hero_subtitle": "AI SEO Writer is a content writing tool that helps you get to your first copy faster.",
+  "hero_cta": "Start free"
 }

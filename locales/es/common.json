@@ -25,5 +25,8 @@
   "pricingDescription_Two": "Crear {{copies}} copias | No expiración | No subscripción",
   "pricingTitle_Three": "100€ = {{copies}} copias",
   "pricingDescription_Three": "Crear {{copies}} copias | No expiración | No subscripción",
-  "startFree": "Comenzar gratuitas"
+  "startFree": "Comienza gratis",
+  "hero_title": "Crea tu primera copia - más rápido.",
+  "hero_subtitle": "AI SEO Writer escribe contenido SEO y te ayuda a alcanzar tu primer borrador más rápido.",
+  "hero_cta": "Comienza gratis"
 }
