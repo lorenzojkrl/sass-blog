@@ -36,5 +36,12 @@
   "benefitsBulletTitle_Two": "Enfócate en lo que importa",
   "benefitsBulletDescription_Two": "Edita, Optimiza, Reescribe. Tú estás a cargo.",
   "benefitsBulletTitle_Three": "Listo",
-  "benefitsBulletDescription_Three": "Entrega tu mejor trabajo."
+  "benefitsBulletDescription_Three": "Entrega tu mejor trabajo.",
+  "topicPlaceholder": "Los beneficios de la terapia con mascotas",
+  "topicLabel": "Generar un nuevo borrador sobre:",
+  "keywordsPlaceholder": "Perros, Terapia con mascotas, Gatos",
+  "keywordsLabel": "Apuntando a las siguientes palabras clave separadas por comas:",
+  "advancedOptions": "Opciones avanzadas",
+  "wordsNumberLabel": "Número aproximado de palabras (200 - 2000)",
+  "G_write": "Escribir"
 }

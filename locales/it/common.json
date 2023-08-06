@@ -36,5 +36,12 @@
   "benefitsBulletTitle_Two": "Concentrati su ciò che conta",
   "benefitsBulletDescription_Two": "Modifica, ottimizza, riscrivi. Crea il miglior contenuto.",
   "benefitsBulletTitle_Three": "Fatto",
-  "benefitsBulletDescription_Three": "Consegna il tuo miglior lavoro."
+  "benefitsBulletDescription_Three": "Consegna il tuo miglior lavoro.",
+  "topicPlaceholder": "I benefici della pet therapy",
+  "topicLabel": "Genera una nuova bozza su:",
+  "keywordsPlaceholder": "Cani, Pet therapy, Gatti",
+  "keywordsLabel": "Usando le seguenti parole chiave, separate da una virgola:",
+  "advancedOptions": "Opzioni avanzate",
+  "wordsNumberLabel": "Numero approssimativo di parole (200 - 2000)",
+  "G_write": "Scrivi"
 }

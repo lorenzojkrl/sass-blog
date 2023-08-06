@@ -1,11 +1,12 @@
 {
-  "G_getStarted": "Get started",
-  "G_logIn": "Login",
-  "G_signUp": "Sign up",
   "G_about": "About",
   "G_contact": "Contact",
-  "G_terms": "Terms",
+  "G_getStarted": "Get started",
+  "G_logIn": "Login",
   "G_privacy": "Privacy",
+  "G_signUp": "Sign up",
+  "G_terms": "Terms",
+  "G_write": "Write",
   "metaTitle": "AI SEO Writer - AI-generated Copy",
   "metaDescription": "AI SEO Writer gets content writers to their first copy faster",
   "sectionPreTitle": "Benefits",
@@ -36,5 +37,11 @@
   "benefitsBulletTitle_Two": "Focus on what matters",
   "benefitsBulletDescription_Two": "Edit, Optimize, Rewrite. You are in charge.",
   "benefitsBulletTitle_Three": "Done",
-  "benefitsBulletDescription_Three": "Deliver your best work."
+  "benefitsBulletDescription_Three": "Deliver your best work.",
+  "topicPlaceholder": "The benefits of pet therapy",
+  "topicLabel": "Generate a new draft about:",
+  "keywordsPlaceholder": "Dogs, Pet therapy, Cats",
+  "keywordsLabel": "Targeting the following comma-separated keywords:",
+  "advancedOptions": "Advanced options",
+  "wordsNumberLabel": "Approximate number of words (200 - 2000)"
 }
