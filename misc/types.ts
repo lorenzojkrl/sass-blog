@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 export type User = {
   nickname: string;
   name: string;
@@ -18,3 +20,24 @@ export type Post = {
   title: string;
   metaDescription: string;
 };
+
+export interface BenefitProps {
+  icon: ReactElement;
+  title: string;
+  children: string;
+}
+
+export interface BenefitsData {
+  data: {
+    title: string;
+    desc: string;
+    image: HTMLImageElement;
+    imgPos?: "right" | "left" | "top" | "bottom";
+    imageAlt: string;
+    bullets: {
+      title: string;
+      desc: string;
+      icon: ReactElement;
+    }[];
+  };
+}

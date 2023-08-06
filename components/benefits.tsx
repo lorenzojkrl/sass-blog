@@ -1,9 +1,10 @@
 import Image from "next/image";
-import React, { ReactElement } from "react";
+import React from "react";
 import Container from "./container";
 import useTranslation from "next-translate/useTranslation";
+import { BenefitProps, BenefitsData } from "../misc/types";
 
-const Benefits = (props) => {
+const Benefits: React.FC<BenefitsData> = (props) => {
   const { data } = props;
   const { t } = useTranslation("common");
 
@@ -58,12 +59,6 @@ const Benefits = (props) => {
     </>
   );
 };
-
-interface BenefitProps {
-  icon: ReactElement;
-  title: string;
-  children: string;
-}
 
 const Benefit: React.FC<BenefitProps> = (props) => {
   return (
