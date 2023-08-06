@@ -38,10 +38,9 @@ export default function NewPost() {
     }
   };
 
-  // generating &&
   return (
     <div className="h-full overflow-hidden">
-      {<Loading />}
+      {generating && <Loading />}
       {!generating && (
         <div className="w-full h-[50%] flex flex-col overflow-auto">
           <form

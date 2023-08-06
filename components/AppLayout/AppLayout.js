@@ -15,6 +15,7 @@ import SidebarFooter from "./sidebarFooter";
 import SidebarLoadMore from "./sidebarLoadMore";
 import SidebarHeader from "./sidebarHeader";
 import MobileHeader from "../mobileHeader";
+import useTranslation from "next-translate/useTranslation";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -86,6 +87,7 @@ export const AppLayout = ({
   postId,
   postCreated,
 }) => {
+  const { t } = useTranslation("common");
   const { user } = useUser();
   const { setPostsFromSSR, posts, getPosts, noMorePosts } =
     useContext(PostsContext);
@@ -122,7 +124,7 @@ export const AppLayout = ({
                 onClose={closeDrawer}
                 size="100%"
                 padding="md"
-                title="AI SEO Writer"
+                title={t("aiseowriter")}
                 className={classes.hiddenDesktop}
                 zIndex={1000000}
               >
