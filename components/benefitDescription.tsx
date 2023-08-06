@@ -3,24 +3,24 @@ import { IconClockCancel, IconPencil, IconFileCheck } from "@tabler/icons";
 import benefitOneImg from "../public/img/benefit-one.png";
 
 const benefitOne = {
-  title: "Your First Draft - Faster",
-  desc: "AI SEO Writer is being designed to remove the tedious parts of getting to your first draft.",
+  title: "benefitsTitle",
+  desc: "benefitsDescription",
   image: benefitOneImg,
   imageAlt: "Woman Texting BY IDAN on https://www.glazestock.com/",
   bullets: [
     {
-      title: "Reduce time to first draft",
-      desc: "Never waste your time again thinking about how to start",
+      title: "benefitsBulletTitle_One",
+      desc: "benefitsBulletDescription_One",
       icon: <IconClockCancel />,
     },
     {
-      title: "Focus on what matters",
-      desc: "Edit, Optimize, Rewrite. You are in charge.",
+      title: "benefitsBulletTitle_Two",
+      desc: "benefitsBulletDescription_Two",
       icon: <IconPencil />,
     },
     {
-      title: "Done",
-      desc: "Deliver your best work.",
+      title: "benefitsBulletTitle_Three",
+      desc: "benefitsBulletDescription_Three",
       icon: <IconFileCheck />,
     },
   ],
