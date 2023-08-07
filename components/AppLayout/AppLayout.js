@@ -106,10 +106,6 @@ export const AppLayout = ({
         getPosts({ getNewerPosts: true, lastPostDate: postCreated });
       }
     }
-
-    const userLanguage = getCookie("language");
-    console.log("userLanguage", userLanguage);
-    setLanguage(userLanguage);
   }, [setPostsFromSSR, postsFromSSR, postId, getPosts, postCreated]);
   // setpostsFromSSR won't ever change because memoized
 
