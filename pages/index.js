@@ -1,38 +1,30 @@
-// import Image from "next/image";
-// import HeroImage from "../public/hero.webp";
 import Head from "next/head";
-import Link from "next/link";
+import useTranslation from "next-translate/useTranslation";
 import { Navbar } from "../components/navbar";
 import Hero from "../components/hero";
 import SectionTitle from "../components/sectionTitle";
 import Benefits from "../components/benefits";
 import { benefitOne } from "../components/benefitDescription";
 import Footer from "../components/footer";
+
 export default function Home() {
+  const { t } = useTranslation("common");
+
   return (
     <>
       <Head>
-        <title>AI SEO Writer - AI-generated draft</title>
-        <meta
-          name="description"
-          content="AI SEO Writer helps content writers to get to the first draft faster"
-        />
+        <title>{t("metaTitle")}</title>
+        <meta name="description" content={t("metaDescription")} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Navbar />
       <Hero />
-      <SectionTitle
-        pretitle="Benefits"
-        title=" Why you should use AI SEO Writer"
-      >
-        AI SEO Writer is being designed to help you get to your first draft
-        faster.
+      <SectionTitle pretitle={t("sectionPreTitle")} title={t("sectionTitle")}>
+        {t("designedTo")}
         <br />
         <br />
-        Write the topic and the keywords you want to use. Get an SEO draft,
-        including meta title, meta description and your keywords. Now focus on
-        the work that matters.
+        {t("writeTopicAndKeywords")}
       </SectionTitle>
       <Benefits data={benefitOne} />
       {/*<Benefits imgPos="right" data={benefitTwo} /> */}
@@ -56,6 +48,3 @@ export default function Home() {
     </>
   );
 }
-
-// 2. Review menu in header
-// 3. Review menu & Legal in footer

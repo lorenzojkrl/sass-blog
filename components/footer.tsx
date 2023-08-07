@@ -1,27 +1,28 @@
 import Link from "next/link";
-import Image from "next/image";
 import React from "react";
 import Container from "./container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFeather } from "@fortawesome/free-solid-svg-icons";
+import useTranslation from "next-translate/useTranslation";
 
 export default function Footer() {
   // const navigation = ["Product", "Features", "Pricing", "Company", "Blog"];
   // const legal = ["Terms", "Privacy", "Legal"];
-  const navigationTest = ["Features (To Come)"];
-  const legalTest = [{ title: "Try 10 free draft", url: "/post/new" }];
+  const navigationTest = ["features"];
+  const legalTest = [{ title: "startFree", url: "/post/new" }];
+  const { t } = useTranslation("common");
+
   return (
     <div className="relative">
       <Container>
         <div className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-gray-100 dark:border-trueGray-700 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div>
-              {" "}
               <Link
                 href="/"
                 className="flex items-center space-x-2 text-2xl font-medium text-indigo-800 dark:text-gray-100"
               >
-                <span>AI SEO Writer</span>
+                <span>{t("aiseowriter")}</span>
                 <FontAwesomeIcon
                   icon={faFeather}
                   size="xs"
@@ -31,8 +32,7 @@ export default function Footer() {
             </div>
 
             <div className="max-w-md mt-4 text-gray-500 dark:text-gray-400">
-              AI SEO Writer is a content writing tool that helps you get to your
-              first draft faster.
+              {t("hero_subtitle")}
             </div>
           </div>
 
@@ -44,7 +44,7 @@ export default function Footer() {
                   href="/"
                   className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
                 >
-                  {item}
+                  {t(`${item}`)}
                 </Link>
               ))}
             </div>
@@ -57,14 +57,14 @@ export default function Footer() {
                   href={item.url}
                   className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
                 >
-                  {item.title}
+                  {t(`${item.title}`)}
                 </Link>
               ))}
             </div>
           </div>
           <div className="">
             <div>
-              <b>Contact us</b> contact@aiseowriter.co
+              <b>{t("G_contact")}</b> contact@aiseowriter.co
             </div>
             {/* <div>Follow us</div>
             <div className="flex mt-5 space-x-5 text-gray-400 dark:text-gray-500">

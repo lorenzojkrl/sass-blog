@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Post } from "../../misc/types";
+import useTranslation from "next-translate/useTranslation";
 
 const SidebarLoadMore = ({
   noMorePosts,
@@ -14,6 +15,8 @@ const SidebarLoadMore = ({
   postId: any;
   closeDrawer: () => void;
 }): JSX.Element => {
+  const { t } = useTranslation("common");
+
   return (
     <div className="px-4 flex-1">
       {posts.map((post) => (
@@ -39,7 +42,7 @@ const SidebarLoadMore = ({
             "hover:underline text-sm text-slate-400 text-center cursor-pointer mt-4 "
           }
         >
-          Load more drafts
+          {t("loadMore")}
         </div>
       )}
     </div>

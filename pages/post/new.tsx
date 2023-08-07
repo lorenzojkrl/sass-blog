@@ -5,13 +5,14 @@ import { useRouter } from "next/router";
 import { getAppProps } from "../../utils/getAppProps";
 import { NumberInput, Textarea } from "@mantine/core";
 import Loading from "../../components/shared/loading";
+import useTranslation from "next-translate/useTranslation";
 
-export default function NewPost(props) {
+export default function NewPost() {
   const [topic, setTopic] = useState("");
   const [keywords, setKeywords] = useState("");
   const [generating, setGenerating] = useState(false);
   const [wordsNumber, setWordsNumber] = useState<number | "">(500);
-
+  const { t } = useTranslation("common");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -48,8 +49,8 @@ export default function NewPost(props) {
             <Textarea
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="The benefits of pet therapy"
-              label="Generate a new draft about:"
+              label={t("topicLabel")}
+              placeholder={t("topicPlaceholder")}
               maxLength={150}
               minRows={3}
               maxRows={5}
@@ -59,8 +60,8 @@ export default function NewPost(props) {
             <Textarea
               value={keywords}
               onChange={(e) => setKeywords(e.target.value)}
-              placeholder="Dogs, Pet therapy, Cats"
-              label="Targeting the following comma-separated keywords:"
+              label={t("keywordsLabel")}
+              placeholder={t("keywordsPlaceholder")}
               maxLength={80}
               minRows={2}
               maxRows={2}
@@ -69,11 +70,11 @@ export default function NewPost(props) {
 
             <details className="my-4">
               <summary className="hover:cursor-pointer">
-                Advanced options
+                {t("advancedOptions")}
               </summary>
               <NumberInput
                 defaultValue={500}
-                label="Approximate number of words (200 - 2000)"
+                label={t("wordsNumberLabel")}
                 withAsterisk
                 hideControls
                 max={2000}
@@ -89,7 +90,7 @@ export default function NewPost(props) {
               className="btn"
               disabled={!topic.trim() || !keywords.trim()}
             >
-              Draft
+              {t("G_write")}
             </button>
           </form>
         </div>

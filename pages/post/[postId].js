@@ -6,6 +6,7 @@ import { getAppProps } from "../../utils/getAppProps";
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import PostsContext from "../../context/postsContext";
+import useTranslation from "next-translate/useTranslation";
 
 function removeHTMLHead(text) {
   const regex = /<head\b[^>]*>[\s\S]*?<\/head>/gi;
@@ -92,13 +93,13 @@ export default function Post(props) {
   const router = useRouter();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const { deletePost } = useContext(PostsContext);
-
   const textWithoutHead = removeHTMLHead(props.postContent);
   const textWithoutTags = removeHTMLTags(textWithoutHead);
   const cleanText = removePunctuation(textWithoutTags);
   const keywordsArray = stringToKeywordsArray(props.keywords);
   const keywordCounts = countMultipleWords(cleanText, keywordsArray);
   const keywordsDensity = calculateKeywordDensity(cleanText, keywordsArray);
+  const { t } = useTranslation("common");
 
   const handleDeleteConfirm = async () => {
     try {
@@ -120,7 +121,7 @@ export default function Post(props) {
     <div className="overflow-auto h-full">
       <div className="max-w-screen-sm mx-auto">
         <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          SEO title and meta description
+          {t("seoMeta")}
         </div>
         <div className="p-4 my-2 border border-stone-200 rounded-md">
           <div className="text-blue-600 text-2xl font-bold">{props.title}</div>
@@ -128,18 +129,16 @@ export default function Post(props) {
         </div>
         {/* Fix for no keywords */}
         <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          SEO Data
+          {t("seoData")}
         </div>
         <div className="p-4 my-2 border border-stone-200 rounded-md">
           {!!props?.slug && (
             <div className="font-bold">
-              Recommended slug: &nbsp;
+              {t("recommendedSlug")}: &nbsp;
               <span className="font-normal">{props.slug}</span>
             </div>
           )}
-          <div className="font-bold">
-            Keywords occurence & approximate density
-          </div>
+          <div className="font-bold">{t("keywordsOccurence")}</div>
           <ul>
             {Object.keys(keywordCounts).map((key) => (
               <li key={key}>
@@ -151,9 +150,10 @@ export default function Post(props) {
           <div></div>
         </div>
 
-        <div className="flex justify-between text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          <div>Draft </div>
-          <div>{props.postContent.split(" ").length} words</div>
+        <div className="text-right text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
+          <div>
+            {props.postContent.split(" ").length} {t("G_words")}
+          </div>
         </div>
 
         <div
@@ -165,27 +165,24 @@ export default function Post(props) {
               className="btn bg-red-600 hover:bg-red-700"
               onClick={() => setShowDeleteConfirm(true)}
             >
-              Delete Post
+              {t("G_delete")}
             </button>
           )}
           {!!showDeleteConfirm && (
             <div>
-              <p className="p-2 bg-red-300 text-center">
-                Are you sure you want to delete this post? This action is
-                irreversible
-              </p>
+              <p className="p-2 bg-red-300 text-center">{t("confirmDelete")}</p>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   className="btn bg-stone-600 hover:bg-stone-700"
                   onClick={() => setShowDeleteConfirm(false)}
                 >
-                  Cancel
+                  {t("G_cancel")}
                 </button>
                 <button
                   className="btn bg-red-600 hover:bg-red-700"
                   onClick={handleDeleteConfirm}
                 >
-                  Confirm & Delete
+                  {t("G_confirmDelete")}
                 </button>
               </div>
             </div>
