@@ -46,8 +46,6 @@ const Hero = () => {
           >
             <Image
               src={heroImg}
-              width="500"
-              height="500"
               className={"object-cover"} // check this
               alt="Woman Working On Computer
               BY PAWEL on https://www.glazestock.com/"

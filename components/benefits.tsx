@@ -15,8 +15,6 @@ const Benefits: React.FC<BenefitsData> = (props) => {
           <div>
             <Image
               src={data.image}
-              width="500"
-              height="500"
               alt={data.imageAlt}
               className={"object-cover"}
               placeholder="blur"
