@@ -8,6 +8,14 @@ module.exports = nextTranslate({
   reactStrictMode: true,
   images: {
     domains: ["s.gravatar.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.googleusercontent.com",
+        port: "",
+        pathname: "**",
+      },
+    ],
   },
   i18n: {
     locales: ["en", "es", "it"],
