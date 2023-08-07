@@ -13,7 +13,6 @@ export default function NewPost() {
   const [generating, setGenerating] = useState(false);
   const [wordsNumber, setWordsNumber] = useState<number | "">(500);
   const { t } = useTranslation("common");
-
   const router = useRouter();
 
   const handleSubmit = async (e) => {

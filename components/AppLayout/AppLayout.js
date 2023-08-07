@@ -16,6 +16,8 @@ import SidebarLoadMore from "./sidebarLoadMore";
 import SidebarHeader from "./sidebarHeader";
 import MobileHeader from "../mobileHeader";
 import useTranslation from "next-translate/useTranslation";
+import setLanguage from "next-translate/setLanguage";
+import { getCookie } from "../../utils/cookieUtils";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -104,6 +106,10 @@ export const AppLayout = ({
         getPosts({ getNewerPosts: true, lastPostDate: postCreated });
       }
     }
+
+    const userLanguage = getCookie("language");
+    console.log("userLanguage", userLanguage);
+    setLanguage(userLanguage);
   }, [setPostsFromSSR, postsFromSSR, postId, getPosts, postCreated]);
   // setpostsFromSSR won't ever change because memoized
 

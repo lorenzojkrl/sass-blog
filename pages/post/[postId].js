@@ -93,7 +93,6 @@ export default function Post(props) {
   const router = useRouter();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const { deletePost } = useContext(PostsContext);
-
   const textWithoutHead = removeHTMLHead(props.postContent);
   const textWithoutTags = removeHTMLTags(textWithoutHead);
   const cleanText = removePunctuation(textWithoutTags);

@@ -29,6 +29,7 @@ import {
   IconLanguage,
 } from "@tabler/icons";
 import useTranslation from "next-translate/useTranslation";
+import { setCookie } from "../utils/cookieUtils";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -111,11 +112,13 @@ const supportedLanguages = [
 
 export function Navbar() {
   const { t } = useTranslation("common");
-
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
+  const handleLanguageChange = (locale: string) => {
+    setCookie("language", locale, 365);
+  };
 
   const pricingData = [
     {
@@ -275,6 +278,7 @@ export function Navbar() {
                           locale={language.locale}
                           key={language.locale}
                           className="text-right"
+                          onClick={() => handleLanguageChange(language.locale)}
                         >
                           {language.name}
                         </Link>
@@ -333,7 +337,7 @@ export function Navbar() {
                       locale={language.locale}
                       key={language.locale}
                       className={classes.link}
-                      onClick={toggleLinks}
+                      onClick={() => handleLanguageChange(language.locale)}
                     >
                       {language.name}
                     </Link>
