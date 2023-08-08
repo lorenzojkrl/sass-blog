@@ -93,6 +93,7 @@ export const AppLayout = ({
     useContext(PostsContext);
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
+  const [opened, { open, close }] = useDisclosure(false);
   const { classes } = useStyles();
 
   useEffect(() => {
