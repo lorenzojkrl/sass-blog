@@ -37,10 +37,8 @@ function MyApp({ Component, pageProps }) {
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: "light",
-        }}
+        inherit
+        theme={{ respectReducedMotion: false }}
       >
         <UserProvider>
           <PostsProvider>
