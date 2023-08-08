@@ -133,7 +133,7 @@ export const AppLayout = ({
                   >
                     <Group>
                       <Title order={2} className="text-slate-900/90">
-                        xxAI SEO Writer
+                        AI SEO Writer
                       </Title>
 
                       <FontAwesomeIcon
@@ -160,7 +160,7 @@ export const AppLayout = ({
                   className={classes.hiddenDesktop}
                   zIndex={1000000}
                 >
-                  <ScrollArea style={{ overflowX: "hidden" }}>
+                  {/* <ScrollArea style={{ overflowX: "hidden" }}>
                     <Divider my="sm" color="gray.1" />
                     <SidebarHeader
                       availableTokens={availableTokens}
@@ -176,7 +176,7 @@ export const AppLayout = ({
                     ></SidebarLoadMore>
                     <Divider my="sm" color="gray.1" />
                     <SidebarFooter user={user}></SidebarFooter>
-                  </ScrollArea>
+                  </ScrollArea> */}
                 </Drawer>
               </Box>
             </nav>
