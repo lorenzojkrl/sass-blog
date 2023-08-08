@@ -121,7 +121,7 @@ export default function Post(props) {
     <div className="overflow-auto h-full">
       <div className="max-w-screen-sm mx-auto">
         <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          {props.metaDescription ? t("seoMeta") : t("shortSEOMeta")}
+          {t("seoMeta")}
         </div>
         <div className="p-4 my-2 border border-stone-200 rounded-md">
           <div className="text-blue-600 text-2xl font-bold">{props.title}</div>
@@ -152,13 +152,11 @@ export default function Post(props) {
 
         <div className="text-right text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           <div>
-            {props.postContent.split(" ").length} {t("G_words")} -{" "}
-            {props.postContent.length} {t("G_characters")}
+            {props.postContent.split(" ").length} {t("G_words")}
           </div>
         </div>
 
         <div
-          className="py-4"
           dangerouslySetInnerHTML={{ __html: props.postContent || "" }}
         ></div>
         <div className="my-4">

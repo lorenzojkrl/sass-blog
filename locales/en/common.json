@@ -59,12 +59,5 @@
   "recommendedSlug": "Recommended slug",
   "keywordsOccurence": "Keywords occurence & approximate density",
   "confirmDelete": "Are you sure you want to delete this draft? This action is irreversible",
-  "purchaseCopies": "Get More Copies",
-  "shortContentLabel": "Generate a short content (newsletter, intros, etc.)",
-  "shortContent": "Short Content",
-  "longContent": "SEO Articles",
-  "wordsCharsLabel": "Approximate number of characters",
-  "shortSEOMeta": "Meta Title",
-  "shortContentKWPlaceholder": "Plant newsletters",
-  "shortContentTopicPlaceholder": "Introduction to my plant newsletters"
+  "purchaseCopies": "Get More Copies"
 }
