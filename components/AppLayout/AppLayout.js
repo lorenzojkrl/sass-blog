@@ -2,6 +2,8 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { Logo } from "../logo";
 import { useContext, useEffect } from "react";
 import PostsContext from "../../context/postsContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFeather } from "@fortawesome/free-solid-svg-icons";
 import {
   createStyles,
   Divider,
@@ -9,12 +11,16 @@ import {
   Drawer,
   ScrollArea,
   rem,
+  Header,
+  Group,
+  Title,
+  Burger,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import SidebarFooter from "./sidebarFooter";
 import SidebarLoadMore from "./sidebarLoadMore";
 import SidebarHeader from "./sidebarHeader";
-import MobileHeader from "../mobileHeader";
+// import MobileHeader from "../mobileHeader";
 import useTranslation from "next-translate/useTranslation";
 
 const useStyles = createStyles((theme) => ({
@@ -113,11 +119,36 @@ export const AppLayout = ({
         <div className="w-full">
           <nav className="container relative  flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
             <Box className="lg:pb-20" style={{ width: "100%" }}>
-              <MobileHeader
+              {/* <MobileHeader
                 drawerOpened={drawerOpened}
                 toggleDrawer={toggleDrawer}
                 style={classes.hiddenDesktop}
-              />
+              /> */}
+              <Header height={60} px="md ">
+                <Group
+                  position="apart"
+                  className="w-full"
+                  sx={{ height: "100%" }}
+                >
+                  <Group>
+                    <Title order={2} className="text-slate-900/90">
+                      AI SEO Writer
+                    </Title>
+
+                    <FontAwesomeIcon
+                      icon={faFeather}
+                      size="lg"
+                      className=" text-slate-900/90"
+                    ></FontAwesomeIcon>
+                  </Group>
+
+                  <Burger
+                    opened={drawerOpened}
+                    onClick={toggleDrawer}
+                    className={classes.hiddenDesktop}
+                  />
+                </Group>
+              </Header>
 
               <Drawer
                 opened={drawerOpened}
