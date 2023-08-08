@@ -4,7 +4,7 @@ import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import { PostsProvider } from "../context/postsContext";
 import { MantineProvider } from "@mantine/core";
 import Head from "next/head";
-import LanguageSetter from "../components/shared/languageSetter";
+import LanguageSetter from "../components/sha";
 // Fix fontawesome huge icon on startup
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -37,8 +37,10 @@ function MyApp({ Component, pageProps }) {
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
-        inherit
-        theme={{ respectReducedMotion: false }}
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: "light",
+        }}
       >
         <UserProvider>
           <PostsProvider>
