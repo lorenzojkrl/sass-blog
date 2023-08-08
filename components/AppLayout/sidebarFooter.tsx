@@ -6,7 +6,6 @@ import useTranslation from "next-translate/useTranslation";
 
 const SidebarFooter = ({ user }: { user: User }): JSX.Element => {
   const { t } = useTranslation("common");
-  console.log("user", user);
 
   return (
     <>

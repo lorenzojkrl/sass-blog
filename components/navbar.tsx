@@ -322,14 +322,14 @@ export function Navbar() {
                 {t("startFree")}
               </Link>
 
-              <UnstyledButton className={classes.link} onClick={toggleLinks}>
+              {/* <UnstyledButton className={classes.link} onClick={toggleLinks}>
                 <Center inline>
                   <a href="#">
                     <IconLanguage size={22} color="#000" />
                   </a>
                 </Center>
-              </UnstyledButton>
-              <Collapse in={linksOpened}>
+              </UnstyledButton> */}
+              {/* <Collapse in={linksOpened}>
                 <SimpleGrid cols={1}>
                   {supportedLanguages.map((language) => (
                     <Link
@@ -343,7 +343,21 @@ export function Navbar() {
                     </Link>
                   ))}
                 </SimpleGrid>
-              </Collapse>
+              </Collapse> */}
+              <details className="ml-4">
+                <summary>Languages</summary>
+                {supportedLanguages.map((language) => (
+                  <Link
+                    href="/"
+                    locale={language.locale}
+                    key={language.locale}
+                    className={classes.link}
+                    onClick={() => handleLanguageChange(language.locale)}
+                  >
+                    {language.name}
+                  </Link>
+                ))}
+              </details>
 
               <Divider
                 my="sm"
