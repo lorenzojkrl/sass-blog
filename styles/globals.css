@@ -80,3 +80,21 @@
   --color-title: #2142bb;
   --color-1: #2563eb;
 }
+
+.hide-on-small-screens {
+  display: none;
+}
+
+.hide-on-large-screens {
+  display: block;
+}
+
+@media (min-width: 769px) {
+  .hide-on-large-screens {
+    display: none;
+  }
+
+  .hide-on-small-screens {
+    display: block;
+  }
+}
