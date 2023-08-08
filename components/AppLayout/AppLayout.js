@@ -15,6 +15,7 @@ import {
   Group,
   Title,
   Burger,
+  Button,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import SidebarFooter from "./sidebarFooter";
@@ -99,6 +100,7 @@ export const AppLayout = ({
     useContext(PostsContext);
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
+  const [opened, { open, close }] = useDisclosure(false);
   const { classes } = useStyles();
 
   useEffect(() => {
@@ -133,7 +135,7 @@ export const AppLayout = ({
                   >
                     <Group>
                       <Title order={2} className="text-slate-900/90">
-                        AI SEO Writer
+                        {t("aiseowriter")}
                       </Title>
 
                       <FontAwesomeIcon
@@ -142,25 +144,31 @@ export const AppLayout = ({
                         className=" text-slate-900/90"
                       ></FontAwesomeIcon>
                     </Group>
+                    <Button variant="outline" onClick={open}>
+                      Open{" "}
+                    </Button>
 
-                    <Burger
+                    {/* <Burger
                       opened={drawerOpened}
                       onClick={toggleDrawer}
                       className={classes.hiddenDesktop}
-                    />
+                    /> */}
                   </Group>
                 </Header>
 
-                <Drawer
+                <Drawer opened={opened} onClose={close} title="Test">
+                  TEST
+                </Drawer>
+                {/* <Drawer
                   opened={drawerOpened}
                   onClose={closeDrawer}
                   size="100%"
                   padding="md"
-                  title={t("aiseowriter")}
+                  title="AI SEO Writer"
                   className={classes.hiddenDesktop}
                   zIndex={1000000}
                 >
-                  {/* <ScrollArea style={{ overflowX: "hidden" }}>
+                  <ScrollArea style={{ overflowX: "hidden" }}>
                     <Divider my="sm" color="gray.1" />
                     <SidebarHeader
                       availableTokens={availableTokens}
@@ -176,8 +184,8 @@ export const AppLayout = ({
                     ></SidebarLoadMore>
                     <Divider my="sm" color="gray.1" />
                     <SidebarFooter user={user}></SidebarFooter>
-                  </ScrollArea> */}
-                </Drawer>
+                  </ScrollArea>
+                </Drawer> */}
               </Box>
             </nav>
           </div>
