@@ -10,8 +10,8 @@ const SidebarFooter = ({ user }: { user: User }): JSX.Element => {
   return (
     <>
       {!!user ? (
-        <Group position="center" grow pb="xl" px="md">
-          <div className="min-width-[50px]">
+        <Group position="center" pb="xl" px="md">
+          <div>
             <Image
               src={user?.picture}
               alt={user?.name}
@@ -20,8 +20,10 @@ const SidebarFooter = ({ user }: { user: User }): JSX.Element => {
               className="rounded-full"
             />
           </div>
-          <div className="flex-1">
-            <div className="font-bold">{user.email}</div>
+          <div>
+            <div className="font-bold text-ellipsis overflow-hidden">
+              {user.email}
+            </div>
             <Link className="text-sm" href="/api/auth/logout">
               {t("G_logOut")}
             </Link>
