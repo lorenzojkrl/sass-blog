@@ -59,12 +59,5 @@
   "recommendedSlug": "Slug recomendado",
   "keywordsOccurence": "Ocurrencia de palabras clave y densidad aproximada",
   "confirmDelete": "¿Qquieres eliminar este borrador? Esta acción es irreversible.",
-  "purchaseCopies": "Obtener más copias",
-  "shortContentLabel": "Generar un contenido corto (boletines, introducciones, etc.)",
-  "shortContent": "Contenido Corto",
-  "longContent": "Artículos SEO",
-  "wordsCharsLabel": "Número aproximado de caracteres",
-  "shortSEOMeta": "Título Meta",
-  "shortContentKWPlaceholder": "Boletines de plantas",
-  "shortContentTopicPlaceholder": "Introducción a mis boletines de plantas"
+  "purchaseCopies": "Obtener más copias"
 }
