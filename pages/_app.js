@@ -4,7 +4,7 @@ import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import { PostsProvider } from "../context/postsContext";
 import { MantineProvider } from "@mantine/core";
 import Head from "next/head";
-import LanguageSetter from "../components/shared/languageSetter";
+// import { LanguageSetter } from "../components/shared/languageSetter";
 // Fix fontawesome huge icon on startup
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }) {
       >
         <UserProvider>
           <PostsProvider>
-            <LanguageSetter />
+            {/* <LanguageSetter /> */}
             <main
               className={`${dmSans.variable} ${dmSerifDisplay.variable} font-body`}
             >
