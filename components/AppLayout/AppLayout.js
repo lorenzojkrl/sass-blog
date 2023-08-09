@@ -72,12 +72,6 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
     }`,
   },
-
-  hiddenDesktop: {
-    [theme.fn.largerThan("sm")]: {
-      display: "none",
-    },
-  },
 }));
 
 export const AppLayout = ({
@@ -110,14 +104,13 @@ export const AppLayout = ({
 
   return (
     <>
-      {/* <div className="block hide-on-large-screens">
+      <div className="block hide-on-large-screens">
         <div className="w-full">
-          <nav className="container relative  flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
-            <Box className="lg:pb-20" style={{ width: "100%" }}>
+          <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto">
+            <Box style={{ width: "100%" }}>
               <MobileHeader
                 drawerOpened={drawerOpened}
                 toggleDrawer={toggleDrawer}
-                style={classes.hiddenDesktop}
               />
 
               <Drawer
@@ -126,7 +119,6 @@ export const AppLayout = ({
                 size="100%"
                 padding="md"
                 title={t("aiseowriter")}
-                className={classes.hiddenDesktop}
                 zIndex={1000000}
               >
                 <ScrollArea style={{ overflowX: "hidden" }}>
@@ -151,7 +143,7 @@ export const AppLayout = ({
           </nav>
         </div>
         {children}
-      </div> */}
+      </div>
 
       <div className="hide-on-small-screens">
         <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
