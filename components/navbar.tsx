@@ -160,7 +160,7 @@ export function Navbar() {
               <Group
                 sx={{ height: "100%" }}
                 spacing={0}
-                className={classes.hiddenMobile}
+                className="hide-on-small-screens-flex"
               >
                 <a href="#" className={classes.link}>
                   {t("home")}
@@ -223,7 +223,7 @@ export function Navbar() {
                   </HoverCard.Dropdown>
                 </HoverCard>
               </Group>
-              <Group className={classes.hiddenMobile}>
+              <Group className="hide-on-small-screens-flex">
                 <Link
                   href="/post/new"
                   className="px-8 py-2 text-lg font-medium text-center text-white bg-indigo-700 rounded-md "
