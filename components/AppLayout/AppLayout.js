@@ -110,7 +110,7 @@ export const AppLayout = ({
 
   return (
     <>
-      <div className="block hide-on-large-screens">
+      {/* <div className="block hide-on-large-screens">
         <div className="w-full">
           <nav className="container relative  flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
             <Box className="lg:pb-20" style={{ width: "100%" }}>
@@ -151,7 +151,7 @@ export const AppLayout = ({
           </nav>
         </div>
         {children}
-      </div>
+      </div> */}
 
       <div className="hide-on-small-screens">
         <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
