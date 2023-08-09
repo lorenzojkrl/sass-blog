@@ -98,3 +98,40 @@
     display: block;
   }
 }
+
+@media (min-width: 1024px) {
+  .lg-halveWidth {
+    width: 50%;
+  }
+
+  .lg-heading {
+    font-size: 2.25rem /* 36px */;
+    line-height: 1.25;
+  }
+
+  .lg-text-xl {
+    font-size: 1.25rem /* 20px */;
+    line-height: 1.75rem /* 28px */;
+  }
+
+  .lg-justify-end {
+    justify-content: flex-end;
+  }
+
+  .lg-grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .lg-col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  /* navbar */
+  .lg-pb-20 {
+    padding-bottom: 5rem;
+  }
+
+  .lg-justify-between {
+    justify-content: space-between;
+  }
+}
