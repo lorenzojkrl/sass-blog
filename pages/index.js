@@ -26,7 +26,7 @@ export default function Home() {
         <br />
         <br />
         {t("writeTopicAndKeywords")}
-      </SectionTitle>
+      </SectionTitle> */}
       <Benefits data={benefitOne} />
       <Footer />
     </>
