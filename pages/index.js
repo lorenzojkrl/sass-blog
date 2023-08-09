@@ -21,7 +21,12 @@ export default function Home() {
       <Navbar />
 
       <Hero />
-      <Benefits data={benefitOne} />
+      <SectionTitle pretitle={t("sectionPreTitle")} title={t("sectionTitle")}>
+        {t("designedTo")}
+        <br />
+        <br />
+        {t("writeTopicAndKeywords")}
+      </SectionTitle>
       <Footer />
     </>
   );
