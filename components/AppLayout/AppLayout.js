@@ -106,7 +106,7 @@ export const AppLayout = ({
     <>
       <div className="block hide-on-large-screens">
         <div className="w-full">
-          <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto">
+          <nav className="container-w relative flex flex-wrap items-center justify-between p-8 mx-auto">
             <Box style={{ width: "100%" }}>
               <MobileHeader
                 drawerOpened={drawerOpened}

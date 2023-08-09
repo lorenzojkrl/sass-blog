@@ -93,6 +93,10 @@
   display: block;
 }
 
+.container-w {
+  max-width: 1280px;
+}
+
 @media (min-width: 769px) {
   .hide-on-large-screens {
     display: none;
@@ -141,5 +145,9 @@
 
   .lg-justify-between {
     justify-content: space-between;
+  }
+
+  .container-w {
+    width: 100%;
   }
 }
