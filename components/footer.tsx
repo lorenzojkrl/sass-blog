@@ -68,7 +68,8 @@ export default function Footer() {
         </div>
 
         <div className="my-10 text-sm text-center text-gray-600">
-          Copyright © {new Date().getFullYear()}. Made with ♥ by AI SEO Writer.
+          Copyright © 2023 {/* {new Date().getFullYear()} */}. Made with ♥ by AI
+          SEO Writer.
         </div>
       </Container>
     </div>
