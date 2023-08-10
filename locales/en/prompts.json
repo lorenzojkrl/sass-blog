@@ -1,0 +1,5 @@
+{
+  "newsletterWriter": "You are an English newsletters writer.",
+  "writeNewsletter": "Write a SEO-friendly newsletter in English about {{topic}}. Keep the newsletter about {{charsNumber}} characters long. The newsletter should include the following comma-separated keywords {{keywords}}.",
+  "writeNewsletterTitle": "Generate an appropriate title for the newsletter above"
+}
