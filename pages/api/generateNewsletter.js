@@ -1,6 +1,7 @@
 import { getSession, withApiAuthRequired } from "@auth0/nextjs-auth0";
 import { Configuration, OpenAIApi } from "openai";
 import clientPromise from "../../lib/mongodb";
+import getT from "next-translate/getT";
 
 // withApiAuthRequired ensures user is authenticated
 export default withApiAuthRequired(async function handler(req, res) {
@@ -11,11 +12,13 @@ export default withApiAuthRequired(async function handler(req, res) {
   const userProfile = await db.collection("users").findOne({
     auth0Id: user.sub,
   });
-  const { topic, keywords, charsNumber } = req.body;
+  const { topic, keywords, charsNumber, locale = "en" } = req.body;
   const config = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   });
   const openai = new OpenAIApi(config);
+
+  const t = await getT(locale, "prompts");
 
   if (!userProfile?.availableTokens) {
     // user is authorized but he doesn't have the required permissions to process the request
@@ -50,13 +53,11 @@ export default withApiAuthRequired(async function handler(req, res) {
     messages: [
       {
         role: "system",
-        content: `You are a newsletters writer.`,
+        content: t("newsletterWriter"),
       },
       {
         role: "user",
-        content: `Write a SEO-friendly newsletter about ${topic}. 
-        Keep the newsletter about ${charsNumber} characters long.
-        The newsletter should include the following comma-separated keywords ${keywords}. `,
+        content: t("writeNewsletter", { topic, charsNumber, keywords }),
       },
     ],
   });
@@ -69,7 +70,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     messages: [
       {
         role: "system",
-        content: `You are a newsletters writer.`,
+        content: t("newsletterWriter"),
       },
       {
         role: "assistant",
@@ -77,11 +78,10 @@ export default withApiAuthRequired(async function handler(req, res) {
       },
       {
         role: "user",
-        content: "Generate an appropriate title for the above newsLetter",
+        content: t("writeNewsletterTitle"),
       },
     ],
   });
-
   const title = titleResponse.data.choices[0]?.message?.content || "";
 
   await db.collection("users").updateOne(
