@@ -121,7 +121,7 @@ export const AppLayout = ({
                 style={classes.hiddenDesktop}
               />
 
-              <Drawer
+              {/* <Drawer
                 opened={drawerOpened}
                 onClose={closeDrawer}
                 size="100%"
@@ -147,7 +147,7 @@ export const AppLayout = ({
                   <Divider my="sm" color="gray.1" />
                   <SidebarFooter user={user}></SidebarFooter>
                 </ScrollArea>
-              </Drawer>
+              </Drawer> */}
             </Box>
           </nav>
         </div>
