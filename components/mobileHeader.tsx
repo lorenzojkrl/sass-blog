@@ -27,11 +27,11 @@ export default function MobileHeader({
           ></FontAwesomeIcon>
         </Group>
 
-        <Burger
+        {/* <Burger
           opened={drawerOpened}
           onClick={toggleDrawer}
           className={style}
-        />
+        /> */}
       </Group>
     </Header>
   );

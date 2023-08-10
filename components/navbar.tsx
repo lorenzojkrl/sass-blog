@@ -288,15 +288,15 @@ export function Navbar() {
                 </HoverCard>
               </Group>
 
-              <Burger
+              {/* <Burger
                 opened={drawerOpened}
                 onClick={toggleDrawer}
                 className={classes.hiddenDesktop}
-              />
+              /> */}
             </Group>
           </Header>
 
-          <Drawer
+          {/* <Drawer
             opened={drawerOpened}
             onClose={closeDrawer}
             size="100%"
@@ -355,7 +355,7 @@ export function Navbar() {
                 <Link href="/post/new">{t("G_logIn")}</Link>
               </Group>
             </ScrollArea>
-          </Drawer>
+          </Drawer> */}
         </Box>
       </nav>
     </div>
