@@ -59,5 +59,12 @@
   "recommendedSlug": "Slug consigliato",
   "keywordsOccurence": "Frequenza delle keywords e densità approssimativa",
   "confirmDelete": "Vuoi eliminare questa bozza? Questa azione è irreversibile.",
-  "purchaseCopies": "Ottieni più copie"
+  "purchaseCopies": "Ottieni più copie",
+  "shortContentLabel": "Genera un contenuto breve (newsletter, introduzioni, ecc.)",
+  "shortContent": "Contenuto Breve",
+  "longContent": "Articoli SEO",
+  "wordsCharsLabel": "Numero approssimativo di caratteri",
+  "shortSEOMeta": "Meta Titolo",
+  "shortContentKWPlaceholder": "Newsletters sulle piante",
+  "shortContentTopicPlaceholder": "Introduzione alla mia newsletters sulle piante"
 }
