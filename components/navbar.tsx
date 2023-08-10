@@ -43,13 +43,6 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 500,
     fontSize: theme.fontSizes.sm,
 
-    [theme.fn.smallerThan("sm")]: {
-      height: rem(42),
-      display: "flex",
-      alignItems: "center",
-      width: "100%",
-    },
-
     ...theme.fn.hover({
       backgroundColor:
         theme.colorScheme === "dark"
@@ -85,18 +78,6 @@ const useStyles = createStyles((theme) => ({
     borderTop: `${rem(1)} solid ${
       theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
     }`,
-  },
-
-  hiddenMobile: {
-    [theme.fn.smallerThan("sm")]: {
-      display: "none",
-    },
-  },
-
-  hiddenDesktop: {
-    [theme.fn.largerThan("sm")]: {
-      display: "none",
-    },
   },
 }));
 
@@ -161,8 +142,8 @@ export function Navbar() {
 
   return (
     <div className="w-full">
-      <nav className="container relative  flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
-        <Box className="lg:pb-20" style={{ width: "100%" }}>
+      <nav className="container relative  flex flex-wrap items-center justify-between p-8 mx-auto lg-justify-between">
+        <Box className="lg-pb-20" style={{ width: "100%" }}>
           <Header height={60} px="md ">
             <Group position="apart" className="w-full" sx={{ height: "100%" }}>
               <Group>
@@ -179,7 +160,7 @@ export function Navbar() {
               <Group
                 sx={{ height: "100%" }}
                 spacing={0}
-                className={classes.hiddenMobile}
+                className="hide-on-small-screens-flex"
               >
                 <a href="#" className={classes.link}>
                   {t("home")}
@@ -242,7 +223,7 @@ export function Navbar() {
                   </HoverCard.Dropdown>
                 </HoverCard>
               </Group>
-              <Group className={classes.hiddenMobile}>
+              <Group className="hide-on-small-screens-flex">
                 <Link
                   href="/post/new"
                   className="px-8 py-2 text-lg font-medium text-center text-white bg-indigo-700 rounded-md "

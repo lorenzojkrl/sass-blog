@@ -16,8 +16,6 @@ import SidebarLoadMore from "./sidebarLoadMore";
 import SidebarHeader from "./sidebarHeader";
 import MobileHeader from "../mobileHeader";
 import useTranslation from "next-translate/useTranslation";
-import setLanguage from "next-translate/setLanguage";
-import { getCookie } from "../../utils/cookieUtils";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -74,12 +72,6 @@ const useStyles = createStyles((theme) => ({
       theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1]
     }`,
   },
-
-  hiddenDesktop: {
-    [theme.fn.largerThan("sm")]: {
-      display: "none",
-    },
-  },
 }));
 
 export const AppLayout = ({
@@ -95,7 +87,8 @@ export const AppLayout = ({
     useContext(PostsContext);
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
-  const { classes, theme } = useStyles();
+  const [opened, { open, close }] = useDisclosure(false);
+  const { classes } = useStyles();
 
   useEffect(() => {
     setPostsFromSSR(postsFromSSR);
@@ -111,14 +104,13 @@ export const AppLayout = ({
 
   return (
     <>
-      <div className="block md:hidden">
+      <div className="block hide-on-large-screens">
         <div className="w-full">
-          <nav className="container relative  flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
-            <Box className="lg:pb-20" style={{ width: "100%" }}>
+          <nav className="container-w relative flex flex-wrap items-center justify-between p-8 mx-auto">
+            <Box style={{ width: "100%" }}>
               <MobileHeader
                 drawerOpened={drawerOpened}
                 toggleDrawer={toggleDrawer}
-                style={classes.hiddenDesktop}
               />
 
               {/* <Drawer
@@ -127,7 +119,6 @@ export const AppLayout = ({
                 size="100%"
                 padding="md"
                 title={t("aiseowriter")}
-                className={classes.hiddenDesktop}
                 zIndex={1000000}
               >
                 <ScrollArea style={{ overflowX: "hidden" }}>
@@ -153,7 +144,8 @@ export const AppLayout = ({
         </div>
         {children}
       </div>
-      <div className="hidden md:block">
+
+      <div className="hide-on-small-screens">
         <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
           <div className="flex flex-col text-white overflow-hidden">
             <div className="bg-slate-800 px-2 ">
