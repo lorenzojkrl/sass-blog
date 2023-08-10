@@ -113,7 +113,7 @@ export const AppLayout = ({
                 toggleDrawer={toggleDrawer}
               />
 
-              <Drawer
+              {/* <Drawer
                 opened={drawerOpened}
                 onClose={closeDrawer}
                 size="100%"
@@ -138,7 +138,7 @@ export const AppLayout = ({
                   <Divider my="sm" color="gray.1" />
                   <SidebarFooter user={user}></SidebarFooter>
                 </ScrollArea>
-              </Drawer>
+              </Drawer> */}
             </Box>
           </nav>
         </div>
