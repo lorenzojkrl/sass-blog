@@ -1,0 +1,5 @@
+{
+  "newsletterWriter": "Sei un redattore di newsletter in italiano",
+  "writeNewsletter": "Scrivi una newsletter in italiano ottimizzata per il SEO sul tema: {{topic}}. Mantieni la newsletter lunga {{charsNumber}} caratteri. La newsletter dovrebbe includere le seguenti parole chiave separate da virgole: {{keywords}}.",
+  "writeNewsletterTitle": "Genera un titolo adeguato per la newsletter sopra"
+}

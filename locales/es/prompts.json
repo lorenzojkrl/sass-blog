@@ -1,0 +1,5 @@
+{
+  "newsletterWriter": "Eres un redactor de boletines informativos en espagnol.",
+  "writeNewsletter": "Escribe un boletín informativo en espagnol optimizado para SEO sobre {{topic}}. Mantén el boletín con una longitud de {{charsNumber}} caracteres. El boletín debe incluir las siguientes palabras clave separadas por comas: {{keywords}}.",
+  "writeNewsletterTitle": "Escribe un título apropiado para el boletín anterior"
+}

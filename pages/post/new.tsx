@@ -14,7 +14,7 @@ export default function NewPost() {
   const [wordsNumber, setWordsNumber] = useState<number | "">(500);
   const [charsNumber, setCharsNumber] = useState<number | "">(500);
   const [longFormat, setLongFormat] = useState(true);
-  const { t } = useTranslation("common");
+  const { t, lang } = useTranslation("common");
   const router = useRouter();
 
   const handleLongFormSubmit = async (e) => {
@@ -49,7 +49,7 @@ export default function NewPost() {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ topic, keywords, charsNumber }),
+        body: JSON.stringify({ topic, keywords, charsNumber, locale: lang }),
       });
       const json = await response.json();
 
