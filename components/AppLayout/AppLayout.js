@@ -11,9 +11,10 @@ import {
   rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import SidebarFooter from "./sidebarFooter";
-import SidebarLoadMore from "./sidebarLoadMore";
 import SidebarHeader from "./sidebarHeader";
+import SidebarLoadMore from "./sidebarLoadMore";
+import SidebarCTA from "./sidebarCTA";
+import SidebarFooter from "./sidebarFooter";
 import MobileHeader from "../mobileHeader";
 import useTranslation from "next-translate/useTranslation";
 
@@ -165,6 +166,9 @@ export const AppLayout = ({
                 postId={postId}
                 closeDrawer={closeDrawer}
               ></SidebarLoadMore>
+            </div>
+            <div className="pt-2 bg-cyan-800  h-20 ">
+              <SidebarCTA/>
             </div>
             <div className="pt-2 bg-cyan-800 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
               <SidebarFooter user={user}></SidebarFooter>

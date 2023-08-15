@@ -51,7 +51,7 @@
   "keywordsLabel": "Apuntando a las siguientes palabras clave separadas por comas:",
   "advancedOptions": "Opciones avanzadas",
   "wordsNumberLabel": "Número aproximado de palabras (200 - 2000)",
-  "newCopy": "Nueva copia",
+  "newCopy": "Nuevo post",
   "copiesAvailable": "{{availableTokens}} copias disponibles",
   "loadMore": "Cargar más copias",
   "seoMeta": "Meta Título y Descripción",
@@ -66,5 +66,6 @@
   "wordsCharsLabel": "Número aproximado de caracteres",
   "shortSEOMeta": "Título Meta",
   "shortContentKWPlaceholder": "Boletines de plantas",
-  "shortContentTopicPlaceholder": "Introducción a mis boletines de plantas"
+  "shortContentTopicPlaceholder": "Introducción a mis boletines de plantas",
+  "unlockPosts": "Más post"
 }
