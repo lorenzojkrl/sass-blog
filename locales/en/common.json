@@ -51,7 +51,7 @@
   "keywordsLabel": "Targeting the following comma-separated keywords:",
   "advancedOptions": "Advanced options",
   "wordsNumberLabel": "Approximate number of words (200 - 2000)",
-  "newCopy": "New copy",
+  "newCopy": "New post",
   "copiesAvailable": "{{availableTokens}} copies available",
   "loadMore": "Load more copies",
   "seoMeta": "SEO Title & Meta Description",
@@ -66,5 +66,7 @@
   "wordsCharsLabel": "Approximate number of characters",
   "shortSEOMeta": "Meta Title",
   "shortContentKWPlaceholder": "Plant newsletters",
-  "shortContentTopicPlaceholder": "Introduction to my plant newsletters"
+  "shortContentTopicPlaceholder": "Introduction to my plant newsletters",
+  "unlockPosts": "Unlock more posts",
+  "postsLeft": "{{availableTokens}} posts left"
 }

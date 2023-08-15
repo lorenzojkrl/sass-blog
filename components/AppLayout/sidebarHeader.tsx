@@ -16,7 +16,7 @@ const SidebarHeader = ({
     <>
       <Link
         href="/post/new"
-        className="btn w-[80%] mx-auto"
+        className="btn mx-auto w-[240px]"
         onClick={closeDrawer}
       >
         {t("newCopy")}
@@ -30,7 +30,7 @@ const SidebarHeader = ({
           icon={faCoins}
           className="text-yellow-500"
         ></FontAwesomeIcon>
-        <span className="pl-1">{t("newCopy", { availableTokens })}</span>
+        <span className="pl-1">{t("postsLeft", { availableTokens })}</span>
       </Link>
     </>
   );
