@@ -67,5 +67,6 @@
   "shortSEOMeta": "Título Meta",
   "shortContentKWPlaceholder": "Boletines de plantas",
   "shortContentTopicPlaceholder": "Introducción a mis boletines de plantas",
-  "unlockPosts": "Más post"
+  "unlockPosts": "Más post",
+  "postsLeft": "{{availableTokens}} posts"
 }

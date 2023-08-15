@@ -67,5 +67,7 @@
   "shortSEOMeta": "Meta Titolo",
   "shortContentKWPlaceholder": "Newsletters sulle piante",
   "shortContentTopicPlaceholder": "Introduzione alla mia newsletters sulle piante",
-  "unlockPosts": "Ottieni post"
+  "unlockPosts": "Ottieni post",
+  "postsLeft": "{{availableTokens}} posts "
+
 }

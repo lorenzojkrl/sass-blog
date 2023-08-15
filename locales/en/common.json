@@ -67,5 +67,6 @@
   "shortSEOMeta": "Meta Title",
   "shortContentKWPlaceholder": "Plant newsletters",
   "shortContentTopicPlaceholder": "Introduction to my plant newsletters",
-  "unlockPosts": "Unlock more posts"
+  "unlockPosts": "Unlock more posts",
+  "postsLeft": "{{availableTokens}} posts left"
 }
