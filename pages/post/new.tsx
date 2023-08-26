@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { AppLayout } from "../../components/AppLayout";
 import { useRouter } from "next/router";
 import { getAppProps } from "../../utils/getAppProps";
-import { Box, Button, Flex, NumberInput, Textarea } from "@mantine/core";
+import { NumberInput, Textarea, Tabs } from "@mantine/core";
 import Loading from "../../components/shared/loading";
 import useTranslation from "next-translate/useTranslation";
 
@@ -13,7 +13,6 @@ export default function NewPost() {
   const [generating, setGenerating] = useState(false);
   const [wordsNumber, setWordsNumber] = useState<number | "">(500);
   const [charsNumber, setCharsNumber] = useState<number | "">(500);
-  const [longFormat, setLongFormat] = useState(true);
   const { t, lang } = useTranslation("common");
   const router = useRouter();
 
@@ -62,154 +61,136 @@ export default function NewPost() {
   };
 
   return (
-    <div className="h-full overflow-hidden">
+    <div className="h-full overflow-hidden bg-slate-100 ">
       {generating && <Loading />}
       {!generating && (
-        <div className="w-full mt-3 md:mt-60 flex flex-col overflow-auto">
-          <Flex
-            justify="center"
-            align="center"
-            wrap="nowrap"
-            gap={10}
-            className="mx-auto w-full max-w-screen-sm py-2"
-          >
-            <Box w={500}>
-              <Button
-                fullWidth
-                onClick={() => setLongFormat(true)}
-                color="gray"
-                variant="outline"
-                className={
-                  longFormat &&
-                  "btn bg-blue-500 uppercase hover:bg-blue-600 py-1"
-                }
+        <div className="w-full mt-3 md:mt-60 flex flex-col items-center overflow-auto">
+          <div className="text-2xl mx-auto w-full max-w-screen-sm py-4 font-semibold">
+            {t("createToday")}
+
+          </div>
+          <Tabs defaultValue="first" className=" mx-auto w-full max-w-screen-sm py-4">
+            <Tabs.List grow >
+              <Tabs.Tab value="first" className="text-xl">{t("longContent")}</Tabs.Tab>
+              <Tabs.Tab value="second" className="text-xl">{t("shortContent")}</Tabs.Tab>
+            </Tabs.List>
+
+            <Tabs.Panel value="first">
+              <div className="text-[#868E96] py-2">
+                {t("topicLabel")}
+              </div>
+              <form
+                onSubmit={handleLongFormSubmit}
+                className="mx-auto w-full max-w-screen-sm pb-4 rounded-md shadow-xlborder border-slate-200 shadow-slate-200"
               >
-                {t("longContent")}
-              </Button>
-            </Box>
-
-            <Box w={500}>
-              <Button
-                fullWidth
-                color="gray"
-                variant="outline"
-                onClick={() => setLongFormat(false)}
-                className={
-                  !longFormat &&
-                  "btn bg-blue-500 uppercase hover:bg-blue-600 py-1"
-                }
-              >
-                {t("shortContent")}
-              </Button>
-            </Box>
-          </Flex>
-          {longFormat && (
-            <form
-              onSubmit={handleLongFormSubmit}
-              className="mx-auto w-full max-w-screen-sm bg-slate-100 px-4 pb-4 rounded-md shadow-xlborder border-slate-200 shadow-slate-200"
-            >
-              <Textarea
-                value={topic}
-                onChange={(e) => setTopic(e.target.value)}
-                label={t("topicLabel")}
-                placeholder={t("topicPlaceholder")}
-                maxLength={150}
-                minRows={3}
-                maxRows={5}
-                autosize
-                className="mt-4"
-              />
-
-              <Textarea
-                value={keywords}
-                onChange={(e) => setKeywords(e.target.value)}
-                label={t("keywordsLabel")}
-                placeholder={t("keywordsPlaceholder")}
-                maxLength={80}
-                minRows={2}
-                maxRows={2}
-                className="mt-4"
-              />
-
-              <details className="my-4">
-                <summary className="hover:cursor-pointer">
-                  {t("advancedOptions")}
-                </summary>
-                <NumberInput
-                  defaultValue={500}
-                  label={t("wordsNumberLabel")}
-                  withAsterisk
-                  hideControls
-                  max={2000}
-                  min={200}
-                  value={wordsNumber}
-                  onChange={setWordsNumber}
+                <Textarea
+                  value={topic}
+                  onChange={(e) => setTopic(e.target.value)}
+                  placeholder={t("topicPlaceholder")}
+                  label={t("G_Topic")}
+                  maxLength={150}
+                  minRows={3}
+                  maxRows={5}
+                  autosize
                   className="mt-4"
                 />
-              </details>
 
-              <button
-                type="submit"
-                className="btn"
-                disabled={!topic.trim() || !keywords.trim()}
-              >
-                {t("G_write")}
-              </button>
-            </form>
-          )}
-          {!longFormat && (
-            <form
-              onSubmit={handleShortFormSubmit}
-              className="mx-auto w-full max-w-screen-sm bg-slate-100 px-4 pb-4 rounded-md shadow-xlborder border-slate-200 shadow-slate-200"
-            >
-              <Textarea
-                value={topic}
-                onChange={(e) => setTopic(e.target.value)}
-                label={t("shortContentLabel")}
-                placeholder={t("shortContentTopicPlaceholder")}
-                maxLength={150}
-                minRows={3}
-                maxRows={5}
-                autosize
-                className="mt-4"
-              />
-
-              <Textarea
-                value={keywords}
-                onChange={(e) => setKeywords(e.target.value)}
-                label={t("keywordsLabel")}
-                placeholder={t("shortContentKWPlaceholder")}
-                maxLength={80}
-                minRows={2}
-                maxRows={2}
-                className="mt-4"
-              />
-
-              <details className="my-4">
-                <summary className="hover:cursor-pointer">
-                  {t("advancedOptions")}
-                </summary>
-                <NumberInput
-                  defaultValue={500}
-                  label={t("wordsCharsLabel")}
-                  withAsterisk
-                  hideControls
-                  max={2000}
-                  value={charsNumber}
-                  onChange={setCharsNumber}
+                <Textarea
+                  value={keywords}
+                  onChange={(e) => setKeywords(e.target.value)}
+                  label={t("keywordsLabel")}
+                  placeholder={t("keywordsPlaceholder")}
+                  maxLength={80}
+                  minRows={2}
+                  maxRows={2}
                   className="mt-4"
                 />
-              </details>
 
-              <button
-                type="submit"
-                className="btn"
-                disabled={!topic.trim() || !keywords.trim()}
+                <details className="my-4">
+                  <summary className="hover:cursor-pointer">
+                    {t("advancedOptions")}
+                  </summary>
+                  <NumberInput
+                    defaultValue={500}
+                    label={t("wordsNumberLabel")}
+                    withAsterisk
+                    hideControls
+                    max={2000}
+                    min={200}
+                    value={wordsNumber}
+                    onChange={setWordsNumber}
+                    className="mt-4"
+                  />
+                </details>
+
+                <button
+                  type="submit"
+                  className="btn"
+                  disabled={!topic.trim() || !keywords.trim()}
+                >
+                  {t("G_write")}
+                </button>
+              </form>
+            </Tabs.Panel>
+            <Tabs.Panel value="second">
+              <div className="text-[#868E96] py-2">
+                {t("shortContentLabel")}
+              </div>
+              <form
+                onSubmit={handleShortFormSubmit}
+                className="mx-auto w-full max-w-screen-sm pb-4 rounded-md shadow-xlborder border-slate-200 shadow-slate-200"
               >
-                {t("G_write")}
-              </button>
-            </form>
-          )}
+                <Textarea
+                  value={topic}
+                  onChange={(e) => setTopic(e.target.value)}
+                  placeholder={t("shortContentTopicPlaceholder")}
+                  label={t("G_Topic")}
+                  maxLength={150}
+                  minRows={3}
+                  maxRows={5}
+                  autosize
+                  className="mt-4"
+                />
+
+                <Textarea
+                  value={keywords}
+                  onChange={(e) => setKeywords(e.target.value)}
+                  label={t("keywordsLabel")}
+                  placeholder={t("shortContentKWPlaceholder")}
+                  maxLength={80}
+                  minRows={2}
+                  maxRows={2}
+                  className="mt-4"
+                />
+
+                <details className="my-4">
+                  <summary className="hover:cursor-pointer">
+                    {t("advancedOptions")}
+                  </summary>
+                  <NumberInput
+                    defaultValue={500}
+                    label={t("wordsCharsLabel")}
+                    withAsterisk
+                    hideControls
+                    max={2000}
+                    value={charsNumber}
+                    onChange={setCharsNumber}
+                    className="mt-4"
+                  />
+                </details>
+
+                <button
+                  type="submit"
+                  className="btn"
+                  disabled={!topic.trim() || !keywords.trim()}
+                >
+                  {t("G_write")}
+                </button>
+              </form>
+            </Tabs.Panel>
+          </Tabs>
+
+
         </div>
       )}
     </div>
