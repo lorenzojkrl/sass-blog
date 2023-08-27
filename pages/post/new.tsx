@@ -3,7 +3,7 @@ import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { AppLayout } from "../../components/AppLayout";
 import { useRouter } from "next/router";
 import { getAppProps } from "../../utils/getAppProps";
-import { NumberInput, Textarea, Tabs } from "@mantine/core";
+import { NumberInput, Textarea, Tabs, Text, Title } from "@mantine/core";
 import Loading from "../../components/shared/loading";
 import useTranslation from "next-translate/useTranslation";
 
@@ -11,13 +11,14 @@ export default function NewPost() {
   const [topic, setTopic] = useState("");
   const [keywords, setKeywords] = useState("");
   const [generating, setGenerating] = useState(false);
-  const [wordsNumber, setWordsNumber] = useState<number | "">(500);
-  const [charsNumber, setCharsNumber] = useState<number | "">(500);
+  const [length, setLength] = useState<number | "">(500);
+  const [activeTab, setActiveTab] = useState<string | null>('first');
   const { t, lang } = useTranslation("common");
   const router = useRouter();
 
   const handleLongFormSubmit = async (e) => {
     e.preventDefault();
+    // validate length here and in backend
     setGenerating(true);
 
     try {
@@ -26,7 +27,7 @@ export default function NewPost() {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ topic, keywords, wordsNumber }),
+        body: JSON.stringify({ topic, keywords, wordsNumber: length }),
       });
       const json = await response.json();
 
@@ -48,7 +49,7 @@ export default function NewPost() {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ topic, keywords, charsNumber, locale: lang }),
+        body: JSON.stringify({ topic, keywords, charsNumber: length, locale: lang }),
       });
       const json = await response.json();
 
@@ -60,25 +61,33 @@ export default function NewPost() {
     }
   };
 
+
+  const textareaStyles = {
+    input: {
+      borderColor: 'gray.4',
+      '&:focus': {
+        borderColor: '#0B7285', //cyan.9
+      },
+    },
+  };
+
+
   return (
-    <div className="h-full overflow-hidden bg-slate-100 ">
+    <div className="h-full overflow-hidden bg-[#F8F9FA]">
       {generating && <Loading />}
       {!generating && (
         <div className="w-full mt-3 md:mt-60 flex flex-col items-center overflow-auto">
-          <div className="text-2xl mx-auto w-full max-w-screen-sm py-4 font-semibold">
-            {t("createToday")}
-
-          </div>
-          <Tabs defaultValue="first" className=" mx-auto w-full max-w-screen-sm py-4">
+          <Title size="1.75rem" color="gray.9" weight={700} className="mx-auto w-full max-w-screen-sm py-4">{t("createToday")}</Title>
+          <Tabs defaultValue="first" value={activeTab} onTabChange={setActiveTab} className=" mx-auto w-full max-w-screen-sm py-4">
             <Tabs.List grow >
-              <Tabs.Tab value="first" className="text-xl">{t("longContent")}</Tabs.Tab>
-              <Tabs.Tab value="second" className="text-xl">{t("shortContent")}</Tabs.Tab>
+              <Tabs.Tab value="first" color="cyan.9" className="text-xl font-semibold border-b border-b-4" ><Text color={activeTab === 'first' ? "gray.9" : "gray.6"}>{t("longContent")}</Text></Tabs.Tab>
+              <Tabs.Tab value="second" color="cyan.9" className="text-xl font-semibold border-b border-b-4"><Text color={activeTab !== 'first' ? "gray.9" : "gray.6"}>{t("shortContent")}</Text></Tabs.Tab>
             </Tabs.List>
 
             <Tabs.Panel value="first">
-              <div className="text-[#868E96] py-2">
+              <Text color="gray.6" className="py-2 leading-6">
                 {t("topicLabel")}
-              </div>
+              </Text>
               <form
                 onSubmit={handleLongFormSubmit}
                 className="mx-auto w-full max-w-screen-sm pb-4 rounded-md shadow-xlborder border-slate-200 shadow-slate-200"
@@ -88,44 +97,46 @@ export default function NewPost() {
                   onChange={(e) => setTopic(e.target.value)}
                   placeholder={t("topicPlaceholder")}
                   label={t("G_Topic")}
+                  labelProps={{ size: 'md' }}
+                  styles={textareaStyles}
                   maxLength={150}
                   minRows={3}
                   maxRows={5}
                   autosize
-                  className="mt-4"
+                  className="mt-8"
                 />
 
                 <Textarea
                   value={keywords}
                   onChange={(e) => setKeywords(e.target.value)}
                   label={t("keywordsLabel")}
+                  labelProps={{ size: 'md' }}
+                  styles={textareaStyles}
                   placeholder={t("keywordsPlaceholder")}
                   maxLength={80}
                   minRows={2}
                   maxRows={2}
-                  className="mt-4"
+                  className="mt-8"
                 />
 
-                <details className="my-4">
-                  <summary className="hover:cursor-pointer">
-                    {t("advancedOptions")}
-                  </summary>
-                  <NumberInput
-                    defaultValue={500}
-                    label={t("wordsNumberLabel")}
-                    withAsterisk
-                    hideControls
-                    max={2000}
-                    min={200}
-                    value={wordsNumber}
-                    onChange={setWordsNumber}
-                    className="mt-4"
-                  />
-                </details>
+                <NumberInput
+                  defaultValue={500}
+                  label={t("wordsNumberLabel")}
+                  labelProps={{ size: 'md' }}
+                  styles={textareaStyles}
+                  withAsterisk
+                  hideControls
+                  max={2000}
+                  min={200}
+                  value={length}
+                  onChange={setLength}
+                  className="my-8"
+                />
+
 
                 <button
                   type="submit"
-                  className="btn"
+                  className="generate-btn"
                   disabled={!topic.trim() || !keywords.trim()}
                 >
                   {t("G_write")}
@@ -133,9 +144,9 @@ export default function NewPost() {
               </form>
             </Tabs.Panel>
             <Tabs.Panel value="second">
-              <div className="text-[#868E96] py-2">
+              <Text color="gray.6" className="py-2 leading-6">
                 {t("shortContentLabel")}
-              </div>
+              </Text>
               <form
                 onSubmit={handleShortFormSubmit}
                 className="mx-auto w-full max-w-screen-sm pb-4 rounded-md shadow-xlborder border-slate-200 shadow-slate-200"
@@ -145,39 +156,42 @@ export default function NewPost() {
                   onChange={(e) => setTopic(e.target.value)}
                   placeholder={t("shortContentTopicPlaceholder")}
                   label={t("G_Topic")}
+                  labelProps={{ size: 'md' }}
+                  styles={textareaStyles}
                   maxLength={150}
                   minRows={3}
                   maxRows={5}
                   autosize
-                  className="mt-4"
+                  className="mt-8"
                 />
 
                 <Textarea
                   value={keywords}
                   onChange={(e) => setKeywords(e.target.value)}
                   label={t("keywordsLabel")}
+                  labelProps={{ size: 'md' }}
+                  styles={textareaStyles}
                   placeholder={t("shortContentKWPlaceholder")}
                   maxLength={80}
                   minRows={2}
                   maxRows={2}
-                  className="mt-4"
+                  className="mt-8"
                 />
 
-                <details className="my-4">
-                  <summary className="hover:cursor-pointer">
-                    {t("advancedOptions")}
-                  </summary>
-                  <NumberInput
-                    defaultValue={500}
-                    label={t("wordsCharsLabel")}
-                    withAsterisk
-                    hideControls
-                    max={2000}
-                    value={charsNumber}
-                    onChange={setCharsNumber}
-                    className="mt-4"
-                  />
-                </details>
+
+                <NumberInput
+                  defaultValue={500}
+                  label={t("wordsCharsLabel")}
+                  labelProps={{ size: 'md' }}
+                  styles={textareaStyles}
+                  withAsterisk
+                  hideControls
+                  max={2000}
+                  value={length}
+                  onChange={setLength}
+                  className="my-8"
+                />
+
 
                 <button
                   type="submit"
