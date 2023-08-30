@@ -3,16 +3,19 @@ import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { AppLayout } from "../../components/AppLayout";
 import { useRouter } from "next/router";
 import { getAppProps } from "../../utils/getAppProps";
-import { NumberInput, Textarea, Tabs, Text, Title } from "@mantine/core";
+import { Tabs, Text, Title } from "@mantine/core";
 import Loading from "../../components/shared/loading";
 import useTranslation from "next-translate/useTranslation";
+import Form from "../../components/form"
 
 export default function NewPost() {
-  const [topic, setTopic] = useState("");
+  const [topic, setTopic] = useState<string>("");
   const [keywords, setKeywords] = useState("");
   const [generating, setGenerating] = useState(false);
   const [length, setLength] = useState<number | "">(500);
   const [activeTab, setActiveTab] = useState<string | null>('first');
+  const [longFormat, setLongFormat] = useState(true)
+
   const { t, lang } = useTranslation("common");
   const router = useRouter();
 
@@ -61,16 +64,27 @@ export default function NewPost() {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setGenerating(true);
 
-  const textareaStyles = {
-    input: {
-      borderColor: 'gray.4',
-      '&:focus': {
-        borderColor: '#0B7285', //cyan.9
-      },
-    },
+    try {
+      const response = await fetch("/api/generateNewsletter", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ topic, keywords, charsNumber: length, locale: lang }),
+      });
+      const json = await response.json();
+
+      if (json?.postId) {
+        router.push(`/post/${json.postId}`);
+      }
+    } catch (e) {
+      setGenerating(false);
+    }
   };
-
 
   return (
     <div className="h-full overflow-hidden bg-[#F8F9FA]">
@@ -88,123 +102,34 @@ export default function NewPost() {
               <Text color="gray.6" className="py-2 leading-6">
                 {t("topicLabel")}
               </Text>
-              <form
-                onSubmit={handleLongFormSubmit}
-                className="mx-auto w-full max-w-screen-sm pb-4 rounded-md shadow-xlborder border-slate-200 shadow-slate-200"
-              >
-                <Textarea
-                  value={topic}
-                  onChange={(e) => setTopic(e.target.value)}
-                  placeholder={t("topicPlaceholder")}
-                  label={t("G_Topic")}
-                  labelProps={{ size: 'md' }}
-                  styles={textareaStyles}
-                  maxLength={150}
-                  minRows={3}
-                  maxRows={5}
-                  autosize
-                  className="mt-8"
-                />
+              <Form
+                topic={topic}
+                setTopic={setTopic}
+                keywords={keywords}
+                setKeywords={setKeywords}
+                length={length}
+                setLength={setLength}
+                handleSubmit={handleLongFormSubmit}
+                format={longFormat}
+              ></Form>
 
-                <Textarea
-                  value={keywords}
-                  onChange={(e) => setKeywords(e.target.value)}
-                  label={t("keywordsLabel")}
-                  labelProps={{ size: 'md' }}
-                  styles={textareaStyles}
-                  placeholder={t("keywordsPlaceholder")}
-                  maxLength={80}
-                  minRows={2}
-                  maxRows={2}
-                  className="mt-8"
-                />
-
-                <NumberInput
-                  defaultValue={500}
-                  label={t("wordsNumberLabel")}
-                  labelProps={{ size: 'md' }}
-                  styles={textareaStyles}
-                  withAsterisk
-                  hideControls
-                  max={2000}
-                  min={200}
-                  value={length}
-                  onChange={setLength}
-                  className="my-8"
-                />
-
-
-                <button
-                  type="submit"
-                  className="generate-btn"
-                  disabled={!topic.trim() || !keywords.trim()}
-                >
-                  {t("G_write")}
-                </button>
-              </form>
             </Tabs.Panel>
             <Tabs.Panel value="second">
               <Text color="gray.6" className="py-2 leading-6">
                 {t("shortContentLabel")}
               </Text>
-              <form
-                onSubmit={handleShortFormSubmit}
-                className="mx-auto w-full max-w-screen-sm pb-4 rounded-md shadow-xlborder border-slate-200 shadow-slate-200"
-              >
-                <Textarea
-                  value={topic}
-                  onChange={(e) => setTopic(e.target.value)}
-                  placeholder={t("shortContentTopicPlaceholder")}
-                  label={t("G_Topic")}
-                  labelProps={{ size: 'md' }}
-                  styles={textareaStyles}
-                  maxLength={150}
-                  minRows={3}
-                  maxRows={5}
-                  autosize
-                  className="mt-8"
-                />
-
-                <Textarea
-                  value={keywords}
-                  onChange={(e) => setKeywords(e.target.value)}
-                  label={t("keywordsLabel")}
-                  labelProps={{ size: 'md' }}
-                  styles={textareaStyles}
-                  placeholder={t("shortContentKWPlaceholder")}
-                  maxLength={80}
-                  minRows={2}
-                  maxRows={2}
-                  className="mt-8"
-                />
-
-
-                <NumberInput
-                  defaultValue={500}
-                  label={t("wordsCharsLabel")}
-                  labelProps={{ size: 'md' }}
-                  styles={textareaStyles}
-                  withAsterisk
-                  hideControls
-                  max={2000}
-                  value={length}
-                  onChange={setLength}
-                  className="my-8"
-                />
-
-
-                <button
-                  type="submit"
-                  className="btn"
-                  disabled={!topic.trim() || !keywords.trim()}
-                >
-                  {t("G_write")}
-                </button>
-              </form>
+              <Form
+                topic={topic}
+                setTopic={setTopic}
+                keywords={keywords}
+                setKeywords={setKeywords}
+                length={length}
+                setLength={setLength}
+                handleSubmit={() => handleSubmit(longFormat)}
+                format={!longFormat}
+              ></Form>
             </Tabs.Panel>
           </Tabs>
-
-
         </div>
       )}
     </div>
