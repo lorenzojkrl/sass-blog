@@ -1,35 +1,55 @@
+import { useState } from "react";
 import useTranslation from "next-translate/useTranslation";
 import { NumberInput, Textarea } from "@mantine/core";
+import { useRouter } from "next/router";
+
+const textareaStyles = {
+    input: {
+        borderColor: 'gray.4',
+        '&:focus': {
+            borderColor: '#0B7285', //cyan.9
+        },
+    },
+};
 
 const Form = ({
-    topic,
-    setTopic, keywords,
-    setKeywords,
-    length,
-    setLength,
-    handleSubmit,
-    format
+    format,
+    setGenerating
 }:
     {
-        topic: string,
-        setTopic,
-        keywords: string,
-        setKeywords, length: number | "",
-        setLength,
-        handleSubmit,
-        format: boolean
+        format: boolean,
+        setGenerating: React.Dispatch<React.SetStateAction<boolean>>
     }) => {
-    const { t } = useTranslation("common");
+    const [topic, setTopic] = useState<string>("");
+    const [keywords, setKeywords] = useState("");
+    const [length, setLength] = useState<number | "">(500);
+    const { t, lang } = useTranslation("common");
+    const router = useRouter();
 
-    const textareaStyles = {
-        input: {
-            borderColor: 'gray.4',
-            '&:focus': {
-                borderColor: '#0B7285', //cyan.9
-            },
-        },
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setGenerating(true);
+
+        console.log('e', e, 'format', format);
+        let url = `/api/${format ? 'generatePost' : 'generateNesletter'}`
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify({ topic, keywords, length, locale: lang }),
+            });
+            const json = await response.json();
+
+            if (json?.postId) {
+                router.push(`/post/${json.postId}`);
+            }
+        } catch (e) {
+            setGenerating(false);
+        }
     };
-
 
     return (
         <form
@@ -49,7 +69,6 @@ const Form = ({
                 autosize
                 className="mt-8"
             />
-
             <Textarea
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}
@@ -62,7 +81,6 @@ const Form = ({
                 maxRows={2}
                 className="mt-8"
             />
-
             <NumberInput
                 defaultValue={500}
                 label={t(format ? "wordsNumberLabel" : "wordsCharsLabel")}
@@ -76,8 +94,6 @@ const Form = ({
                 onChange={setLength}
                 className="my-8"
             />
-
-
             <button
                 type="submit"
                 className="generate-btn"

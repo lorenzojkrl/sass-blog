@@ -1,90 +1,20 @@
-import { useState } from "react";
+import { useState, ReactNode, FC } from "react";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import { AppLayout } from "../../components/AppLayout";
-import { useRouter } from "next/router";
 import { getAppProps } from "../../utils/getAppProps";
 import { Tabs, Text, Title } from "@mantine/core";
 import Loading from "../../components/shared/loading";
 import useTranslation from "next-translate/useTranslation";
 import Form from "../../components/form"
 
-export default function NewPost() {
-  const [topic, setTopic] = useState<string>("");
-  const [keywords, setKeywords] = useState("");
+// function component type that matches the signature of NewPost
+type GetLayoutFunction = (page: FC, pageProps: any) => ReactNode;
+
+export default function NewPost<FC>() {
   const [generating, setGenerating] = useState(false);
-  const [length, setLength] = useState<number | "">(500);
   const [activeTab, setActiveTab] = useState<string | null>('first');
   const [longFormat, setLongFormat] = useState(true)
-
-  const { t, lang } = useTranslation("common");
-  const router = useRouter();
-
-  const handleLongFormSubmit = async (e) => {
-    e.preventDefault();
-    // validate length here and in backend
-    setGenerating(true);
-
-    try {
-      const response = await fetch("/api/generatePost", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ topic, keywords, wordsNumber: length }),
-      });
-      const json = await response.json();
-
-      if (json?.postId) {
-        router.push(`/post/${json.postId}`);
-      }
-    } catch (e) {
-      setGenerating(false);
-    }
-  };
-
-  const handleShortFormSubmit = async (e) => {
-    e.preventDefault();
-    setGenerating(true);
-
-    try {
-      const response = await fetch("/api/generateNewsletter", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ topic, keywords, charsNumber: length, locale: lang }),
-      });
-      const json = await response.json();
-
-      if (json?.postId) {
-        router.push(`/post/${json.postId}`);
-      }
-    } catch (e) {
-      setGenerating(false);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setGenerating(true);
-
-    try {
-      const response = await fetch("/api/generateNewsletter", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ topic, keywords, charsNumber: length, locale: lang }),
-      });
-      const json = await response.json();
-
-      if (json?.postId) {
-        router.push(`/post/${json.postId}`);
-      }
-    } catch (e) {
-      setGenerating(false);
-    }
-  };
+  const { t } = useTranslation("common");
 
   return (
     <div className="h-full overflow-hidden bg-[#F8F9FA]">
@@ -103,30 +33,17 @@ export default function NewPost() {
                 {t("topicLabel")}
               </Text>
               <Form
-                topic={topic}
-                setTopic={setTopic}
-                keywords={keywords}
-                setKeywords={setKeywords}
-                length={length}
-                setLength={setLength}
-                handleSubmit={handleLongFormSubmit}
                 format={longFormat}
+                setGenerating={setGenerating}
               ></Form>
-
             </Tabs.Panel>
             <Tabs.Panel value="second">
               <Text color="gray.6" className="py-2 leading-6">
                 {t("shortContentLabel")}
               </Text>
               <Form
-                topic={topic}
-                setTopic={setTopic}
-                keywords={keywords}
-                setKeywords={setKeywords}
-                length={length}
-                setLength={setLength}
-                handleSubmit={() => handleSubmit(longFormat)}
                 format={!longFormat}
+                setGenerating={setGenerating}
               ></Form>
             </Tabs.Panel>
           </Tabs>
@@ -136,7 +53,7 @@ export default function NewPost() {
   );
 }
 
-NewPost.getLayout = function getLayout(page, pageProps) {
+NewPost.getLayout = function getLayout(page: GetLayoutFunction, pageProps: any) {
   return <AppLayout {...pageProps}>{page}</AppLayout>;
 };
 
