@@ -148,31 +148,23 @@ export const AppLayout = ({
 
       <div className="hide-on-small-screens">
         <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
-          <div className="flex flex-col text-white overflow-hidden">
-            <div className="bg-slate-800 px-2 ">
-              <Logo />
-              <Divider my="sm" color="rgb(30 41 59)" />
-              <SidebarHeader
-                availableTokens={availableTokens}
-                closeDrawer={closeDrawer}
-              ></SidebarHeader>
-              <Divider my="sm" color="rgb(30 41 59)" />
-            </div>
-            <div className="flex-1 bg-gradient-to-b from-slate-800 to-cyan-800">
-              <SidebarLoadMore
-                noMorePosts={noMorePosts}
-                getPosts={getPosts}
-                posts={posts}
-                postId={postId}
-                closeDrawer={closeDrawer}
-              ></SidebarLoadMore>
-            </div>
-            <div className="pt-2 bg-cyan-800  h-20 ">
-              <SidebarCTA/>
-            </div>
-            <div className="pt-2 bg-cyan-800 flex items-center gap-2 border-t border-t-black/50 h-20 px-2">
-              <SidebarFooter user={user}></SidebarFooter>
-            </div>
+          <div className="flex flex-col text-white overflow-hidden bg-[#343A40] px-2">
+            <Logo />
+            <Divider color="gray.7" />
+            <SidebarHeader
+              availableTokens={availableTokens}
+              closeDrawer={closeDrawer}
+            ></SidebarHeader>
+            <SidebarLoadMore
+              noMorePosts={noMorePosts}
+              getPosts={getPosts}
+              posts={posts}
+              postId={postId}
+              closeDrawer={closeDrawer}
+            ></SidebarLoadMore>
+            <SidebarCTA />
+            <Divider color="gray.7" />
+            <SidebarFooter user={user}></SidebarFooter>
           </div>
           {children}
         </div>
