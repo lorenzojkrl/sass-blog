@@ -11,7 +11,7 @@ export default withApiAuthRequired(async function handler(req, res) {
   const userProfile = await db.collection("users").findOne({
     auth0Id: user.sub,
   });
-  const { topic, keywords, wordsNumber } = req.body;
+  const { topic, keywords, length, locale = "en" } = req.body;
   const config = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   });
@@ -24,11 +24,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     return;
   }
 
-  if (
-    typeof wordsNumber !== "number" ||
-    wordsNumber < 200 ||
-    wordsNumber > 2000
-  ) {
+  if (typeof length !== "number" || length < 200 || length > 2000) {
     res.status(422); //Unprocessable entity because we want a topic and keywords
     return {
       redirect: {
@@ -61,7 +57,7 @@ export default withApiAuthRequired(async function handler(req, res) {
       {
         role: "user",
         content: `Write a long and detailed SEO-friendly blog post about ${topic}. 
-        The blog post should contain about ${wordsNumber} words.
+        The blog post should contain about ${length} words.
         The blog post should target the following comma-separated keywords ${keywords}. 
         The content should be formatted in SEO-friendly HTML.
         It should be limited to the following comma-separated HTML tags: ${allowedHTMLTags}

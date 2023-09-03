@@ -12,7 +12,7 @@ export default withApiAuthRequired(async function handler(req, res) {
   const userProfile = await db.collection("users").findOne({
     auth0Id: user.sub,
   });
-  const { topic, keywords, charsNumber, locale = "en" } = req.body;
+  const { topic, keywords, length, locale = "en" } = req.body;
   const config = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   });
@@ -27,7 +27,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     return;
   }
 
-  if (typeof charsNumber !== "number" || charsNumber > 2000) {
+  if (typeof length !== "number" || length > 2000) {
     res.status(422); //Unprocessable entity because we want a topic and keywords
     return {
       redirect: {
@@ -57,7 +57,7 @@ export default withApiAuthRequired(async function handler(req, res) {
       },
       {
         role: "user",
-        content: t("writeNewsletter", { topic, charsNumber, keywords }),
+        content: t("writeNewsletter", { topic, length, keywords }),
       },
     ],
   });

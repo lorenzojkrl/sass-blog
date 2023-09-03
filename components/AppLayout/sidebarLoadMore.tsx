@@ -18,15 +18,15 @@ const SidebarLoadMore = ({
   const { t } = useTranslation("common");
 
   return (
-    <div className="px-4 flex-1">
+    <div className="w-[240px] mx-auto flex-1">
       {posts.map((post) => (
         <Link
           onClick={closeDrawer}
           key={post._id}
           href={`/post/${post._id}`}
-          className={`py-1 border border-transparent block text-ellipsis max-w-xs overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${
-            postId === post._id ? "bg-white/20 border-white" : ""
-          }`}
+
+          className={`py-1 border border-transparent block text-ellipsis overflow-hidden whitespace-nowrap my-1 px-2 bg-white/10 cursor-pointer rounded-sm ${postId === post._id ? "bg-white/20 border-white" : ""
+            }`}
         >
           {post.topic}
         </Link>
