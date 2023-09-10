@@ -1,16 +1,30 @@
 import { useState } from "react";
 import useTranslation from "next-translate/useTranslation";
-import { NumberInput, Textarea } from "@mantine/core";
+import { Group, NumberInput, Textarea } from "@mantine/core";
 import { useRouter } from "next/router";
+import { Chip, Text } from '@mantine/core';
 
 const textareaStyles = {
     input: {
-        borderColor: 'gray.4',
         '&:focus': {
             borderColor: '#0B7285', //cyan.9
         },
     },
 };
+
+const chipStyles = {
+    label: {
+        borderColor: '#CED4DA', //gray.4
+        backgroundColor: 'white',
+        '&:hover': {
+            backgroundColor: '#CED4DA', //gray.4
+        },
+        'data-checked="true"': {
+            color: 'red'
+        }
+
+    }
+}
 
 const Form = ({
     format,
@@ -21,6 +35,7 @@ const Form = ({
         setGenerating: React.Dispatch<React.SetStateAction<boolean>>
     }) => {
     const [topic, setTopic] = useState<string>("");
+    const [chip, setChip] = useState('react');
     const [keywords, setKeywords] = useState("");
     const [length, setLength] = useState<number | "">(500);
     const { t, lang } = useTranslation("common");
@@ -69,6 +84,18 @@ const Form = ({
                 autosize
                 className="mt-8"
             />
+
+            <div className="mt-8">
+                <Text>Style</Text>
+                <Chip.Group multiple={false} value={chip} onChange={setChip}>
+                    <Group>
+                        <Chip value="react" variant="filled" color="cyan" size="md" radius="sm" styles={chipStyles}>React</Chip>
+                        <Chip value="ng" variant="filled" color="cyan" size="md" radius="sm" styles={chipStyles}>Angular</Chip>
+                        <Chip value="svelte" variant="filled" color="cyan" size="md" radius="sm" styles={chipStyles}>Svelte</Chip>
+                        <Chip value="vue" variant="filled" color="cyan" size="md" radius="sm" styles={chipStyles}>Vue</Chip>
+                    </Group>
+                </Chip.Group>
+            </div>
             <Textarea
                 value={keywords}
                 onChange={(e) => setKeywords(e.target.value)}
