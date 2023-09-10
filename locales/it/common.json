@@ -11,6 +11,7 @@
   "G_privacy": "Privacy",
   "G_purchase": "Acquista",
   "G_signUp": "Registrati",
+  "G_styles": "Stile",
   "G_terms": "Termini",
   "G_Topic": "Argomento",
   "G_words": "Parole",
@@ -70,6 +71,10 @@
   "shortContentKWPlaceholder": "Newsletters sulle piante",
   "shortContentTopicPlaceholder": "Introduzione alla mia newsletters sulle piante",
   "unlockPosts": "Ottieni post",
-  "postsLeft": "{{availableTokens}} posts "
-
+  "postsLeft": "{{availableTokens}} posts ",
+  "G_formal": "Formale",
+  "G_conversational": "Conversazionale",
+  "G_technical": "Tecnico",
+  "G_engaging": "Coinvolgente",
+  "G_persuasive": "Persuasivo"
 }

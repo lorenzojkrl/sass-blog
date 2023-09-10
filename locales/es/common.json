@@ -11,6 +11,7 @@
   "G_privacy": "Privacidad",
   "G_purchase": "Comprar",
   "G_signUp": "Registrarse",
+  "G_styles": "Estilo",
   "G_terms": "Terminos",
   "G_Topic": "Tema",
   "G_words": "Palabras",
@@ -70,5 +71,10 @@
   "shortContentKWPlaceholder": "Boletines de plantas",
   "shortContentTopicPlaceholder": "Introducción a mis boletines de plantas",
   "unlockPosts": "Más post",
-  "postsLeft": "{{availableTokens}} posts"
+  "postsLeft": "{{availableTokens}} posts",
+  "G_formal": "Formal",
+  "G_conversational": "Conversacional",
+  "G_technical": "Técnico",
+  "G_engaging": "Atractivo",
+  "G_persuasive": "Persuasivo"
 }

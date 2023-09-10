@@ -18,13 +18,11 @@ const chipStyles = {
         backgroundColor: 'white',
         '&:hover': {
             backgroundColor: '#CED4DA', //gray.4
-        },
-        'data-checked="true"': {
-            color: 'red'
         }
-
     }
 }
+
+const chips = [{ value: 'G_formal' }, { value: 'G_conversational' }, { value: 'G_technical' }, { value: 'G_engaging' }, { value: 'G_persuasive' }]
 
 const Form = ({
     format,
@@ -35,7 +33,7 @@ const Form = ({
         setGenerating: React.Dispatch<React.SetStateAction<boolean>>
     }) => {
     const [topic, setTopic] = useState<string>("");
-    const [chip, setChip] = useState('react');
+    const [style, setStyle] = useState("");
     const [keywords, setKeywords] = useState("");
     const [length, setLength] = useState<number | "">(500);
     const { t, lang } = useTranslation("common");
@@ -45,8 +43,7 @@ const Form = ({
         e.preventDefault();
         setGenerating(true);
 
-        console.log('e', e, 'format', format);
-        let url = `/api/${format ? 'generatePost' : 'generateNesletter'}`
+        let url = `/api/${format ? 'generatePost' : 'generateNewsletter'}`
 
         try {
             const response = await fetch(url, {
@@ -54,7 +51,7 @@ const Form = ({
                 headers: {
                     "content-type": "application/json",
                 },
-                body: JSON.stringify({ topic, keywords, length, locale: lang }),
+                body: JSON.stringify({ topic, keywords, length, locale: lang, style }),
             });
             const json = await response.json();
 
@@ -65,6 +62,7 @@ const Form = ({
             setGenerating(false);
         }
     };
+
 
     return (
         <form
@@ -86,13 +84,25 @@ const Form = ({
             />
 
             <div className="mt-8">
-                <Text>Style</Text>
-                <Chip.Group multiple={false} value={chip} onChange={setChip}>
-                    <Group>
-                        <Chip value="react" variant="filled" color="cyan" size="md" radius="sm" styles={chipStyles}>React</Chip>
-                        <Chip value="ng" variant="filled" color="cyan" size="md" radius="sm" styles={chipStyles}>Angular</Chip>
-                        <Chip value="svelte" variant="filled" color="cyan" size="md" radius="sm" styles={chipStyles}>Svelte</Chip>
-                        <Chip value="vue" variant="filled" color="cyan" size="md" radius="sm" styles={chipStyles}>Vue</Chip>
+                <Text>{t("G_styles")}</Text>
+                <Chip.Group multiple={false} value={style} onChange={setStyle}>
+                    <Group position="apart">
+                        {
+                            chips.map((chip) => (
+                                <Chip
+                                    key={chip.value}
+                                    value={t(`${chip.value}`)}
+                                    variant="filled"
+                                    color="cyan"
+                                    size="sm"
+                                    radius="sm"
+                                    styles={chipStyles}
+                                >
+                                    {t(`${chip.value}`)}
+                                </Chip>
+
+                            ))
+                        }
                     </Group>
                 </Chip.Group>
             </div>

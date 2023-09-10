@@ -11,6 +11,7 @@
   "G_privacy": "Privacy",
   "G_purchase": "Purchase",
   "G_signUp": "Sign up",
+  "G_styles": "Style",
   "G_terms": "Terms",
   "G_Topic": "Topic",
   "G_words": "Words",
@@ -70,5 +71,10 @@
   "shortContentKWPlaceholder": "Plant newsletters",
   "shortContentTopicPlaceholder": "Introduction to my plant newsletters",
   "unlockPosts": "Unlock more posts",
-  "postsLeft": "{{availableTokens}} posts left"
+  "postsLeft": "{{availableTokens}} posts left",
+  "G_formal": "Formal",
+  "G_conversational": "Conversational",
+  "G_technical": "Technical",
+  "G_engaging": "Engaging",
+  "G_persuasive": "Persuasive"
 }
