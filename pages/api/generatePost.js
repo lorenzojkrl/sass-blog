@@ -73,6 +73,64 @@ export default withApiAuthRequired(async function handler(req, res) {
       La risposta deve anche includere un titolo HTML e una descrizione meta appropriati.`,
     },
   };
+
+  const titleContent = {
+    system: {
+      en: "You are a SEO content writer.",
+      es: "Eres un redactor de contenido SEO.",
+      it: "Sei un redattore di contenuti SEO.",
+    },
+    user: {
+      en: "Generate an appropriate title for the above blog post",
+      es: "Crear un título apropiado para la entrada de blog anterior",
+      it: "Generare un titolo appropriato per il post del blog di cui sopra",
+    },
+  };
+
+  const slugContent = {
+    system: {
+      en: `You are a URL slug generator. 
+      A URL slug is a composed of multiple dash-separated words.
+      A URL slug must include the words from a keyword.
+      `,
+      es: `Eres un generador de URL simplificadas.
+      Una URL simplificada se compone de varias palabras separadas por guiones.
+      Una URL simplificada debe incluir las palabras clave.`,
+      it: `Sei un generatore di slug URL.
+      Uno slug URL è composto da diverse parole separate da trattini.
+      Uno slug URL deve includere le parole chiave.`,
+    },
+    assistant: {
+      en: `Title: ${title}`,
+      es: `Titulo: ${title}`,
+      it: `Titolo: ${title}`,
+    },
+    user: {
+      en: `Generate an appropriate URL slug given the above title.
+      The URL slug must include the following keyword ${keywords[0]}.
+      Keep the URL slug short.`,
+      es: `Genera una URL simplificada apropiada dado el título anterior.
+      La URL simplificada debe incluir la siguiente palabra clave ${keywords[0]}.
+      Mantén la URL simplificada corta.`,
+      it: `Genera uno slug URL appropriato dato il titolo sopra indicato.
+      Lo slug URL deve includere la seguente parola chiave ${keywords[0]}.
+      Mantieni lo slug URL corto.`,
+    },
+  };
+
+  const metaContent = {
+    system: {
+      en: "You are a SEO content writer.",
+      es: "Eres un redactor de contenido SEO.",
+      it: "Sei un redattore di contenuti SEO.",
+    },
+    user: {
+      en: "Generate SEO friendly meta description content for the above blog post",
+      es: "Generar contenido de meta descripción SEO amigable para la entrada de blog anterior",
+      it: "Generare contenuti di meta descrizione SEO friendly per il post del blog di cui sopra.",
+    },
+  };
+
   const postContentResponse = await openai.createChatCompletion({
     model: "gpt-4",
     temperature: 0.3,
@@ -97,7 +155,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     messages: [
       {
         role: "system",
-        content: `You are a SEO content writer.`,
+        content: titleContent.system[locale],
       },
       {
         role: "assistant",
@@ -105,7 +163,7 @@ export default withApiAuthRequired(async function handler(req, res) {
       },
       {
         role: "user",
-        content: "Generate an appropriate title for the above blog post",
+        content: titleContent.user[locale],
       },
     ],
   });
@@ -118,21 +176,15 @@ export default withApiAuthRequired(async function handler(req, res) {
     messages: [
       {
         role: "system",
-        content: `You are a URL slug generator. 
-        A URL slug is a composed of multiple dash-separated words.
-        A URL slug must include the words from a keyword.
-        `,
+        content: slugContent.system[locale],
       },
       {
         role: "assistant",
-        content: `Title: ${title}`,
+        content: slugContent.assistant[locale],
       },
       {
         role: "user",
-        content: `Generate an appropriate URL slug given the above title.
-        The URL slug must include the following keyword ${keywords[0]}.
-        Keep the URL slug short. 
-        `,
+        content: slugContent.user[locale],
       },
     ],
   });
@@ -144,7 +196,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     messages: [
       {
         role: "system",
-        content: `You are a SEO content writer.`,
+        content: metaContent.system[locale],
       },
       {
         role: "assistant",
@@ -152,8 +204,7 @@ export default withApiAuthRequired(async function handler(req, res) {
       },
       {
         role: "user",
-        content:
-          "Generate SEO friendly meta description content for the above blog post",
+        content: metaContent.user[locale],
       },
     ],
   });

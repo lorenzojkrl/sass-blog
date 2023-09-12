@@ -51,7 +51,7 @@
   "topicPlaceholder": "The benefits of pet therapy",
   "topicLabel": "Online articles and blog posts that are optimized for SEO through keywords, readability and heading types.",
   "keywordsPlaceholder": "Dogs, Pet therapy, Cats",
-  "keywordsLabel": "Targeting the following comma-separated keywords:",
+  "keywordsLabel": "Keywords (comma separated)",
   "advancedOptions": "Advanced options",
   "wordsNumberLabel": "Approximate number of words (200 - 2000)",
   "newCopy": "New post",
