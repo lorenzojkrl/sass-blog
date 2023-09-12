@@ -37,8 +37,9 @@
   "pricingTitle_Three": "100€ = {{copies}} bozze",
   "pricingDescription_Three": "Crea fino a {{copies}} bozze | Nessuna scadenza | Nessnu abbonamento",
   "startFree": "Inizia gratis",
-  "hero_title": "Crea la tua prima bozza - più velocemente.",
-  "hero_subtitle": "AI SEO Writer scrive contenuti SEO e ti aiuta a raggiungere la tua prima bozza più velocemente.",
+  "hero_title": "Arriva alla tua prima bozza ",
+  "hero_title_seconds": "in pochi secondi",
+  "hero_subtitle": "Concentratevi su ciò che conta e lasciate che l'intelligenza artificiale faccia il resto. Iniziate facilmente con post di blog e newsletter ottimizzati per la SEO.",
   "hero_cta": "Inizia gratis",
   "benefitsTitle": "La tua prima bozza - più velocemente.",
   "benefitsDescription": "AI SEO Writer is being designed to remove the tedious parts of getting to your first draft.",
@@ -76,5 +77,12 @@
   "G_conversational": "Conversazionale",
   "G_technical": "Tecnico",
   "G_engaging": "Coinvolgente",
-  "G_persuasive": "Persuasivo"
+  "G_persuasive": "Persuasivo",
+  "demoTagline": "Blog post ottimizzato per SEO",
+  "demoTitle": "Perché l'Estate è la Peggiore Stagione: Una Guida Completa",
+  "demoIntro": "Mentre molte persone attendono con impazienza l'arrivo dell'estate, ci sono molte ragioni per cui questa stagione può essere considerata la peggiore, soprattutto per coloro che lavorano in ufficio.",
+  "demoH2_First": "Il Caldo Scomodo",
+  "demoH2_Second": "Impatto sul Lavoro",
+  "demoP_First": "Una delle principali ragioni per cui l'estate può essere la peggiore stagione è il calore intenso che porta con sé. Il caldo può anche causare problemi di salute come il colpo di calore e la disidratazione.",
+  "demoP_Second": "Le alte temperature dell'estate possono avere un impatto significativo sulla produttività lavorativa. Studi hanno dimostrato che quando le temperature negli uffici superano un livello confortevole, la produttività diminuisce. Questo accade perché il corpo utilizza energia per raffreddarsi, lasciando meno energia per la concentrazione e le attività lavorative."
 }
