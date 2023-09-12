@@ -65,6 +65,10 @@
   .generate-btn {
     @apply disabled:bg-[#DEE2E6] disabled:cursor-not-allowed hover:no-underline bg-[#1098AD] tracking-wider w-full text-center text-white font-bold cursor-pointer py-2 rounded-md hover:bg-[#0B7285] transition-colors block;
   }
+
+  .auth-btn {
+    @apply hover:no-underline bg-[#1098AD] tracking-wider w-[150px] h-[40.8px] text-center text-white font-bold cursor-pointer py-2 rounded-sm hover:bg-[#0B7285] transition-colors block;
+  }
 }
 
 :root {
@@ -84,10 +88,6 @@
   --color-1: #2563eb;
 }
 
-.hide-on-small-screens-flex {
-  display: none;
-}
-
 .hide-on-small-screens {
   display: none;
 }
@@ -100,6 +100,20 @@
   max-width: 1280px;
 }
 
+.toggle-row-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toggle-header-font-size {
+  font-size: 16px;
+}
+
+.toggle-p-font-size {
+  font-size: 14px;
+}
+
 @media (min-width: 769px) {
   .hide-on-large-screens {
     display: none;
@@ -109,8 +123,17 @@
     display: block;
   }
 
-  .hide-on-small-screens-flex {
-    display: flex;
+  .toggle-row-column {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .toggle-header-font-size {
+    font-size: 20px;
+  }
+
+  .toggle-p-font-size {
+    font-size: 20px;
   }
 }
 
