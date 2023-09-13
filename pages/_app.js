@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
-import { DM_Sans, DM_Serif_Display, Roboto } from "next/font/google";
+import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import { PostsProvider } from "../context/postsContext";
 import { MantineProvider } from "@mantine/core";
 import Head from "next/head";
@@ -21,12 +21,6 @@ const dmSerifDisplay = DM_Serif_Display({
   weight: ["400"],
   subsets: ["latin"],
   variable: "--font-dm-serif",
-});
-
-const roboto = Roboto({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--font-roboto",
 });
 
 function MyApp({ Component, pageProps }) {
@@ -52,7 +46,7 @@ function MyApp({ Component, pageProps }) {
           <PostsProvider>
             <LanguageSetter />
             <main
-              className={`${dmSans.variable} ${dmSerifDisplay.variable} ${roboto.variable}  font-body`}
+              className={`${dmSans.variable} ${dmSerifDisplay.variable}  font-body`}
             >
               {getLayout(<Component {...pageProps} />, pageProps)}
             </main>
