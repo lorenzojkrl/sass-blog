@@ -41,3 +41,13 @@ export interface BenefitsData {
     }[];
   };
 }
+
+export interface SectionData {
+  data: {
+    title: string;
+    desc?: string;
+    image: HTMLImageElement;
+    imagePos?: "right" | "left";
+    imageAlt: string;
+  };
+}

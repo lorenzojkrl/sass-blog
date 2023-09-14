@@ -1,12 +1,12 @@
+// Keep as reference, currently not in use
 import { IconClockCancel, IconPencil, IconFileCheck } from "@tabler/icons";
-
-import benefitOneImg from "../public/img/benefit-one.png";
+import benefitOneImg from "../public/img/article_generation.png";
 
 const benefitOne = {
   title: "benefitsTitle",
   desc: "benefitsDescription",
   image: benefitOneImg,
-  imageAlt: "Woman Texting BY IDAN on https://www.glazestock.com/",
+  imageAlt: "Preview of SEO content generation",
   bullets: [
     {
       title: "benefitsBulletTitle_One",

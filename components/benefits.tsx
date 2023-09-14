@@ -1,3 +1,4 @@
+// Keep as reference, currently not in use
 import Image from "next/image";
 import React from "react";
 import Container from "./container";
