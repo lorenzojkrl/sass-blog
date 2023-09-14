@@ -17,6 +17,7 @@ module.exports = {
         "cyan-5": "#22B8CF",
         "cyan-7": "#1098ad",
         "gray-5": "#adb5bd",
+        "gray-2": "#E9ECEF",
         "gray-4": "#CED4DA",
         "gray-7": "#495057",
         "gray-9": "#212529",

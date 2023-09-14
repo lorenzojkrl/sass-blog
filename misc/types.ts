@@ -49,5 +49,6 @@ export interface SectionData {
     image: HTMLImageElement;
     imagePos?: "right" | "left";
     imageAlt: string;
+    wordsToColor: string[];
   };
 }
