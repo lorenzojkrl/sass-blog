@@ -3,30 +3,7 @@ import Image from "next/image";
 import Container from "./container";
 import useTranslation from "next-translate/useTranslation";
 import { SectionData } from "../misc/types";
-
-// Move to utils and use for Hero title as well
-export const colorWords = (
-  text: string,
-  wordsToColor: string[],
-  baseColor: string = "var(--text-gray-9)",
-  customColor: string = "var(--cyan-7)"
-) => {
-  return (
-    <div>
-      {text.split(" ").map((word, i) => (
-        <span
-          key={i}
-          // Cannot use words position because of i18n
-          style={{
-            color: wordsToColor.includes(word) ? customColor : baseColor,
-          }}
-        >
-          {word}{" "}
-        </span>
-      ))}
-    </div>
-  );
-};
+import colorWords from "../utils/colorWords";
 
 const Section: React.FC<SectionData> = (props) => {
   const { data } = props;
@@ -57,9 +34,9 @@ const Section: React.FC<SectionData> = (props) => {
         </div>
         <div className={`flex flex-wrap items-center w-full lg-halveWidth`}>
           <div className="flex justify-center w-full mt-4">
-            <h3 className="max-w-[400px] mt-3 lg:text-[64px] text-3xl font-bold leading-snug tracking-tight text-gray-9 lg-heading">
+            <h2 className="max-w-[400px] mt-3 lg:text-[64px] text-3xl font-bold leading-snug tracking-tight text-gray-9 lg-heading">
               {colorWords(title, wordsToColor)}
-            </h3>
+            </h2>
           </div>
         </div>
       </Container>
