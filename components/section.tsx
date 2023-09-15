@@ -14,9 +14,9 @@ const Section: React.FC<SectionData> = (props) => {
   return (
     <div className="w-full bg-gray-2">
       <Container
-        className={`flex ${
+        className={`flex flex-col-reverse lg:flex-row ${
           data?.imagePos === "right" ? "flex-row-reverse" : ""
-        } flex-wrap h-[800px]`}
+        } flex-wrap lg:h-[800px]`}
       >
         <div
           className={`flex items-center justify-center w-full lg-halveWidth`}

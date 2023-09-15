@@ -45,7 +45,7 @@ const Hero = () => {
           </div>
         </div>
         <div className="flex w-full lg-halveWidth">
-          <div className="w-[570px] h-[700px] border border-dark-gray rounded-lg text-gray-4 bg-gray-7 p-4 lg:p-8">
+          <div className="w-[570px] h-[700px] border border-dark-gray rounded-t-lg text-gray-4 bg-gray-7 p-4 lg:p-8">
             <div className="py-1 px-3 inline-block max-w-content bg-dark-gray-1 rounded-md text-center text-[14px] lg:text-[16px] text-cyan-5 font-bold">
               {t("demoTagline")}
             </div>
