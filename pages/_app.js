@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }) {
           <PostsProvider>
             <LanguageSetter />
             <main
-              className={`${dmSans.variable} ${dmSerifDisplay.variable} font-body`}
+              className={`${dmSans.variable} ${dmSerifDisplay.variable}  font-body`}
             >
               {getLayout(<Component {...pageProps} />, pageProps)}
             </main>

@@ -148,7 +148,7 @@ export const AppLayout = ({
 
       <div className="hide-on-small-screens">
         <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
-          <div className="flex flex-col text-white overflow-hidden bg-[#343A40] px-2">
+          <div className="flex flex-col text-white overflow-hidden bg-gray-8 px-2">
             <Logo />
             <Divider color="gray.7" />
             <SidebarHeader

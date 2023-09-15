@@ -2,9 +2,8 @@ import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
 import { Navbar } from "../components/navbar";
 import Hero from "../components/hero";
-import SectionTitle from "../components/sectionTitle";
-import Benefits from "../components/benefits";
-import { benefitOne } from "../components/benefitDescription";
+import Section from "../components/section";
+import { sectionData } from "../components/sectionData";
 import Footer from "../components/footer";
 
 export default function Home() {
@@ -20,13 +19,11 @@ export default function Home() {
 
       <Navbar />
       <Hero />
-      <SectionTitle pretitle={t("sectionPreTitle")} title={t("sectionTitle")}>
-        {t("designedTo")}
-        <br />
-        <br />
-        {t("writeTopicAndKeywords")}
-      </SectionTitle>
-      <Benefits data={benefitOne} />
+      <Section
+        data={sectionData.generation}
+        title={t(`${sectionData.generation.title}`)}
+      />
+      {/* <Section data={sectionData.pricing} /> */}
       <Footer />
     </>
   );

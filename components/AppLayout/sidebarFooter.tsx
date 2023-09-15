@@ -24,7 +24,7 @@ const SidebarFooter = ({ user }: { user: User }): JSX.Element => {
               className="rounded-full"
             />
           </div>
-          <div>
+          <div className="max-w-[150px] whitespace-nowrap">
             <Text size="md" className="font-bold text-ellipsis overflow-hidden">
               {user.name}
             </Text>
