@@ -94,28 +94,30 @@ export const AppLayout = ({
   }, [setPostsFromSSR, postsFromSSR, postId, getPosts, postCreated]);
   // setpostsFromSSR won't ever change because memoized
 
+  // Refactor to remove duplications
   return (
     <>
       <div className="block hide-on-large-screens w-full bg-gray-10">
-        <Header
-          drawerOpened={drawerOpened}
-          toggleDrawer={toggleDrawer}
-          closeDrawer={closeDrawer}
-        />
+        <Header drawerOpened={drawerOpened} toggleDrawer={toggleDrawer} />
         {drawerOpened ? (
-          <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
-            <div className="flex flex-col text-white overflow-hidden bg-gray-8 px-2">
+          <div className="grid lg:grid-cols-[300px_1fr] h-screen max-h-screen">
+            <div className="flex flex-col text-white overflow-hidden bg-gray-8 px-4">
               <Divider color="gray.7" />
-              <SidebarHeader availableTokens={availableTokens}></SidebarHeader>
+              <SidebarHeader
+                drawerOpened={drawerOpened}
+                availableTokens={availableTokens}
+                toggleDrawer={toggleDrawer}
+              />
               <SidebarLoadMore
                 noMorePosts={noMorePosts}
                 getPosts={getPosts}
                 posts={posts}
                 postId={postId}
-              ></SidebarLoadMore>
-              <SidebarCTA />
+                toggleDrawer={toggleDrawer}
+              />
+              <SidebarCTA toggleDrawer={toggleDrawer} />
               <Divider color="gray.7" />
-              <SidebarFooter user={user}></SidebarFooter>
+              <SidebarFooter user={user} toggleDrawer={toggleDrawer} />
             </div>
           </div>
         ) : (
@@ -124,8 +126,8 @@ export const AppLayout = ({
       </div>
 
       <div className="hide-on-small-screens">
-        <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
-          <div className="flex flex-col text-white overflow-hidden bg-gray-8 px-2">
+        <div className="grid lg:grid-cols-[300px_1fr] h-screen max-h-screen">
+          <div className="flex flex-col text-white overflow-hidden bg-gray-8 px-4">
             <Header />
             <Divider color="gray.7" />
             <SidebarHeader availableTokens={availableTokens}></SidebarHeader>

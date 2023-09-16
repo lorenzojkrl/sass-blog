@@ -78,7 +78,7 @@
   "shortContentKWPlaceholder": "Newsletters sulle piante",
   "shortContentTopicPlaceholder": "Introduzione alla mia newsletters sulle piante",
   "unlockPosts": "Ottieni post",
-  "postsLeft": "{{availableTokens}} posts ",
+  "postsLeft": "{{availableTokens}} posts rimanenti",
   "G_formal": "Formale",
   "G_conversational": "Conversazionale",
   "G_technical": "Tecnico",

@@ -78,7 +78,7 @@
   "shortContentKWPlaceholder": "Boletines de plantas",
   "shortContentTopicPlaceholder": "Introducción a mis boletines de plantas",
   "unlockPosts": "Más post",
-  "postsLeft": "{{availableTokens}} posts",
+  "postsLeft": "{{availableTokens}} posts restantes",
   "G_formal": "Formal",
   "G_conversational": "Conversacional",
   "G_technical": "Técnico",

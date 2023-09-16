@@ -17,7 +17,7 @@ export default function NewPost<FC>() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="h-full overflow-hidden bg-[#F8F9FA]">
+    <div className="h-full overflow-hidden bg-[#F8F9FA] px-4">
       {generating && <Loading />}
       {!generating && (
         <div className="w-full  md:mt-40 flex flex-col items-center overflow-auto">
