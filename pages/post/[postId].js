@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import PostsContext from "../../context/postsContext";
 import useTranslation from "next-translate/useTranslation";
 
+// Refactor to utils function
 function removeHTMLHead(text) {
   const regex = /<head\b[^>]*>[\s\S]*?<\/head>/gi;
   return text.replace(regex, "");
@@ -118,12 +119,12 @@ export default function Post(props) {
     } catch (error) {}
   };
   return (
-    <div className="overflow-auto h-full">
+    <div className="overflow-auto h-full bg-gray-0 px-4">
       <div className="max-w-screen-sm mx-auto">
         <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           {props.metaDescription ? t("seoMeta") : t("shortSEOMeta")}
         </div>
-        <div className="p-4 my-2 border border-stone-200 rounded-md">
+        <div className="p-2 lg:p-4 my-2 lg:border border-stone-200 rounded-md">
           <div className="text-blue-600 text-2xl font-bold">{props.title}</div>
           <div className="mt-2 ">{props.metaDescription}</div>
         </div>
@@ -131,7 +132,7 @@ export default function Post(props) {
         <div className="text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           {t("seoData")}
         </div>
-        <div className="p-4 my-2 border border-stone-200 rounded-md">
+        <div className="p-2 lg:p-4 my-2 lg:border border-stone-200 rounded-md">
           {!!props?.slug && (
             <div className="font-bold">
               {t("recommendedSlug")}: &nbsp;
@@ -146,19 +147,15 @@ export default function Post(props) {
               </li>
             ))}
           </ul>
-
-          <div></div>
         </div>
 
         <div className="text-right text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
-          <div>
-            {props.postContent.split(" ").length} {t("G_words")} -{" "}
-            {props.postContent.length} {t("G_characters")}
-          </div>
+          {props.postContent.split(" ").length} {t("G_words")}&nbsp;-&nbsp;
+          {props.postContent.length} {t("G_characters")}
         </div>
 
         <div
-          className="py-4"
+          className="lg:py-4"
           dangerouslySetInnerHTML={{ __html: props.postContent || "" }}
         ></div>
         <div className="my-4">
