@@ -18,7 +18,7 @@ interface Tier {
 
 const tiers: Tier[] = [
   {
-    id: 1,
+    id: 0,
     name: "Personal",
     desc: "For bloggers",
     benefits: [
@@ -30,7 +30,7 @@ const tiers: Tier[] = [
     quantity: 100,
   },
   {
-    id: 2,
+    id: 1,
     name: "Professional",
     desc: "For copywriters",
     benefits: [
@@ -43,7 +43,7 @@ const tiers: Tier[] = [
     recommended: true,
   },
   {
-    id: 3,
+    id: 2,
     name: "Enterprise",
     desc: "For businesses",
     benefits: [
@@ -51,17 +51,21 @@ const tiers: Tier[] = [
       { name: "Benefit 2" },
       { name: "Benefit 3" },
     ],
-    price: 100,
-    quantity: 5000,
+    price: 0,
+    quantity: 0,
   },
 ];
 
 export default function TokenTopup() {
   const { t } = useTranslation("common");
 
-  const handleClick = async () => {
+  const handleClick = async (tier: Tier) => {
     const result = await fetch(`/api/addTokens`, {
       method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ tier }),
     });
 
     const json = await result.json();
@@ -113,7 +117,7 @@ export default function TokenTopup() {
                       ${tier.recommended ? "text-gray-9" : "text-gray-5"}
                     `}
                   >
-                    {tier.id === 3 ? (
+                    {tier.id === 2 ? (
                       <>On Demand</>
                     ) : (
                       <>
@@ -121,7 +125,7 @@ export default function TokenTopup() {
                       </>
                     )}
                   </div>
-                  {tier.id === 3 ? (
+                  {tier.id === 2 ? (
                     <>
                       <Text
                         color="gray.6"
@@ -139,7 +143,7 @@ export default function TokenTopup() {
                           ? "generate-btn text-white"
                           : "btn bg-gray-3 text-gray-9 hover:bg-gray-8"
                       }`}
-                      onClick={handleClick}
+                      onClick={() => handleClick(tier)}
                     >
                       {t("G_purchase")}
                     </button>
