@@ -59,6 +59,10 @@
 }
 
 @layer components {
+  .btn {
+    @apply disabled:bg-blue-200 disabled:cursor-not-allowed hover:no-underline bg-blue-500 tracking-wider w-full text-center text-white font-bold cursor-pointer uppercase px-4 py-2 rounded-md hover:bg-blue-600 transition-colors block;
+  }
+
   .generate-btn {
     @apply disabled:bg-[#DEE2E6] disabled:cursor-not-allowed hover:no-underline bg-[#1098AD] tracking-wider w-full text-center text-white font-bold cursor-pointer py-2 rounded-md hover:bg-[#0B7285] transition-colors block;
   }
@@ -149,7 +153,7 @@
   }
 
   .toggle-p-font-size {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 

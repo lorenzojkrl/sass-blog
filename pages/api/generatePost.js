@@ -87,37 +87,6 @@ export default withApiAuthRequired(async function handler(req, res) {
     },
   };
 
-  const slugContent = {
-    system: {
-      en: `You are a URL slug generator. 
-      A URL slug is a composed of multiple dash-separated words.
-      A URL slug must include the words from a keyword.
-      `,
-      es: `Eres un generador de URL simplificadas.
-      Una URL simplificada se compone de varias palabras separadas por guiones.
-      Una URL simplificada debe incluir las palabras clave.`,
-      it: `Sei un generatore di slug URL.
-      Uno slug URL è composto da diverse parole separate da trattini.
-      Uno slug URL deve includere le parole chiave.`,
-    },
-    assistant: {
-      en: `Title: ${title}`,
-      es: `Titulo: ${title}`,
-      it: `Titolo: ${title}`,
-    },
-    user: {
-      en: `Generate an appropriate URL slug given the above title.
-      The URL slug must include the following keyword ${keywords[0]}.
-      Keep the URL slug short.`,
-      es: `Genera una URL simplificada apropiada dado el título anterior.
-      La URL simplificada debe incluir la siguiente palabra clave ${keywords[0]}.
-      Mantén la URL simplificada corta.`,
-      it: `Genera uno slug URL appropriato dato il titolo sopra indicato.
-      Lo slug URL deve includere la seguente parola chiave ${keywords[0]}.
-      Mantieni lo slug URL corto.`,
-    },
-  };
-
   const metaContent = {
     system: {
       en: "You are a SEO content writer.",
@@ -169,6 +138,37 @@ export default withApiAuthRequired(async function handler(req, res) {
   });
 
   const title = titleResponse.data.choices[0]?.message?.content || "";
+
+  const slugContent = {
+    system: {
+      en: `You are a URL slug generator. 
+      A URL slug is a composed of multiple dash-separated words.
+      A URL slug must include the words from a keyword.
+      `,
+      es: `Eres un generador de URL simplificadas.
+      Una URL simplificada se compone de varias palabras separadas por guiones.
+      Una URL simplificada debe incluir las palabras clave.`,
+      it: `Sei un generatore di slug URL.
+      Uno slug URL è composto da diverse parole separate da trattini.
+      Uno slug URL deve includere le parole chiave.`,
+    },
+    assistant: {
+      en: `Title: ${title}`,
+      es: `Titulo: ${title}`,
+      it: `Titolo: ${title}`,
+    },
+    user: {
+      en: `Generate an appropriate URL slug given the above title.
+      The URL slug must include the following keyword ${keywords[0]}.
+      Keep the URL slug short.`,
+      es: `Genera una URL simplificada apropiada dado el título anterior.
+      La URL simplificada debe incluir la siguiente palabra clave ${keywords[0]}.
+      Mantén la URL simplificada corta.`,
+      it: `Genera uno slug URL appropriato dato il titolo sopra indicato.
+      Lo slug URL deve includere la seguente parola chiave ${keywords[0]}.
+      Mantieni lo slug URL corto.`,
+    },
+  };
 
   const slugResponse = await openai.createChatCompletion({
     model: "gpt-4",

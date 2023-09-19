@@ -1,21 +1,13 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { Logo } from "../logo";
 import { useContext, useEffect } from "react";
 import PostsContext from "../../context/postsContext";
-import {
-  createStyles,
-  Divider,
-  Box,
-  Drawer,
-  ScrollArea,
-  rem,
-} from "@mantine/core";
+import { createStyles, Divider, rem } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import SidebarHeader from "./sidebarHeader";
 import SidebarLoadMore from "./sidebarLoadMore";
 import SidebarCTA from "./sidebarCTA";
 import SidebarFooter from "./sidebarFooter";
-import MobileHeader from "../mobileHeader";
+import Header from "../Header";
 import useTranslation from "next-translate/useTranslation";
 
 const useStyles = createStyles((theme) => ({
@@ -88,7 +80,6 @@ export const AppLayout = ({
     useContext(PostsContext);
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
-  const [opened, { open, close }] = useDisclosure(false);
   const { classes } = useStyles();
 
   useEffect(() => {
@@ -103,64 +94,48 @@ export const AppLayout = ({
   }, [setPostsFromSSR, postsFromSSR, postId, getPosts, postCreated]);
   // setpostsFromSSR won't ever change because memoized
 
+  // Refactor to remove duplications
   return (
     <>
-      <div className="block hide-on-large-screens">
-        <div className="w-full">
-          <nav className="container-w relative flex flex-wrap items-center justify-between p-8 mx-auto">
-            <Box style={{ width: "100%" }}>
-              <MobileHeader
+      <div className="block hide-on-large-screens w-full bg-gray-10">
+        <Header drawerOpened={drawerOpened} toggleDrawer={toggleDrawer} />
+        {drawerOpened ? (
+          <div className="grid lg:grid-cols-[300px_1fr] h-screen max-h-screen">
+            <div className="flex flex-col text-white overflow-hidden bg-gray-8 px-4">
+              <Divider color="gray.7" />
+              <SidebarHeader
                 drawerOpened={drawerOpened}
+                availableTokens={availableTokens}
                 toggleDrawer={toggleDrawer}
               />
-
-              {/* <Drawer
-                opened={drawerOpened}
-                onClose={closeDrawer}
-                size="100%"
-                padding="md"
-                title={t("aiseowriter")}
-                zIndex={1000000}
-              >
-                <ScrollArea style={{ overflowX: "hidden" }}>
-                  <Divider my="sm" color="gray.1" />
-                  <SidebarHeader
-                    availableTokens={availableTokens}
-                    closeDrawer={closeDrawer}
-                  ></SidebarHeader>
-                  <Divider my="sm" color="gray.1" />
-                  <SidebarLoadMore
-                    noMorePosts={noMorePosts}
-                    getPosts={getPosts}
-                    posts={posts}
-                    postId={postId}
-                    closeDrawer={closeDrawer}
-                  ></SidebarLoadMore>
-                  <Divider my="sm" color="gray.1" />
-                  <SidebarFooter user={user}></SidebarFooter>
-                </ScrollArea>
-              </Drawer> */}
-            </Box>
-          </nav>
-        </div>
-        {children}
+              <SidebarLoadMore
+                noMorePosts={noMorePosts}
+                getPosts={getPosts}
+                posts={posts}
+                postId={postId}
+                toggleDrawer={toggleDrawer}
+              />
+              <SidebarCTA toggleDrawer={toggleDrawer} />
+              <Divider color="gray.7" />
+              <SidebarFooter user={user} toggleDrawer={toggleDrawer} />
+            </div>
+          </div>
+        ) : (
+          children
+        )}
       </div>
 
       <div className="hide-on-small-screens">
-        <div className="grid grid-cols-[300px_1fr] h-screen max-h-screen">
-          <div className="flex flex-col text-white overflow-hidden bg-gray-8 px-2">
-            <Logo />
+        <div className="grid lg:grid-cols-[300px_1fr] h-screen max-h-screen">
+          <div className="flex flex-col text-white overflow-hidden bg-gray-8 px-4">
+            <Header />
             <Divider color="gray.7" />
-            <SidebarHeader
-              availableTokens={availableTokens}
-              closeDrawer={closeDrawer}
-            ></SidebarHeader>
+            <SidebarHeader availableTokens={availableTokens}></SidebarHeader>
             <SidebarLoadMore
               noMorePosts={noMorePosts}
               getPosts={getPosts}
               posts={posts}
               postId={postId}
-              closeDrawer={closeDrawer}
             ></SidebarLoadMore>
             <SidebarCTA />
             <Divider color="gray.7" />
