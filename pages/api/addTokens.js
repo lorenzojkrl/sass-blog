@@ -8,7 +8,6 @@ export default async function handler(req, res) {
   const { user } = await getSession(req, res);
   const { tier } = req.body;
 
-  console.log("In addTokens handler");
   const lineItems = [
     {
       price: process.env.STRIPE_PRODUCT_PRICE_ID,
@@ -56,11 +55,8 @@ export default async function handler(req, res) {
     cancel_url: `${protocol}${host}/cancel`,
   });
 
-  console.log("user", user);
   const client = await clientPromise;
   const db = client.db("SassBlog");
-  console.log("tier", tier);
-  // console.log("tier quantityyyyyyyyyyyyyyyyyy", tier);
 
   // MongoDB upsert
   // If document exists, then update it, otherwise create one
@@ -80,10 +76,6 @@ export default async function handler(req, res) {
       upsert: true,
     }
   );
-
-  console.log("USER checkoutSession", checkoutSession);
-
-  console.log("In addTokens checkout");
 
   res.status(200).json({ session: checkoutSession });
 }

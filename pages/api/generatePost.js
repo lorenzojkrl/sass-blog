@@ -139,7 +139,6 @@ export default withApiAuthRequired(async function handler(req, res) {
 
   const title = titleResponse.data.choices[0]?.message?.content || "";
 
-  console.log("title", title);
   const slugContent = {
     system: {
       en: `You are a URL slug generator. 
