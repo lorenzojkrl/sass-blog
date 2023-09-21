@@ -35,7 +35,7 @@ const SidebarLoadMore = ({
         <div
           onClick={() => {
             getPosts({
-              lastPostDate: posts[posts.length - 1].created,
+              lastPostDate: posts[posts.length - 1]?.created,
             });
           }}
           className={
