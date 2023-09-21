@@ -18,9 +18,13 @@ export default function NewPost<FC>() {
 
   return (
     <div className="h-full overflow-hidden bg-gray-0 px-4">
-      {generating && <Loading />}
+      {generating && (
+        <div className="h-screen">
+          <Loading />
+        </div>
+      )}
       {!generating && (
-        <div className="w-full  md:mt-40 flex flex-col items-center overflow-auto">
+        <div className="w-full md:mt-40 flex flex-col items-center overflow-auto">
           <Title
             size="1.75rem"
             color="gray.9"
