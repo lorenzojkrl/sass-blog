@@ -4,6 +4,7 @@ import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
 import { Title } from "@mantine/core";
 import Container from "./container";
 import useTranslation from "next-translate/useTranslation";
+import { useRouter } from "next/router";
 
 export default function Header({
   drawerOpened,
@@ -13,6 +14,9 @@ export default function Header({
   toggleDrawer: () => void;
 }): JSX.Element {
   const { t } = useTranslation("common");
+  const router = useRouter();
+  const isNewPost = router.pathname.includes("new");
+  console.log(isNewPost);
 
   return (
     <Container className="p-4 hide-on-large-screens">
@@ -28,8 +32,10 @@ export default function Header({
         </div>
         <Link
           href="/post/new"
-          className="generate-btn w-[32px] h-[32px] text-3xl flex justify-center items-center"
           onClick={drawerOpened && toggleDrawer}
+          className={`${
+            isNewPost ? "generate-btn-disabled" : "generate-btn"
+          }  w-[32px] h-[32px] text-3xl flex justify-center items-center`}
         >
           +
         </Link>

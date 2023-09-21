@@ -3,6 +3,7 @@ import useTranslation from "next-translate/useTranslation";
 import { faFeather } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Title } from "@mantine/core";
+import { useRouter } from "next/router";
 
 const SidebarHeader = ({
   availableTokens,
@@ -14,6 +15,8 @@ const SidebarHeader = ({
   toggleDrawer: () => void;
 }): JSX.Element => {
   const { t } = useTranslation("common");
+  const router = useRouter();
+  const isNewPost = router.pathname.includes("new");
 
   return (
     <>
@@ -30,7 +33,12 @@ const SidebarHeader = ({
         {drawerOpened ? (
           ""
         ) : (
-          <Link href="/post/new" className="generate-btn mx-auto w-[240px]">
+          <Link
+            href="/post/new"
+            className={`${
+              isNewPost ? "generate-btn-disabled" : "generate-btn"
+            } mx-auto w-[240px]`}
+          >
             {t("newCopy")}
           </Link>
         )}

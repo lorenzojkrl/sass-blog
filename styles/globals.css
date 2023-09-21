@@ -67,6 +67,11 @@
     @apply disabled:bg-[#DEE2E6] disabled:cursor-not-allowed hover:no-underline bg-[#1098AD] tracking-wider w-full text-center text-white font-bold cursor-pointer py-2 rounded-md hover:bg-[#0B7285] transition-colors block;
   }
 
+  /* doesn't prevent keyboard enter */
+  .generate-btn-disabled {
+    @apply bg-[#0B7285] cursor-not-allowed hover:no-underline tracking-wider w-full text-center text-[#868E96] font-bold py-2 rounded-md hover:bg-[#0B7285] transition-colors block pointer-events-none;
+  }
+
   .auth-btn {
     @apply hover:no-underline bg-[#1098AD] tracking-wider w-[150px] h-[40.8px] text-center text-white font-bold cursor-pointer py-2 rounded-sm hover:bg-[#0B7285] transition-colors block;
   }
