@@ -16,7 +16,6 @@ export default function Header({
   const { t } = useTranslation("common");
   const router = useRouter();
   const isNewPost = router.pathname.includes("new");
-  console.log(isNewPost);
 
   return (
     <Container className="p-4 hide-on-large-screens">

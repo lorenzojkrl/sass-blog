@@ -90,5 +90,18 @@
   "demoH2_First": "Il Caldo Scomodo",
   "demoH2_Second": "Impatto sul Lavoro",
   "demoP_First": "Una delle principali ragioni per cui l'estate può essere la peggiore stagione è il calore intenso che porta con sé. Il caldo può anche causare problemi di salute come il colpo di calore e la disidratazione.",
-  "demoP_Second": "Le alte temperature dell'estate possono avere un impatto significativo sulla produttività lavorativa. Studi hanno dimostrato che quando le temperature negli uffici superano un livello confortevole, la produttività diminuisce. Questo accade perché il corpo utilizza energia per raffreddarsi, lasciando meno energia per la concentrazione e le attività lavorative."
+  "demoP_Second": "Le alte temperature dell'estate possono avere un impatto significativo sulla produttività lavorativa. Studi hanno dimostrato che quando le temperature negli uffici superano un livello confortevole, la produttività diminuisce. Questo accade perché il corpo utilizza energia per raffreddarsi, lasciando meno energia per la concentrazione e le attività lavorative.",
+  "G_Personal": "Personale",
+  "G_Professional": "Professionale",
+  "G_Enterprise": "Aziendale",
+  "forBloggers": "Per Blogger",
+  "forCopywriters": "Per Copywriter",
+  "forBusiness": "Per le Aziende",
+  "seoOptimization": "Ottimizzazione SEO",
+  "customStyles": "Personalizza Stili di Scrittura",
+  "upToNPosts": "Fino a {{posts}} Articoli",
+  "accessNewFeatures": "Accesso alle Nuove Funzionalità",
+  "pricingPerPost": "{{price}} {{currency}} / {{quantity}} Posts",
+  "onDemand": "Su Richiesta",
+  "G_recommended": "Consigliato"
 }

@@ -90,5 +90,18 @@
   "demoH2_First": "El Calor Incómodo",
   "demoH2_Second": "Impacto en el Trabajo",
   "demoP_First": "Una de las principales razones por las cuales el verano puede ser la peor estación es el intenso calor que trae consigo. El calor también puede dar lugar a problemas de salud como el agotamiento por calor y la deshidratación.",
-  "demoP_Second": "Las altas temperaturas del verano pueden tener un impacto significativo en la productividad laboral. Estudios han demostrado que cuando las temperaturas en las oficinas superan un nivel confortable, la productividad disminuye. Esto se debe a que el cuerpo utiliza energía para enfriarse, lo que deja menos energía para la concentración y las tareas laborales."
+  "demoP_Second": "Las altas temperaturas del verano pueden tener un impacto significativo en la productividad laboral. Estudios han demostrado que cuando las temperaturas en las oficinas superan un nivel confortable, la productividad disminuye. Esto se debe a que el cuerpo utiliza energía para enfriarse, lo que deja menos energía para la concentración y las tareas laborales.",
+  "G_Personal": "Personal",
+  "G_Professional": "Profesional",
+  "G_Enterprise": "Empresa",
+  "forBloggers": "Para Blogueros",
+  "forCopywriters": "Para Redactores",
+  "forBusiness": "Para Empresas",
+  "seoOptimization": "Optimización SEO",
+  "customStyles": "Personaliza Estilos de Escritura",
+  "upToNPosts": "Hasta {{posts}} Publicaciones",
+  "accessNewFeatures": "Acceso a Nuevas Funcionalidades",
+  "pricingPerPost": "{{price}} {{currency}} / {{quantity}} Posts",
+  "onDemand": "A Pedido",
+  "G_recommended": "Recomendado"
 }

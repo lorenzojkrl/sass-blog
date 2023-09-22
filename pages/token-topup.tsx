@@ -5,59 +5,50 @@ import useTranslation from "next-translate/useTranslation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { Text } from "@mantine/core";
-
-interface Tier {
-  id: number;
-  name: string;
-  desc: string;
-  benefits: { name: string }[];
-  price: number;
-  quantity: number;
-  recommended?: boolean;
-}
-
-const tiers: Tier[] = [
-  {
-    id: 0,
-    name: "Personal",
-    desc: "For bloggers",
-    benefits: [
-      { name: "Benefit 1" },
-      { name: "Benefit 2" },
-      { name: "Benefit 3" },
-    ],
-    price: 10,
-    quantity: 100,
-  },
-  {
-    id: 1,
-    name: "Professional",
-    desc: "For copywriters",
-    benefits: [
-      { name: "Benefit 1" },
-      { name: "Benefit 2" },
-      { name: "Benefit 3" },
-    ],
-    price: 100,
-    quantity: 2000,
-    recommended: true,
-  },
-  {
-    id: 2,
-    name: "Enterprise",
-    desc: "For businesses",
-    benefits: [
-      { name: "Benefit 1" },
-      { name: "Benefit 2" },
-      { name: "Benefit 3" },
-    ],
-    price: 0,
-    quantity: 0,
-  },
-];
+import { Tier } from "../misc/types";
 
 export default function TokenTopup() {
   const { t } = useTranslation("common");
+
+  const tiers: Tier[] = [
+    {
+      id: 0,
+      name: t("G_Personal"),
+      desc: t("forBloggers"),
+      benefits: [
+        { name: t("seoOptimization") },
+        { name: t("customStyles") },
+        { name: t("upToNPosts", { posts: 100 }) },
+      ],
+      price: 10,
+      quantity: 100,
+    },
+    {
+      id: 1,
+      name: t("G_Professional"),
+      desc: t("forCopywriters"),
+      benefits: [
+        { name: t("seoOptimization") },
+        { name: t("customStyles") },
+        { name: t("upToNPosts", { posts: 2000 }) },
+      ],
+      price: 100,
+      quantity: 2000,
+      recommended: true,
+    },
+    {
+      id: 2,
+      name: t("G_Enterprise"),
+      desc: t("forBusiness"),
+      benefits: [
+        { name: t("seoOptimization") },
+        { name: t("customStyles") },
+        { name: t("accessNewFeatures") },
+      ],
+      price: 0,
+      quantity: 0,
+    },
+  ];
 
   const handleClick = async (tier: Tier) => {
     const result = await fetch(`/api/addTokens`, {
@@ -93,7 +84,7 @@ export default function TokenTopup() {
                 </div>
                 {tier.recommended && (
                   <div className="bg-cyan-0 text-cyan-7 text-center toggle-p-font-size leading-6 py-2">
-                    {"Recommended"}
+                    {t("G_recommended")}
                   </div>
                 )}
                 <div className="px-4 py-8">
@@ -118,10 +109,14 @@ export default function TokenTopup() {
                     `}
                   >
                     {tier.id === 2 ? (
-                      <>On Demand</>
+                      <>{t("onDemand")}</>
                     ) : (
                       <>
-                        {tier.price}USD / {tier.quantity} post
+                        {t("pricingPerPost", {
+                          price: tier.price,
+                          currency: "USD",
+                          quantity: tier.quantity,
+                        })}
                       </>
                     )}
                   </div>

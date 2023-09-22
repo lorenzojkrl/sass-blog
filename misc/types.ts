@@ -52,3 +52,13 @@ export interface SectionData {
     wordsToColor: string[];
   };
 }
+
+export interface Tier {
+  id: number;
+  name: string;
+  desc: string;
+  benefits: { name: string }[];
+  price: number;
+  quantity: number;
+  recommended?: boolean;
+}

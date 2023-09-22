@@ -90,5 +90,18 @@
   "demoH2_First": "The Uncomfortable Heat",
   "demoH2_Second": "Impact on Work",
   "demoP_First": "One of the main reasons why summer can be the worst season is the intense heat it brings. The heat can also lead to health issues such as heat exhaustion and dehydration.",
-  "demoP_Second": "Summer's high temperatures can have a significant impact on work productivity. Studies have shown that when office temperatures rise above a comfortable level, productivity decreases. This is because the body uses energy to cool itself down, leaving less energy for concentration and work tasks."
+  "demoP_Second": "Summer's high temperatures can have a significant impact on work productivity. Studies have shown that when office temperatures rise above a comfortable level, productivity decreases. This is because the body uses energy to cool itself down, leaving less energy for concentration and work tasks.",
+  "G_Personal": "Personal",
+  "G_Professional": "Professional",
+  "G_Enterprise": "Enterprise",
+  "forBloggers": "For Bloggers",
+  "forCopywriters": "For Copywriters",
+  "forBusiness": "For Business",
+  "seoOptimization": "Seo Optimization",
+  "customStyles": "Customize Writing Styles",
+  "upToNPosts": "Up To {{posts}} Posts",
+  "accessNewFeatures": "Access New Features",
+  "pricingPerPost": "{{price}} {{currency}} / {{quantity}} Posts",
+  "onDemand": "On Demand",
+  "G_recommended": "Recommended"
 }
