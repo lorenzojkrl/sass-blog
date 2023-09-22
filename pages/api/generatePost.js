@@ -94,9 +94,9 @@ export default withApiAuthRequired(async function handler(req, res) {
       it: "Sei un redattore di contenuti SEO.",
     },
     user: {
-      en: "Generate SEO friendly meta description content for the above blog post",
-      es: "Generar contenido de meta descripción SEO amigable para la entrada de blog anterior",
-      it: "Generare contenuti di meta descrizione SEO friendly per il post del blog di cui sopra.",
+      en: "Generate a SEO friendly meta description for the above blog post. Do not add HTML tags.",
+      es: "Generar meta descripción SEO amigable para la entrada de blog anterior. No añadir etiquetas HTML.",
+      it: "Genera una meta descrizione SEO friendly per il blog di cui sopra. Non aggiungere tag HTML.",
     },
   };
 
