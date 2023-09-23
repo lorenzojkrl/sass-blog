@@ -99,6 +99,19 @@ export default withApiAuthRequired(async function handler(req, res) {
     },
   };
 
+  const imagePrompt = {
+    en: `${topic}. The image can have a ${style} style.`,
+    es: "Eres un redactor de contenido SEO.",
+    it: "Sei un redattore di contenuti SEO.",
+  };
+
+  const image = await openai.images.generate({
+    prompt: imagePrompt[locale],
+    size: "512x512",
+  });
+
+  const imageUrl = image.data[0].url;
+
   const postContentResponse = await openai.chat.completions.create({
     model: "gpt-4",
     temperature: 0.3,
@@ -230,6 +243,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     metaDescription,
     userId: userProfile._id,
     created: new Date(),
+    imageUrl,
   });
 
   res.status(200).json({ postId: post.insertedId });
