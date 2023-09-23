@@ -7,11 +7,17 @@ const nextTranslate = require("next-translate-plugin");
 module.exports = nextTranslate({
   reactStrictMode: true,
   images: {
-    domains: ["s.gravatar.com"],
+    domains: ["s.gravatar.com", "oaidalleapiprodscus.blob.core.windows.net"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "*.googleusercontent.com",
+        port: "",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.oaidalleapiprodscus.blob.core.windows.net",
         port: "",
         pathname: "**",
       },

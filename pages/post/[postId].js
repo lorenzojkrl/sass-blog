@@ -7,6 +7,7 @@ import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import PostsContext from "../../context/postsContext";
 import useTranslation from "next-translate/useTranslation";
+import Image from "next/image";
 
 // Refactor to utils function
 function removeHTMLHead(text) {
@@ -148,12 +149,22 @@ export default function Post(props) {
             ))}
           </ul>
         </div>
-
         <div className="text-right text-sm font-bold mt-6 p-2 bg-stone-200 rounded-sm">
           {props.postContent.split(" ").length} {t("G_words")}&nbsp;-&nbsp;
           {props.postContent.length} {t("G_characters")}
         </div>
-
+        {props.imageUrl && (
+          <div className="flex justify-center pt-2 lg:pt-4">
+            <Image
+              src={props.imageUrl}
+              alt={props.title}
+              height={500}
+              width={500}
+              placeholder="blur"
+              blurDataURL="../../public/img/article_generation.png"
+            />
+          </div>
+        )}
         <div
           className="lg:py-4"
           dangerouslySetInnerHTML={{ __html: props.postContent || "" }}
@@ -229,6 +240,7 @@ export const getServerSideProps = withPageAuthRequired({
         metaDescription: post.metaDescription,
         keywords: post.keywords,
         postCreated: post.created.toString(),
+        imageUrl: post.imageUrl || "",
         ...props,
       },
     };

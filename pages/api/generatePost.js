@@ -1,5 +1,5 @@
 import { getSession, withApiAuthRequired } from "@auth0/nextjs-auth0";
-import { Configuration, OpenAIApi } from "openai";
+import OpenAI from "openai";
 import clientPromise from "../../lib/mongodb";
 
 // withApiAuthRequired ensures user is authenticated
@@ -12,10 +12,9 @@ export default withApiAuthRequired(async function handler(req, res) {
     auth0Id: user.sub,
   });
   const { topic, keywords, length, locale = "en", style } = req.body;
-  const config = new Configuration({
+  const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });
-  const openai = new OpenAIApi(config);
 
   if (!userProfile?.availableTokens) {
     // user is authorized but he doesn't have the required permissions to process the request
@@ -100,7 +99,20 @@ export default withApiAuthRequired(async function handler(req, res) {
     },
   };
 
-  const postContentResponse = await openai.createChatCompletion({
+  const imagePrompt = {
+    en: `${topic}. The image can have a ${style} style.`,
+    es: "Eres un redactor de contenido SEO.",
+    it: "Sei un redattore di contenuti SEO.",
+  };
+
+  const image = await openai.images.generate({
+    prompt: imagePrompt[locale],
+    size: "512x512",
+  });
+
+  const imageUrl = image.data[0].url;
+
+  const postContentResponse = await openai.chat.completions.create({
     model: "gpt-4",
     temperature: 0.3,
     messages: [
@@ -115,10 +127,9 @@ export default withApiAuthRequired(async function handler(req, res) {
     ],
   });
 
-  const postContent =
-    postContentResponse.data.choices[0]?.message?.content || "";
+  const postContent = postContentResponse.choices[0]?.message?.content || "";
 
-  const titleResponse = await openai.createChatCompletion({
+  const titleResponse = await openai.chat.completions.create({
     model: "gpt-4",
     temperature: 0.3,
     messages: [
@@ -137,7 +148,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     ],
   });
 
-  const title = titleResponse.data.choices[0]?.message?.content || "";
+  const title = titleResponse.choices[0]?.message?.content || "";
 
   const slugContent = {
     system: {
@@ -170,7 +181,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     },
   };
 
-  const slugResponse = await openai.createChatCompletion({
+  const slugResponse = await openai.chat.completions.create({
     model: "gpt-4",
     temperature: 0.3,
     messages: [
@@ -188,9 +199,9 @@ export default withApiAuthRequired(async function handler(req, res) {
       },
     ],
   });
-  const slug = slugResponse.data.choices[0]?.message?.content || "";
+  const slug = slugResponse.choices[0]?.message?.content || "";
 
-  const metaDescriptionResponse = await openai.createChatCompletion({
+  const metaDescriptionResponse = await openai.chat.completions.create({
     model: "gpt-4",
     temperature: 0.3,
     messages: [
@@ -210,7 +221,7 @@ export default withApiAuthRequired(async function handler(req, res) {
   });
 
   const metaDescription =
-    metaDescriptionResponse.data.choices[0]?.message?.content || "";
+    metaDescriptionResponse.choices[0]?.message?.content || "";
 
   await db.collection("users").updateOne(
     {
@@ -232,6 +243,7 @@ export default withApiAuthRequired(async function handler(req, res) {
     metaDescription,
     userId: userProfile._id,
     created: new Date(),
+    imageUrl,
   });
 
   res.status(200).json({ postId: post.insertedId });
