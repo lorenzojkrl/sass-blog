@@ -17,7 +17,7 @@ export default function NewPost<FC>() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="h-full overflow-hidden bg-gray-0 px-4">
+    <div className="h-full bg-gray-0 px-4">
       {generating && (
         <div className="h-screen">
           <Loading />
@@ -29,7 +29,7 @@ export default function NewPost<FC>() {
             size="1.75rem"
             color="gray.9"
             weight={700}
-            className="mx-auto w-full max-w-screen-sm py-4"
+            className="mx-auto w-full max-w-screen-sm py-4 text-center"
           >
             {t("createToday")}
           </Title>
@@ -37,7 +37,7 @@ export default function NewPost<FC>() {
             defaultValue="first"
             value={activeTab}
             onTabChange={setActiveTab}
-            className=" mx-auto w-full max-w-screen-sm py-4"
+            className=" mx-auto w-full max-w-screen-sm py-4 overflow-auto"
           >
             <Tabs.List grow>
               <Tabs.Tab

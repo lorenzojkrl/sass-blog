@@ -15,8 +15,11 @@ export const config = {
 
 const stripe = stripeInit(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+console.log("Inside Inside stripe.js");
 
 const handler = async (req, res) => {
+  console.log("Using Payment Handler stripe.js");
+
   if (req.method === "POST") {
     let event;
     try {
@@ -34,6 +37,7 @@ const handler = async (req, res) => {
         const client = await clientPromise;
         const db = client.db("SassBlog");
 
+        console.log("Successful Payment");
         const paymentIntent = event.data.object;
         const auth0Id = paymentIntent.metadata.sub;
 
